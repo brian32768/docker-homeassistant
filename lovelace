@@ -1,0 +1,78 @@
+{
+    "data": {
+        "config": {
+            "title": "Home",
+            "views": [
+                {
+                    "badges": [
+                        {
+                            "entity": "binary_sensor.updater"
+                        },
+                        {
+                            "entity": "binary_sensor.centralite_systems_4200_c_21a196fe_on_off"
+                        },
+                        {
+                            "entity": "sensor.yr_symbol"
+                        },
+                        {
+                            "entity": "sun.sun"
+                        }
+                    ],
+                    "cards": [
+                        {
+                            "entity": "light.centralite_systems_4200_c_499d96fe_on_off",
+                            "hold_action": {
+                                "action": "more-info"
+                            },
+                            "icon_height": "32px",
+                            "name": "IKEA",
+                            "show_icon": true,
+                            "show_name": true,
+                            "tap_action": {
+                                "action": "toggle"
+                            },
+                            "type": "button"
+                        },
+                        {
+                            "entity": "light.centralite_systems_4200_c_21a196fe_on_off",
+                            "hold_action": {
+                                "action": "more-info"
+                            },
+                            "icon_height": "32px",
+                            "name": "Living room",
+                            "show_icon": true,
+                            "show_name": true,
+                            "tap_action": {
+                                "action": "toggle"
+                            },
+                            "type": "button"
+                        },
+                        {
+                            "entity": "media_player.redbox",
+                            "type": "media-control"
+                        },
+                        {
+                            "entity": "light.osram_lightify_a19_on_off_dim_10_year_76170c00_level_on_off",
+                            "name": "Entry",
+                            "type": "light"
+                        },
+                        {
+                            "entity": "light.cree_connected_a_19_60w_equivalent_2ea506fe_level_on_off",
+                            "name": "Studio",
+                            "type": "light"
+                        },
+                        {
+                            "entity": "light.cree_connected_a_19_60w_equivalent_70e108fe_level_on_off",
+                            "name": "Reading light",
+                            "type": "light"
+                        }
+                    ],
+                    "path": "default_view",
+                    "title": "Home"
+                }
+            ]
+        }
+    },
+    "key": "lovelace",
+    "version": 1
+}

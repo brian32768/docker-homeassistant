@@ -1,0 +1,10 @@
+# Set up for using Traccar to keep tabs on cellphone locations
+#
+#device_tracker:
+- platform: traccar
+  host: traccar
+  port: 8082
+  username: HA
+  password: haTravel
+  event: [ 'device_moving', 'device_stopped', 'geofence_enter', 'geofence_exit', 'device_online', 'text_message' ]
+

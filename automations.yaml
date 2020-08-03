@@ -1,0 +1,52 @@
+# https://www.home-assistant.io/docs/automation
+#
+#automation:
+  
+- alias: 'Porch light sunset'
+  trigger:
+    - platform: sun
+      event: sunset
+      offset: '00:00:00'
+  action:
+    service: homeassistant.turn_on
+    entity_id: group.porch
+    data:
+      brightness: 20
+
+
+- alias: 'Porch light 30 before sunrise'
+  trigger:
+    - platform: sun
+      event: sunrise
+      offset: '-00:30:00'
+  action:
+    service: homeassistant.turn_off
+    entity_id: group.porch
+
+
+- alias: 'Porch light dim'
+  trigger:
+    - platform: time
+      at: '22:30:00'
+  action:
+    service: homeassistant.turn_on
+    data:
+      brightness: 8
+      entity_id: group.porch
+      entity_id: group.reading_light
+
+
+- alias: 'Turn off the lights, it is late.'
+  trigger:
+    - platform: time
+      at: '22:45:00'
+  action:
+    service: homeassistant.turn_off
+    data:
+      brightness: 0
+      entity_id: group.inside_lights
+
+# Geolocation triggers go here
+# just send a notification I guess...
+
+

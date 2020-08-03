@@ -1,0 +1,74 @@
+version: '3.6'
+services:
+  home-assistant:
+    container_name: home-assistant
+    image: "homeassistant/home-assistant:stable"
+    env_file: .env
+    volumes:
+      - "home-assistant_config:/config"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/etc/timezone:/etc/timezone:ro"
+    ports:
+      #- "80:80" # Required for Amazon Echo set up but interferes with proxy
+      - "22222:22222" # ssh (debug only)
+      - "8123:8123" # HTTP is here and will be proxied, see .env
+    networks:
+      proxy_net:
+        aliases:
+          - home-assistant-net
+    devices:
+      - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if00-port0:/dev/ttyUSB0" # Z-Wave
+      - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if01-port0:/dev/ttyUSB1" # Zigbee
+    restart: unless-stopped	  
+
+  node-red:
+    container_name: ha-node-red
+    # Build our own image to get the homeassistant node module
+    build:
+      context: .
+      dockerfile: Dockerfile.nodered
+    volumes:
+      - "nodered_data:/data"
+    ports:
+      - "1880:1880"
+    networks:
+      proxy_net:
+        aliases:
+          - home-assistant-net
+    restart: unless-stopped	  
+
+  mosquitto:
+    container_name: ha-mosquitto
+    image: eclipse-mosquitto:latest
+
+# We're not a web server so Let's Encrypt fails.
+#    env_file: .env
+#    environment:
+#      VIRTUAL_PORT: 9001
+
+    volumes:
+      - ${PWD}/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+
+    # I use mqtt to talk to hardware so
+    # some ports have to be open to the LAN.
+    ports:
+      - "9001:9001"
+      - "1883:1883"
+    networks:
+      proxy_net:
+        aliases:
+          - home-assistant-net
+    restart: unless-stopped	  
+
+volumes:
+  home-assistant_config:
+    name: home-assistant_config
+  nodered_data:
+    name: nodered_data
+
+networks:
+  proxy_net:
+    name: proxy_net
+    external: true
