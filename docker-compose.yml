@@ -19,8 +19,8 @@ services:
     devices:
       - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if00-port0:/dev/ttyUSB0" # Z-Wave
       - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if01-port0:/dev/ttyUSB1" # Zigbee
-    restart: unless-stopped	  
-
+    restart: unless-stopped
+    
   node-red:
     container_name: ha-node-red
     # Build our own image to get the homeassistant node module
@@ -35,8 +35,8 @@ services:
       proxy_net:
         aliases:
           - home-assistant-net
-    restart: unless-stopped	  
-
+    restart: unless-stopped
+    
   mosquitto:
     container_name: ha-mosquitto
     image: eclipse-mosquitto:latest
@@ -60,8 +60,8 @@ services:
       proxy_net:
         aliases:
           - home-assistant-net
-    restart: unless-stopped	  
-
+    restart: unless-stopped
+    
 volumes:
   home-assistant_config:
     name: home-assistant_config
