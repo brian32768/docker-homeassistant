@@ -1,0 +1,198 @@
+- id: a94f03dd36014684854730ba7a3de6a9
+  alias: Porch light ON at sunset
+  trigger:
+  - event: sunset
+    offset: 00:20:00
+    platform: sun
+  action:
+  - brightness_pct: 12
+    device_id: bbf254d6ff5941cb88c2e869073fb7e8
+    domain: light
+    entity_id: light.osram_lightify_a19_on_off_dim_10_year_d7100c00_level_on_off
+    type: turn_on
+- id: '1590422096038'
+  alias: Porch light OFF at sunrise
+  description: ''
+  trigger:
+  - event: sunrise
+    platform: sun
+  condition: []
+  action:
+  - device_id: bbf254d6ff5941cb88c2e869073fb7e8
+    domain: light
+    entity_id: light.osram_lightify_a19_on_off_dim_10_year_d7100c00_level_on_off
+    type: turn_off
+- id: '1590422479061'
+  alias: Porch light DIM
+  description: ''
+  trigger:
+  - at: '22:30:00'
+    platform: time
+  condition: []
+  action:
+  - device_id: bbf254d6ff5941cb88c2e869073fb7e8
+    domain: light
+    entity_id: light.osram_lightify_a19_on_off_dim_10_year_d7100c00_level_on_off
+    type: brightness_decrease
+- id: '1590422923262'
+  alias: Reading light DOWN
+  description: ''
+  trigger:
+  - at: '23:00:00'
+    platform: time
+  condition: []
+  action:
+  - device_id: 478d0e35af9d4bf5a04b8c04c019fbdf
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_cws_opal_600lm_5c8463fe_level_light_color_on_off
+    type: brightness_decrease
+  - device_id: 23d5919d5c2e457bad1b7c0c5ab27b9b
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_w_op_ch_400lm_c21e1bfe_level_on_off
+    type: brightness_decrease
+  - device_id: 575533cc5b904ee9b8a7b99d1f00c3ee
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_w_op_ch_400lm_168721fe_level_on_off
+    type: brightness_decrease
+- id: '1591331160985'
+  alias: Turn on some lights after sunset
+  description: ''
+  trigger:
+  - event: sunset
+    offset: +00:20
+    platform: sun
+  condition: []
+  action:
+  - device_id: 8cc375f27af241dfbf21ccabb8609977
+    domain: light
+    entity_id: light.centralite_systems_4200_c_21a196fe_on_off
+    type: turn_on
+  - brightness_pct: 5
+    device_id: 478d0e35af9d4bf5a04b8c04c019fbdf
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_cws_opal_600lm_5c8463fe_level_light_color_on_off
+    type: turn_on
+  - brightness_pct: 10
+    device_id: 23d5919d5c2e457bad1b7c0c5ab27b9b
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_w_op_ch_400lm_c21e1bfe_level_on_off
+    type: turn_on
+  - brightness_pct: 10
+    device_id: 575533cc5b904ee9b8a7b99d1f00c3ee
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_w_op_ch_400lm_168721fe_level_on_off
+    type: turn_on
+  - brightness_pct: 25
+    device_id: 2277b117527543b3bcd8a35ba84c2879
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_gu10_ww_400lm_eae3aafe_level_on_off
+    type: turn_on
+- id: '1591494004057'
+  alias: Turn off lights and go to bed
+  description: ''
+  trigger:
+  - at: '23:00'
+    platform: time
+  condition: []
+  action:
+  - device_id: 478d0e35af9d4bf5a04b8c04c019fbdf
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_cws_opal_600lm_5c8463fe_level_light_color_on_off
+    type: turn_off
+  - device_id: 7140dac7b8b04d85b51cb0e9f1c1c775
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e26_ws_opal_1000lm_15362ffe_level_light_color_on_off
+    type: turn_off
+  - device_id: 23d5919d5c2e457bad1b7c0c5ab27b9b
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_w_op_ch_400lm_c21e1bfe_level_on_off
+    type: turn_off
+  - device_id: 575533cc5b904ee9b8a7b99d1f00c3ee
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_w_op_ch_400lm_168721fe_level_on_off
+    type: turn_off
+  - device_id: 2277b117527543b3bcd8a35ba84c2879
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_gu10_ww_400lm_eae3aafe_level_on_off
+    type: turn_off
+- id: '1595269748324'
+  alias: Toggle Reading Light
+  description: ''
+  trigger:
+  - device_id: eea0d418798943b9b45e73efd03299fc
+    domain: zha
+    platform: device
+    subtype: turn_on
+    type: remote_button_short_press
+  condition: []
+  action:
+  - device_id: 478d0e35af9d4bf5a04b8c04c019fbdf
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_cws_opal_600lm_5c8463fe_level_light_color_on_off
+    type: toggle
+  - device_id: 23d5919d5c2e457bad1b7c0c5ab27b9b
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_w_op_ch_400lm_c21e1bfe_level_on_off
+    type: toggle
+  - device_id: 575533cc5b904ee9b8a7b99d1f00c3ee
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_w_op_ch_400lm_168721fe_level_on_off
+    type: toggle
+- id: '1595269892212'
+  alias: IKEA bright
+  description: ''
+  trigger:
+  - device_id: eea0d418798943b9b45e73efd03299fc
+    domain: zha
+    platform: device
+    subtype: dim_up
+    type: remote_button_short_press
+  condition: []
+  action:
+  - device_id: 478d0e35af9d4bf5a04b8c04c019fbdf
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_cws_opal_600lm_5c8463fe_level_light_color_on_off
+    type: brightness_increase
+  - device_id: 23d5919d5c2e457bad1b7c0c5ab27b9b
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_w_op_ch_400lm_c21e1bfe_level_on_off
+    type: brightness_increase
+  - device_id: 575533cc5b904ee9b8a7b99d1f00c3ee
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_w_op_ch_400lm_168721fe_level_on_off
+    type: brightness_increase
+- id: '1595269962540'
+  alias: IKEA dim
+  description: ''
+  trigger:
+  - device_id: eea0d418798943b9b45e73efd03299fc
+    domain: zha
+    platform: device
+    subtype: dim_down
+    type: remote_button_short_press
+  condition: []
+  action:
+  - device_id: 478d0e35af9d4bf5a04b8c04c019fbdf
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_cws_opal_600lm_5c8463fe_level_light_color_on_off
+    type: brightness_decrease
+  - device_id: 23d5919d5c2e457bad1b7c0c5ab27b9b
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_w_op_ch_400lm_c21e1bfe_level_on_off
+    type: brightness_decrease
+  - device_id: 575533cc5b904ee9b8a7b99d1f00c3ee
+    domain: light
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_w_op_ch_400lm_168721fe_level_on_off
+    type: brightness_decrease
+- id: '1595270332740'
+  alias: RED
+  description: ''
+  trigger:
+  - device_id: eea0d418798943b9b45e73efd03299fc
+    domain: zha
+    platform: device
+    subtype: left
+    type: remote_button_short_press
+  condition: []
+  action:
+  - scene: scene.red

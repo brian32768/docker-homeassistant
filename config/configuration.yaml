@@ -72,13 +72,13 @@ logger:
   default: info
   logs:
     homeassistant.core: info
-    homeassistant.components.zha: info
+    homeassistant.components.zha: debug
     homeassistant.components.device_tracker: debug
     homeassistant.components.device_automation: debug
     bellows.zigbee.application: warning
     bellows.ezsp: warning
-    zigpy: warning
-#    zigpy_cc: debug
+#    zigpy: warning
+    zigpy_cc: debug
 #    zigpy_deconz.zigbee.application: debug
 #    zigpy_deconz.api: debug
 #    zigpy_xbee.zigbee.application: debug
@@ -90,3 +90,62 @@ group: !include groups.yaml
 automation: !include automations.yaml
 device_tracker: !include tracker.yaml
 script: !include scripts.yaml
+
+scene: !include scene.yaml
+
+# DOES NOT WORK
+#emulated_hue:
+#  listen_port: 80
+#  advertise_ip: 71.8.168.155
+#  exposed_domains:
+#    - light
+
+
+zha:
+  zigpy_config:
+    ota:
+      otau_directory: /config/zigpy_ota
+      ikea_provider: true
+      ledvance_provider: false
+    
+alexa:
+  smart_home:
+
+mqtt:
+    broker: 192.168.123.2
+
+sensor:
+  - platform: mqtt
+    name: mqtt_wemos
+    unique_id: "WEMOS 1"
+    device_class: "motion"
+    state_topic: "WEMOS/Motion"
+    qos: 0
+
+
+# RGBW:
+#light:
+#  - platform: mqtt
+#    schema: json
+#    name: mqtt_hallway
+#    state_topic: "home/rgbw"
+#    command_topic: "home/rgbw/set"
+#    brightness: true
+#    rgb: true
+#    white_value: true
+#    effect: true
+#    effect_list: [colorfade_slow, colorfade_fast, flash]
+#    optimistic: false
+#    qos: 0
+
+
+# MiLight Strip
+#light:
+#  platform: limitlessled
+#  bridges:
+#    - host: diningroom
+#      groups:
+#      - number: 1
+#        name: Dining Room
+#        type: rgbw
+#      port: 8899

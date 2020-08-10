@@ -1,11 +1,12 @@
 version: '3.6'
 services:
   home-assistant:
-    container_name: home-assistant
     image: "homeassistant/home-assistant:stable"
+
     env_file: .env
     volumes:
-      - "home-assistant_config:/config"
+#      - "home-assistant_config:/config"
+      - "/home/bwilson/docker/home-assist/config:/config"
       - "/etc/localtime:/etc/localtime:ro"
       - "/etc/timezone:/etc/timezone:ro"
     ports:
@@ -22,7 +23,6 @@ services:
     restart: unless-stopped
     
   node-red:
-    container_name: ha-node-red
     # Build our own image to get the homeassistant node module
     build:
       context: .
@@ -38,7 +38,6 @@ services:
     restart: unless-stopped
     
   mosquitto:
-    container_name: ha-mosquitto
     image: eclipse-mosquitto:latest
 
 # We're not a web server so Let's Encrypt fails.
