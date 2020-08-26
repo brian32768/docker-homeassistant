@@ -12,7 +12,7 @@ Mosquitto is configured via a local file, mosquitto.conf.
 
 ## Deploy
 
-"docker stack" does not work because of the needed "devices" option.
+Swarm mode does not work because of the "devices" option needed to talk to the USB devices.
 
 Instead use
     docker-compose build

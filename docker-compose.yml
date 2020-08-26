@@ -1,12 +1,15 @@
+#
+#   WE RUN THIS IN COMPOSE BECAUSE OF "DEVICES"
+#
 version: '3.6'
 services:
-  home-assistant:
+  server:
     image: "homeassistant/home-assistant:stable"
 
     env_file: .env
     volumes:
-#      - "home-assistant_config:/config"
-      - "/home/bwilson/docker/home-assist/config:/config"
+      - "home-assistant_config:/config"
+#      - "/home/bwilson/docker/home-assistant/config:/config"
       - "/etc/localtime:/etc/localtime:ro"
       - "/etc/timezone:/etc/timezone:ro"
     ports:
