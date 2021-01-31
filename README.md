@@ -18,6 +18,10 @@ Instead use
     docker-compose build
     docker-compose up -d
 
+## Backups
+
+The script backup.sh will do a nightly backup to the Synology when invoked from cron.
+
 ## URLs
 
     https://home-assistant.wildsong.biz/
