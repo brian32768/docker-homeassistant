@@ -54,9 +54,9 @@ map:
 sun:
 
 # Sensors
-sensor:
-  # Weather prediction
-  - platform: yr
+#sensor:
+# Weather prediction
+#  - platform: yr
 
 # Text to speech
 tts:
@@ -140,12 +140,31 @@ sensor:
 
 
 # MiLight Strip
-#light:
-#  platform: limitlessled
-#  bridges:
-#    - host: diningroom
-#      groups:
-#      - number: 1
-#        name: Dining Room
-#        type: rgbw
-#      port: 8899
+light:
+  platform: limitlessled
+  bridges:
+    - host: 192.168.123.25
+      groups:
+      # group on remote
+      - number: 2
+        name: Kitchen
+        type: RGBW
+      port: 8899
+
+spotify:
+  client_id: c466f453b4fc419e9880a1c26d7f55c2
+  client_secret: 3d04f618e1ec40d1a8bdf4e106fb936f
+
+ecobee:
+  # https://www.home-assistant.io/integrations/ecobee/
+  # This is only needed for initial set up.
+  # You create the key in developer site, then add
+  # the integration and feed it the pin when prompted.
+  # *** Get the pin from the thermostat. ***
+  # After that it's supposed to work forevermore or in my case about a week... grrr
+  apikey: Tm0eWWiT1TA7gO2xNCC2m4Yipa2Sj4Uf
+
+# This is supposed to allow sending notifications to the thermostat
+notify:
+  - name: Home Assistant
+  platform: ecobee
