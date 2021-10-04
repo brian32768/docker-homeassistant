@@ -3,11 +3,11 @@
 #
 version: '3.6'
 
-volumes:
-  home-assistant_config:
-    name: home-assistant_config
-  nodered_data:
-    name: nodered_data
+#volumes:
+#  homeassistant_config:
+#    name: homeassistant_config
+#  nodered_data:
+#    name: nodered_data
 
 networks:
   proxy_net:
@@ -16,12 +16,13 @@ networks:
 
 services:
   server:
+    # This is defined for the swag reverse proxy, it won't work with swarm!
+    container_name: homeassistant
+    depends_on:
+      - "mosquitto"
     image: "homeassistant/home-assistant:latest"
-
-    env_file: .env
     volumes:
-      - "home-assistant_config:/config"
-#      - "/home/bwilson/docker/home-assistant/config:/config"
+      - "${PWD}/config:/config"
       - "/etc/localtime:/etc/localtime:ro"
       - "/etc/timezone:/etc/timezone:ro"
     ports:
@@ -31,40 +32,33 @@ services:
     networks:
       proxy_net:
         aliases:
-          - home-assistant-net
+          - homeassistant
     devices:
       - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if00-port0:/dev/ttyUSB0" # Z-Wave
       - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if01-port0:/dev/ttyUSB1" # Zigbee
     restart: unless-stopped
     
-  node-red:
-    # Build our own image to get the homeassistant node module
-    build:
-      context: .
-      dockerfile: Dockerfile.nodered
-    volumes:
-      - "nodered_data:/data"
-    ports:
-      - "1880:1880"
-    networks:
-      proxy_net:
-        aliases:
-          - home-assistant-net
-    restart: unless-stopped
+#  node-red:
+#    # Build our own image to get the homeassistant node module
+#    build:
+#      context: .
+#      dockerfile: Dockerfile.nodered
+#    volumes:
+#      - "nodered_data:/data"
+#    ports:
+#      - "1880:1880"
+#    networks:
+#      proxy_net:
+#        aliases:
+#          - node-red
+#    restart: unless-stopped
     
   mosquitto:
     image: eclipse-mosquitto:latest
-
-# We're not a web server so Let's Encrypt fails.
-#    env_file: .env
-#    environment:
-#      VIRTUAL_PORT: 9001
-
     volumes:
-      - ${PWD}/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ${PWD}/mosquitto_config:/mosquitto/config
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-
     # I use mqtt to talk to hardware so
     # some ports have to be open to the LAN.
     ports:
@@ -73,19 +67,6 @@ services:
     networks:
       proxy_net:
         aliases:
-          - home-assistant-net
+          - mosquitto
     restart: unless-stopped
-    
-#  esphome:
-#    image: "esphome/esphome:latest"
-#    environment:
-#      VIRTUAL_HOST: esphome.wildsong.biz
-#      VIRTUAL_PORT: 80
-#      LETSENCRYPT_HOST: esphome.wildsong.biz
-#      LETSENCRYPT_MAIL: brian@wildsong.biz
-#    networks:
-#      proxy_net:
-#        aliases:
-#          - home-assistant-net
-#    restart: unless-stopped
     
