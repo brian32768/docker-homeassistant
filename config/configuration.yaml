@@ -82,8 +82,9 @@ mqtt:
     broker: 192.168.123.2
     discovery: true
     discovery_prefix: homeassistant
-    username: homeassistant
-    password: u89adsjr3
+# 2021-10-10 Not working in mosquitto
+#    username: homeassistant
+#    password: u89adsjr3
 
 # Text to speech
 tts:
@@ -147,6 +148,22 @@ zha:
 alexa:
   smart_home:
 
+# 2021-10-25
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram
+    parse_mode: html
+    allowed_chat_ids:
+      - 2024646225 # Brian
+#    trusted_networks:
+#      - 149.154.160.0/20
+#      - 91.108.4.0/22
+
+notify:
+  - platform: telegram
+    name: toasted_cheese
+    chat_id: 2024646225 # Brian
+
 
 # RGBW:
 #light:
@@ -163,29 +180,15 @@ alexa:
 #    optimistic: false
 #    qos: 0
 
-
-# MiLight Strip
-light:
-  platform: limitlessled
-  bridges:
-    - host: 192.168.123.25
-      groups:
-      - number: 2
-        name: Kitchen counter
-        type: dimmer
-      - number: 1
-        name: Kitchen
-        type: rgbw
-
 timer:
   bedroom:
-    duration: '00:01:00'
-  elab:
-    duration: '00:01:00'
-  bathroom:
-    duration: '00:00:45'
-  island:
     duration: '00:03:00'
+  elab:
+    duration: '00:02:00'
+  bathroom:
+    duration: '00:01:00'
+  living_room:
+    duration: '00:02:00'
   mbath:
     duration: '00:45:00'
   

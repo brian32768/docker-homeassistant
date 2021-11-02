@@ -59,7 +59,7 @@ services:
       - ${PWD}/mosquitto_config:/mosquitto/config
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-    # I use mqtt to talk to hardware so
+    # I use mqtt to talk to IoT hardware so
     # some ports have to be open to the LAN.
     ports:
       - "9001:9001"

@@ -35,13 +35,13 @@ Create a new password file using the password entry you put in config/configurat
 To create credential pairs, use the mosquitto_passwd command to create a new file and put a password for homeassistant in it.
 
 ```bash
-docker run -it --rm -v mosquitto_config:/mosquitto/config eclipse-mosquitto:latest mosquitto_passwd -c mosquitto.passwords homeassistant
+docker run -it --rm -v mosquitto_config:/mosquitto/config eclipse-mosquitto:latest mosquitto_passwd -c /mosquitto/config/passwd homeassistant
 ```
 
-To create additional credentials, leave off the -c.
+To create additional credentials, leave off the -c. For example, 
 
 ```bash
-docker run -it --rm -v mosquitto_config:/mosquitto/config eclipse-mosquitto:latest mosquitto_passwd -c mosquitto.passwords wemos
+docker run -it --rm -v mosquitto_config:/mosquitto/config eclipse-mosquitto:latest mosquitto_passwd /mosquitto/config/passwd wemos
 ```
 
 ## Volumes

@@ -1,0 +1,7 @@
+test_telegram:
+  alias: "test_telegram"
+  sequence:
+    - service: notify.toasted_cheese
+      data:
+        title: Test message
+        message: "This is toasted cheese."

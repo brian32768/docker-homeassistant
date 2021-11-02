@@ -55,7 +55,7 @@
   alias: BED TIME
   description: ''
   trigger:
-  - at: '23:00'
+  - at: '23:00:00'
     platform: time
   condition: []
   action:
@@ -86,6 +86,10 @@
   - type: turn_off
     device_id: 7140dac7b8b04d85b51cb0e9f1c1c775
     entity_id: light.ikea_of_sweden_tradfri_bulb_e26_ws_opal_1000lm_15362ffe_level_light_color_on_off
+    domain: light
+  - type: turn_off
+    device_id: 2277b117527543b3bcd8a35ba84c2879
+    entity_id: light.ikea_of_sweden_tradfri_bulb_gu10_ww_400lm_eae3aafe_level_on_off
     domain: light
   mode: single
 - id: '1595269748324'
@@ -193,65 +197,10 @@
       before: '23:15:00'
   action:
   - type: turn_on
-    device_id: bbf254d6ff5941cb88c2e869073fb7e8
-    entity_id: light.osram_lightify_a19_on_off_dim_10_year_d7100c00_level_on_off
+    device_id: 2277b117527543b3bcd8a35ba84c2879
+    entity_id: light.ikea_of_sweden_tradfri_bulb_gu10_ww_400lm_eae3aafe_level_on_off
     domain: light
-    brightness_pct: 30
-  - service: timer.start
-    data:
-      duration: '0'
-    target:
-      entity_id: timer.bedroom
-  mode: single
-- id: '1597293658371'
-  alias: Turn off bedroom light after a  bit of time
-  description: ''
-  trigger:
-  - platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.bedroom
-  condition: []
-  action:
-  - type: turn_off
-    device_id: bbf254d6ff5941cb88c2e869073fb7e8
-    entity_id: light.osram_lightify_a19_on_off_dim_10_year_d7100c00_level_on_off
-    domain: light
-  mode: restart
-- id: '1607644533700'
-  alias: Turn on a light when Brian gets home
-  description: ''
-  trigger:
-  - platform: zone
-    entity_id: device_tracker.brian_s_phone
-    zone: zone.home
-    event: enter
-  condition: []
-  action:
-  - domain: light
-    entity_id: light.4736863710521cfbe63f
-    device_id: a4b87fd0ac004410e65b9120cf9312c9
-    type: turn_on
-  mode: single
-- id: '1609741742457'
-  alias: Motion turns on eLab globe light
-  description: ''
-  trigger:
-  - platform: mqtt
-    topic: ESP32/Motion
-    payload: 'ON'
-  condition:
-  - condition: sun
-    after: sunset
-  action:
-  - type: turn_on
-    device_id: 85ad071c383244928c929282071ecccf
-    entity_id: light.cree_connected_a_19_60w_equivalent_70e108fe_level_on_off
-    domain: light
-  - service: timer.start
-    entity_id: timer.elab
-    data:
-      duration: 120
+    brightness_pct: 40
   mode: single
 - id: '1610085445182'
   alias: Testing ESP32
@@ -266,63 +215,47 @@
     entity_id: light.4736863710521cfbde78
     domain: light
   mode: single
-- id: '1610085709561'
-  alias: 'Turn on Living Room '
-  description: ''
-  trigger:
-  - platform: device
-    type: turned_on
-    device_id: f468c2a3790b31772756c0a5f7306931
-    entity_id: light.4736863710521cfbde78
-    domain: light
-  condition: []
-  action:
-  - type: turn_on
-    device_id: d9457450295983e13d9bf7a24f835095
-    entity_id: light.4736863710521cfbdf9e
-    domain: light
-  mode: single
 - id: '1611621770954'
   alias: Julie arrived home
   description: ''
   trigger:
   - platform: device
-    device_id: f2333c3f444ca47ca0764a8bfd7cc6d2
+    device_id: 6ebf391641f7a1d72a9480386b5afbe8
     domain: device_tracker
-    entity_id: device_tracker.julie_phone
+    entity_id: device_tracker.julies_phone
     type: enters
     zone: zone.home
   condition: []
   action:
-  - service: notify.notify
+  - service: notify.toasted_cheese
     data:
-      message: Julie is home. Thermostat set to Home.
+      title: Julie arrived home.
+      message: Setting thermostat to Home
   - device_id: 233353ebf3a4f303f3d6622cec9eda54
     domain: climate
-    entity_id: climate.thermostat
+    entity_id: climate.ecobee
     type: set_preset_mode
     preset_mode: Home
   mode: single
 - id: '1611622293425'
-  alias: Julie left work
+  alias: Julie left the Co-op
   description: ''
   trigger:
   - platform: device
-    device_id: f2333c3f444ca47ca0764a8bfd7cc6d2
+    device_id: 6ebf391641f7a1d72a9480386b5afbe8
     domain: device_tracker
-    entity_id: device_tracker.julie_phone
+    entity_id: device_tracker.julies_phone
     type: leaves
     zone: zone.home_2
   condition: []
   action:
-  - service: notify.mobile_app_julie_phone
+  - service: notify.toasted_cheese
     data:
-      target: 17078270003
-      message: Julie left work
-      title: Julie left work
+      message: Julie has left the Co-op!
+      title: Tracker
   mode: single
 - id: '1611629123187'
-  alias: Notify me when Tab battery needs charging
+  alias: Tab battery needs charging
   description: ''
   trigger:
   - type: battery_level
@@ -333,23 +266,24 @@
     below: 22
   condition: []
   action:
-  - service: notify.notify
+  - service: notify.toasted_cheese
     data:
-      message: Tab battery needs charging.
+      message: Tablet battery needs charging.
   mode: single
 - id: '1611865321213'
   alias: Julie arrived at CC office
   description: ''
   trigger:
   - platform: zone
-    entity_id: device_tracker.julie_s_phone
+    entity_id: device_tracker.julies_phone
     zone: zone.clatsop_county_office
     event: enter
   condition: []
   action:
-  - service: notify.notify
+  - service: notify.toasted_cheese
     data:
-      message: Julie is at Clatsop County Office
+      title: Julie is here!
+      message: Julie has entered the Clatsop Zone.
   mode: single
 - id: '1613269737483'
   alias: Toggle bathroom light
@@ -368,19 +302,18 @@
     domain: light
   mode: single
 - id: '1613269841799'
-  alias: Switch off Bedroom Light
+  alias: Timer turns off bedroom light
   description: ''
   trigger:
-  - device_id: 2cd22672418b11801f7a288094070bf6
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: turn_off
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.bedroom
   condition: []
   action:
   - type: turn_off
-    device_id: 575533cc5b904ee9b8a7b99d1f00c3ee
-    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_w_op_ch_400lm_168721fe_level_on_off
+    device_id: 2277b117527543b3bcd8a35ba84c2879
+    entity_id: light.ikea_of_sweden_tradfri_bulb_gu10_ww_400lm_eae3aafe_level_on_off
     domain: light
   mode: single
 - id: '1613522589112'
@@ -395,25 +328,15 @@
     zone: zone.home
   condition: []
   action:
-  - service: notify.notify
+  - service: notify.toasted_cheese
     data:
-      message: Brian is home.
+      message: Brian arrived at home. Changing Ecobee to Home.
+  - device_id: 233353ebf3a4f303f3d6622cec9eda54
+    domain: climate
+    entity_id: climate.ecobee
+    type: set_preset_mode
+    preset_mode: Home
   mode: single
-- id: '1614579043012'
-  alias: Turn off eLab light after time
-  description: ''
-  trigger:
-  - platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.elab
-  condition: []
-  action:
-  - type: turn_off
-    device_id: 85ad071c383244928c929282071ecccf
-    entity_id: light.cree_connected_a_19_60w_equivalent_70e108fe_level_on_off
-    domain: light
-  mode: restart
 - id: '1615095673495'
   alias: Turn elab lights on
   description: ''
@@ -542,7 +465,7 @@
     domain: light
   mode: single
 - id: '1620277765619'
-  alias: Motion in kitchen
+  alias: Motion in living room (tradfri)
   description: ''
   trigger:
   - type: motion
@@ -557,8 +480,8 @@
       milliseconds: 0
   condition:
   - condition: time
-    after: '20:00'
-    before: '8:00'
+    after: '20:00:00'
+    before: 08:00:00
   - condition: device
     type: is_off
     device_id: 7140dac7b8b04d85b51cb0e9f1c1c775
@@ -567,9 +490,9 @@
   action:
   - service: timer.start
     data:
-      duration: '180'
+      duration: '0'
     target:
-      entity_id: timer.island
+      entity_id: timer.living_room
   - type: turn_on
     device_id: 7140dac7b8b04d85b51cb0e9f1c1c775
     entity_id: light.ikea_of_sweden_tradfri_bulb_e26_ws_opal_1000lm_15362ffe_level_light_color_on_off
@@ -674,7 +597,7 @@
       entity_id: timer.mbath
   mode: single
 - id: '1631541366997'
-  alias: Turn off mbath light after time
+  alias: Timer turns off mbath light
   description: ''
   trigger:
   - platform: event
@@ -705,6 +628,10 @@
     entity_id: light.4736863710521cfbe63f
     domain: light
     brightness_pct: 50
+  - type: turn_on
+    device_id: 2277b117527543b3bcd8a35ba84c2879
+    entity_id: light.ikea_of_sweden_tradfri_bulb_gu10_ww_400lm_eae3aafe_level_on_off
+    domain: light
   mode: single
 - id: '1632668888738'
   alias: Counter TOGGLE
@@ -771,19 +698,193 @@
   - condition: and
     conditions:
     - condition: sun
-      after: sunrise
-      after_offset: 00:20:00
+      before: sunrise
     - condition: time
-      after: 06:00:00
+      after: 06:15:00
+      weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
   action:
   - type: turn_on
-    device_id: bbf254d6ff5941cb88c2e869073fb7e8
-    entity_id: light.osram_lightify_a19_on_off_dim_10_year_d7100c00_level_on_off
+    device_id: 2277b117527543b3bcd8a35ba84c2879
+    entity_id: light.ikea_of_sweden_tradfri_bulb_gu10_ww_400lm_eae3aafe_level_on_off
     domain: light
-    brightness_pct: 20
+    brightness_pct: 25
+  mode: single
+- id: '1635215775295'
+  alias: Telegram test
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_on
+    device_id: d9457450295983e13d9bf7a24f835095
+    entity_id: light.4736863710521cfbdf9e
+    domain: light
+  condition: []
+  action:
+  - service: notify.toasted_cheese
+    data:
+      message: Living room light turned on.
+      title: Telegram test
+  mode: single
+- id: '1635297285742'
+  alias: Bedroom light goes on
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_on
+    device_id: 2277b117527543b3bcd8a35ba84c2879
+    entity_id: light.ikea_of_sweden_tradfri_bulb_gu10_ww_400lm_eae3aafe_level_on_off
+    domain: light
+  condition: []
+  action:
+  - service: timer.start
+    data: {}
+    target:
+      entity_id: timer.bedroom
+  mode: single
+- id: '1635521053106'
+  alias: Ecobee occupancy
+  description: ''
+  trigger:
+  - type: occupied
+    platform: device
+    device_id: 233353ebf3a4f303f3d6622cec9eda54
+    entity_id: binary_sensor.ecobee_occupancy
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: notify.toasted_cheese
+    data:
+      title: Ecobee
+      message: Occupancy detected upstairs
+  mode: single
+- id: '1635521232458'
+  alias: Ecobee Sensor occupancy
+  description: ''
+  trigger:
+  - type: occupied
+    platform: device
+    device_id: efb6f08281774f84cad13627e73cbb59
+    entity_id: binary_sensor.ecobee_sensor_occupancy
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: notify.toasted_cheese
+    data:
+      title: Ecobee Sensor
+      message: Occupancy detected downstairs
+  mode: single
+- id: '1635743156251'
+  alias: Brian arrived at CC office
+  description: ''
+  trigger:
+  - platform: zone
+    entity_id: device_tracker.brians_phone
+    zone: zone.clatsop_county_office
+    event: enter
+  condition: []
+  action:
+  - service: notify.toasted_cheese
+    data:
+      message: Brian has entered the Clatsop Zone.
+  mode: single
+- id: '1635797484111'
+  alias: Julie arrived at Co-op
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 6ebf391641f7a1d72a9480386b5afbe8
+    domain: device_tracker
+    entity_id: device_tracker.julies_phone
+    type: enters
+    zone: zone.home_2
+  condition: []
+  action:
+  - service: notify.toasted_cheese
+    data:
+      message: Julie has arrived at the Co-op!
+      title: Tracker
+  mode: single
+- id: '1635828973219'
+  alias: Motion in kitchen at night
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: a411a12fb94d6c80bc9b26fccc1c31f0
+    entity_id: binary_sensor.wemos03_motion
+    domain: binary_sensor
+  condition:
+  - condition: and
+    conditions:
+    - condition: sun
+      before: sunrise
+    - condition: time
+      after: '23:00:00'
+      weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+      - sat
+      - sun
+  action:
+  - type: turn_on
+    device_id: 7140dac7b8b04d85b51cb0e9f1c1c775
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e26_ws_opal_1000lm_15362ffe_level_light_color_on_off
+    domain: light
   - service: timer.start
     data:
       duration: '0'
     target:
-      entity_id: timer.bedroom
+      entity_id: timer.living_room
+  mode: single
+- id: '1635829483223'
+  alias: Timer turns off living room lamp
+  description: ''
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.living_room
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 7140dac7b8b04d85b51cb0e9f1c1c775
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e26_ws_opal_1000lm_15362ffe_level_light_color_on_off
+    domain: light
+  mode: single
+- id: '1635860577703'
+  alias: Motion in living room
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: a411a12fb94d6c80bc9b26fccc1c31f0
+    entity_id: binary_sensor.wemos03_motion
+    domain: binary_sensor
+  condition:
+  - condition: time
+    after: '23:00:00'
+    before: 08:00:00
+  - condition: device
+    type: is_off
+    device_id: 7140dac7b8b04d85b51cb0e9f1c1c775
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e26_ws_opal_1000lm_15362ffe_level_light_color_on_off
+    domain: light
+  action:
+  - service: timer.start
+    data:
+      duration: '0'
+    target:
+      entity_id: timer.living_room
+  - type: turn_on
+    device_id: 7140dac7b8b04d85b51cb0e9f1c1c775
+    entity_id: light.ikea_of_sweden_tradfri_bulb_e26_ws_opal_1000lm_15362ffe_level_light_color_on_off
+    domain: light
   mode: single
