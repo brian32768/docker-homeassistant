@@ -14,7 +14,7 @@ datestamp=`date "+%Y%m%d"`
 HOME_ASSISTANT=${PWD}/config
 
 # Where to write output data
-OUTPUT_DIR=/net/wenda/volume1/Wildsong/Backups/home-assistant/
+OUTPUT_DIR=/net/Wenda/volume1/Wildsong/Backups/home-assistant
 if [ ! -e ${OUTPUT_DIR} ]; then
     mkdir -p $OUTPUT_DIR
 fi
@@ -25,13 +25,15 @@ echo Backing up home assistant on $datestamp to $OUTPUT_DIR
 
 for database in home-assistant_v2 zigbee; do
     echo -n "...working on $database"
-    docker run --rm --net=proxy_net -v $HOME_ASSISTANT:/config -v $OUTPUT_DIR:/target \
+    docker run --rm --net=proxy -v $HOME_ASSISTANT:/config -v $OUTPUT_DIR:/target \
        wildsong/sqlite3:latest \
        sqlite3 ${database}.db ".backup /target/${database}-$datestamp.db"
     echo
 done
 
 echo Backing up home assistant files to files-$datestamp.tgz
-docker run --rm --net=proxy_net -v $HOME_ASSISTANT:/config -v $OUTPUT_DIR:/target \
+docker run --rm --net=proxy -v $HOME_ASSISTANT:/config -v $OUTPUT_DIR:/target \
        wildsong/sqlite3:latest \
        tar czf /target/files-$datestamp.tgz --exclude='*.db' .
+
+docker run --rm --net=proxy -v $OUTPUT_DIR:/target wildsong/sqlite3:latest chmod 600 /target/*tgz

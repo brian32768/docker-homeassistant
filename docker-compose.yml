@@ -1,5 +1,6 @@
 #
 #   WE RUN THIS IN COMPOSE BECAUSE OF "DEVICES"
+#   This version is for the caddy reverse proxy
 #
 version: '3.6'
 
@@ -10,33 +11,43 @@ version: '3.6'
 #    name: nodered_data
 
 networks:
-  proxy_net:
-    name: proxy_net
+  proxy:
+    name: proxy
     external: true
 
 services:
   server:
-    # This is defined for the swag reverse proxy, it won't work with swarm!
-    container_name: homeassistant
     depends_on:
       - "mosquitto"
     image: "homeassistant/home-assistant:latest"
     volumes:
       - "${PWD}/config:/config"
-      - "/etc/localtime:/etc/localtime:ro"
-      - "/etc/timezone:/etc/timezone:ro"
     ports:
       #- "80:80" # Required for Amazon Echo set up but interferes with proxy
       - "22222:22222" # ssh (debug only)
-      - "8123:8123" # HTTP is here and will be proxied, see .env
+      - "5683:5683" # CoIot for Shelly 1
+    environment:
+      TZ: "America/Los_Angeles"
     networks:
-      proxy_net:
+      proxy:
         aliases:
           - homeassistant
     devices:
       - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if00-port0:/dev/ttyUSB0" # Z-Wave
       - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if01-port0:/dev/ttyUSB1" # Zigbee
     restart: unless-stopped
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    labels:
+      # I think that when this container starts up,
+      # the 'caddy' container will see it and generate a new Caddyfile
+      # but what happens here?? Does it generate a Caddyfile here too?
+      caddy: homeassistant.${DOMAIN}
+      caddy.reverse_proxy: "{{upstreams 8123}}"
+      caddy.tls.protocols: "tls1.3"
+#      caddy.tls.dns: "cloudflare ${API_CLOUDFLARE_TOKEN}"
     
 #  node-red:
 #    # Build our own image to get the homeassistant node module
@@ -48,7 +59,7 @@ services:
 #    ports:
 #      - "1880:1880"
 #    networks:
-#      proxy_net:
+#      proxy:
 #        aliases:
 #          - node-red
 #    restart: unless-stopped
@@ -57,15 +68,15 @@ services:
     image: eclipse-mosquitto:latest
     volumes:
       - ${PWD}/mosquitto_config:/mosquitto/config
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
+    environment:
+      TZ: "America/Los_Angeles"
     # I use mqtt to talk to IoT hardware so
     # some ports have to be open to the LAN.
     ports:
       - "9001:9001"
       - "1883:1883"
     networks:
-      proxy_net:
+      proxy:
         aliases:
           - mosquitto
     restart: unless-stopped

@@ -1,21 +1,38 @@
 homeassistant:
   # Name of the location where Home Assistant is running
   name: Home
-  # Location required to calculate the time the sun rises and sets
+
+  country: US
+  
+# Location required to calculate the time the sun rises and sets
   latitude: 46.17441
   longitude: -123.83788
-  # Impacts weather/sunrise data (altitude above sea level in meters)
+
+# Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 5
-  # metric for Metric, imperial for Imperial
+
+# metric for Metric, imperial for Imperial
   unit_system: imperial
-  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+# Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Los_Angeles
-  # Customization file
+
+# Customization file
   customize: !include customize.yaml
 
-  external_url: https://home-assistant.wildsong.biz/
-  internal_url: https://home-assistant.wildsong.biz/
+  currency: USD
 
+  external_url: https://homeassistant.wildsong.biz/
+  internal_url: https://homeassistant.wildsong.biz/
+
+# This entry is only here to attempt to override the default radius of 100m
+zone:
+  - name: Home
+    latitude: 46.17441
+    longitude: -123.83788
+    radius: 30
+    icon: mdi:account-multiple
+      
 # Show links to resources in log and frontend
 #introduction:
 
@@ -32,18 +49,10 @@ scene: !include scenes.yaml
 http:
    trusted_proxies:
      - 10.0.0.0/8
+     - 172.29.0.0/16
    use_x_forwarded_for: true
    ip_ban_enabled: true
    login_attempts_threshold: 3
-
-# Checks for available updates
-# Note: This component will send some information about your system to
-# the developers to assist with development of Home Assistant.
-# For more information, please see:
-# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
-updater:
-  # Optional, allows Home Assistant developers to focus on popular components.
-  # include_used_components: true
 
 # Discover some devices automatically
 discovery:
@@ -78,14 +87,6 @@ sensor:
       - "activities/steps"
     unit_system: en_US
 
-mqtt:
-    broker: 192.168.123.2
-    discovery: true
-    discovery_prefix: homeassistant
-# 2021-10-10 Not working in mosquitto
-#    username: homeassistant
-#    password: u89adsjr3
-
 # Text to speech
 tts:
   - platform: google_translate
@@ -99,10 +100,10 @@ system_health:
 logger:
   default: info
   logs:
-    homeassistant.core: info
-    homeassistant.components.zha: debug
-    homeassistant.components.device_tracker: debug
-    homeassistant.components.device_automation: debug
+    homeassistant.core: warning
+    homeassistant.components.zha: warning
+    homeassistant.components.device_tracker: warning
+    homeassistant.components.device_automation: warning
     bellows.zigbee.application: warning
     bellows.ezsp: warning
 #    zigpy: warning
@@ -129,14 +130,11 @@ script: !include scripts.yaml
 #    - light
 
 # Rheem water heater
-water_heater:
-  - platform: econet
-    username: brian@wildsong.biz
-    password: !secret econet
+#water_heater:
+#  - platform: econet
+#    username: brian@wildsong.biz
+#    password: !secret econet
 
-spotify:
-  client_id: c466f453b4fc419e9880a1c26d7f55c2
-  client_secret: !secret spotify
 
 zha:
   zigpy_config:
@@ -180,20 +178,55 @@ notify:
 #    optimistic: false
 #    qos: 0
 
+light:
+  - platform: limitlessled
+    bridges:
+      - host: 192.168.123.235
+        groups:
+        - number: 1
+          name: Island
+          type: rgbww
+          #type: white, dimmer did not work
+
 timer:
+  bathroom:
+    duration: '00:17:00'
   bedroom:
     duration: '00:03:00'
   elab:
     duration: '00:02:00'
-  bathroom:
-    duration: '00:01:00'
+  library:
+    duration: '00:05:00'
   living_room:
     duration: '00:02:00'
   mbath:
     duration: '00:45:00'
-  
+  studio:
+    duration: '00:03:00'
 
 mobile_app:
 
 # 2021-07-25 To enable the Helpers
 default_config:
+
+# Pass these numbers from Home Assistant to Wemos05 (Garage)
+input_number:
+  blink_rate:
+    name: Blink rate
+    min: 0
+    max: 100
+    step: 1
+    initial: 0
+
+  icu:
+    name: ICU Dist
+    min: 0
+    max: 200
+    step: 1
+
+  stop_now:
+    name: Stop Dist
+    min: 0
+    max: 200
+    step: 1
+  
