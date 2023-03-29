@@ -2,7 +2,7 @@
 #   WE RUN THIS IN COMPOSE BECAUSE OF "DEVICES"
 #   This version is for the caddy reverse proxy
 #
-version: '3.6'
+version: '3.9'
 
 #volumes:
 #  homeassistant_config:
@@ -12,7 +12,7 @@ version: '3.6'
 
 networks:
   proxy:
-    name: proxy
+    name: ${NETWORK_NAME}
     external: true
 
 services:
@@ -24,6 +24,7 @@ services:
       - "${PWD}/config:/config"
     ports:
       #- "80:80" # Required for Amazon Echo set up but interferes with proxy
+      - "8123:8123"
       - "22222:22222" # ssh (debug only)
       - "5683:5683" # CoIot for Shelly 1
     environment:
@@ -36,18 +37,7 @@ services:
       - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if00-port0:/dev/ttyUSB0" # Z-Wave
       - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if01-port0:/dev/ttyUSB1" # Zigbee
     restart: unless-stopped
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-    labels:
-      # I think that when this container starts up,
-      # the 'caddy' container will see it and generate a new Caddyfile
-      # but what happens here?? Does it generate a Caddyfile here too?
-      caddy: homeassistant.${DOMAIN}
-      caddy.reverse_proxy: "{{upstreams 8123}}"
-      caddy.tls.protocols: "tls1.3"
-#      caddy.tls.dns: "cloudflare ${API_CLOUDFLARE_TOKEN}"
+
     
 #  node-red:
 #    # Build our own image to get the homeassistant node module

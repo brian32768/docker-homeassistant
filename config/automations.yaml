@@ -50,6 +50,11 @@
   - service: timer.cancel
     target:
       entity_id: timer.living_room
+    data: {}
+  - type: turn_on
+    device_id: fdfb51a95dde3a197fee7de56955b39b
+    entity_id: switch.shelly3
+    domain: switch
   mode: single
 - id: '1591494004057'
   alias: BED TIME
@@ -1003,7 +1008,6 @@
     domain: light
     metadata:
       secondary: false
-    brightness_pct: 40
   - delay:
       hours: 0
       minutes: 3
@@ -1035,7 +1039,6 @@
     domain: light
     metadata:
       secondary: false
-    brightness_pct: 70
   - delay:
       hours: 0
       minutes: 5
@@ -1208,10 +1211,6 @@
     device_id: 4875c40f2029e77d1419f704734c7180
     entity_id: light.porch_blue_led
     domain: light
-  - type: turn_on
-    device_id: fdfb51a95dde3a197fee7de56955b39b
-    entity_id: switch.shelly3
-    domain: switch
   mode: single
 - id: '1637633426623'
   alias: Library lights on at sunrise (motion)

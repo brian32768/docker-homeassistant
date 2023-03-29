@@ -50,6 +50,7 @@ http:
    trusted_proxies:
      - 10.0.0.0/8
      - 172.29.0.0/16
+     - 192.168.192.0/24
    use_x_forwarded_for: true
    ip_ban_enabled: true
    login_attempts_threshold: 3
@@ -85,6 +86,8 @@ sensor:
       - "body/weight"
       - "devices/battery"
       - "activities/steps"
+      - "activities/tracker/minutesFairlyActive"
+      - "activities/tracker/minutesVeryActive"
     unit_system: en_US
 
 # Text to speech
