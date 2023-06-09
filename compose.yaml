@@ -1,19 +1,11 @@
 #
 #   WE RUN THIS IN COMPOSE BECAUSE OF "DEVICES"
-#   This version is for the caddy reverse proxy
+#   It might work in Swarm but so what, it definitely works in Compose
 #
-version: '3.9'
 
 #volumes:
-#  homeassistant_config:
-#    name: homeassistant_config
 #  nodered_data:
 #    name: nodered_data
-
-networks:
-  proxy:
-    name: ${NETWORK_NAME}
-    external: true
 
 services:
   server:
@@ -29,10 +21,6 @@ services:
       - "5683:5683" # CoIot for Shelly 1
     environment:
       TZ: "America/Los_Angeles"
-    networks:
-      proxy:
-        aliases:
-          - homeassistant
     devices:
       - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if00-port0:/dev/ttyUSB0" # Z-Wave
       - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if01-port0:/dev/ttyUSB1" # Zigbee
@@ -65,9 +53,5 @@ services:
     ports:
       - "9001:9001"
       - "1883:1883"
-    networks:
-      proxy:
-        aliases:
-          - mosquitto
     restart: unless-stopped
     

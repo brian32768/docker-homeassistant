@@ -36,4 +36,5 @@ docker run --rm --net=proxy -v $HOME_ASSISTANT:/config -v $OUTPUT_DIR:/target \
        wildsong/sqlite3:latest \
        tar czf /target/files-$datestamp.tgz --exclude='*.db' .
 
-docker run --rm --net=proxy -v $OUTPUT_DIR:/target wildsong/sqlite3:latest chmod 600 /target/*tgz
+# The asterisk messes me up, but I don't really care about this right now.
+#docker run --rm --net=proxy -v $OUTPUT_DIR:/target wildsong/sqlite3:latest chmod 600 /target/*tgz

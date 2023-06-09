@@ -49,8 +49,8 @@ scene: !include scenes.yaml
 http:
    trusted_proxies:
      - 10.0.0.0/8
-     - 172.29.0.0/16
-     - 192.168.192.0/24
+     - 172.0.0.0/8
+     - 192.168.0.0/16
    use_x_forwarded_for: true
    ip_ban_enabled: true
    login_attempts_threshold: 3

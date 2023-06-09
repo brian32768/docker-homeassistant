@@ -23,7 +23,7 @@ to get rid of an error message that popped up in the log about auth from HA.
 Let mosquitto create its config volume then fix its permissions
 
 ```bash
-docker-compose up mosquitto
+docker compose up mosquitto
 ^C
 sudo chmod 660 mosquitto_config/
 ```
@@ -47,15 +47,15 @@ docker run -it --rm -v mosquitto_config:/mosquitto/config eclipse-mosquitto:late
 ## Volumes
 
 It's just easier here to keep configuration for home assistant in local folders.
-Home assistant is in config/ and mosquitto is in mosquitto_config/.
+Home Assistant is in config/ and mosquitto is in mosquitto_config/.
 
 ## Deploy
 
 Swarm mode does not work because of the "devices" option needed to talk to the USB devices.
 
 Instead use
-    docker-compose build
-    docker-compose up -d
+
+    docker compose up -d
 
 ## Backups
 
@@ -67,4 +67,6 @@ Normally I run my instance here,
 
     https://homeassistant.wildsong.biz/
 
+## TODO
 
+* build an image with log file redirection (see unifi for example)
