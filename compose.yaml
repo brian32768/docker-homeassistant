@@ -3,9 +3,13 @@
 #   It might work in Swarm but so what, it definitely works in Compose
 #
 
-#volumes:
+volumes:
 #  nodered_data:
 #    name: nodered_data
+  certs:
+    # These live in the letsencrypt project now
+    name: certs
+    external: true
 
 services:
   server:
@@ -13,7 +17,8 @@ services:
       - "mosquitto"
     image: "homeassistant/home-assistant:latest"
     volumes:
-      - "${PWD}/config:/config"
+      - ${PWD}/config:/config
+      - certs:/certs:ro
     ports:
       #- "80:80" # Required for Amazon Echo set up but interferes with proxy
       - "8123:8123"

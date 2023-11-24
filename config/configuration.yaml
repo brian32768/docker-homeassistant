@@ -1,8 +1,15 @@
 homeassistant:
   # Name of the location where Home Assistant is running
   name: Home
-
   country: US
+
+  auth_providers:
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.123.0/24
+        - 127.0.0.1
+      allow_bypass_login: true
+    - type: homeassistant
   
 # Location required to calculate the time the sun rises and sets
   latitude: 46.17441
@@ -23,7 +30,7 @@ homeassistant:
   currency: USD
 
   external_url: https://homeassistant.wildsong.biz/
-  internal_url: https://homeassistant.wildsong.biz/
+  internal_url: http://homeassistant.wildsong.biz:8123/
 
 # This entry is only here to attempt to override the default radius of 100m
 zone:
@@ -47,16 +54,10 @@ scene: !include scenes.yaml
 
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 http:
-   trusted_proxies:
-     - 10.0.0.0/8
-     - 172.0.0.0/8
-     - 192.168.0.0/16
-   use_x_forwarded_for: true
    ip_ban_enabled: true
    login_attempts_threshold: 3
-
-# Discover some devices automatically
-discovery:
+   ssl_certificate: /certs/live/bellman.wildsong.biz/fullchain.pem
+   ssl_key: /certs/live/bellman.wildsong.biz/privkey.pem
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
@@ -79,16 +80,16 @@ sun:
 #  - platform: yr
 
 # Fitbit
-sensor:
-  - platform: fitbit
-    clock_format: 12H
-    monitored_resources:
-      - "body/weight"
-      - "devices/battery"
-      - "activities/steps"
-      - "activities/tracker/minutesFairlyActive"
-      - "activities/tracker/minutesVeryActive"
-    unit_system: en_US
+#sensor:
+#  - platform: fitbit
+#    clock_format: 12H
+#    monitored_resources:
+#      - "body/weight"
+#      - "devices/battery"
+#      - "activities/steps"
+#      - "activities/tracker/minutesFairlyActive"
+#      - "activities/tracker/minutesVeryActive"
+#    unit_system: en_US
 
 # Text to speech
 tts:
@@ -103,7 +104,7 @@ system_health:
 logger:
   default: info
   logs:
-    homeassistant.core: warning
+    homeassistant.core: info
     homeassistant.components.zha: warning
     homeassistant.components.device_tracker: warning
     homeassistant.components.device_automation: warning
@@ -149,21 +150,10 @@ zha:
 alexa:
   smart_home:
 
-# 2021-10-25
-telegram_bot:
-  - platform: polling
-    api_key: !secret telegram
-    parse_mode: html
-    allowed_chat_ids:
-      - 2024646225 # Brian
-#    trusted_networks:
-#      - 149.154.160.0/20
-#      - 91.108.4.0/22
-
-notify:
-  - platform: telegram
-    name: toasted_cheese
-    chat_id: 2024646225 # Brian
+#notify:
+#  - platform: telegram
+#    name: toasted_cheese
+#    chat_id: 2024646225 # Brian
 
 
 # RGBW:

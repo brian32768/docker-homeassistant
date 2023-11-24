@@ -1,7 +1,121 @@
-test_telegram:
-  alias: "test_telegram"
+play_2fm:
+  alias: KDFC Classical
   sequence:
-    - service: notify.toasted_cheese
-      data:
-        title: Test message
-        message: "This is toasted cheese."
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.zebra
+    data:
+      media_content_id: media-source://radio_browser/b6b7d5c9-1c3b-4d7f-ac88-d6b82327fab7
+      media_content_type: audio/aac
+    metadata:
+      title: Classical KDFC
+      thumbnail: ''
+      media_class: music
+      children_media_class:
+      navigateIds:
+      - {}
+      - media_content_type: app
+        media_content_id: media-source://radio_browser
+      - media_content_type: music
+        media_content_id: media-source://radio_browser/country/UM
+  mode: single
+play_radio_paradise_on_zebra:
+  alias: Radio Paradise
+  sequence:
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.zebra
+    data:
+      media_content_id: media-source://radio_browser/9617a958-0601-11e8-ae97-52543be04c81
+      media_content_type: audio/aac
+    metadata:
+      title: Radio Paradise (320k)
+      thumbnail: https://www.radioparadise.com/favicon-32x32.png
+      media_class: music
+      children_media_class:
+      navigateIds:
+      - {}
+      - media_content_type: app
+        media_content_id: media-source://radio_browser
+      - media_content_type: music
+        media_content_id: media-source://radio_browser/popular
+  mode: single
+  icon: mdi:play
+play_a_stream:
+  alias: Play a stream
+  sequence:
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.zebra
+    data:
+      media_content_type: music
+      media_content_id: https://listen.jazzgroove.org/generate?url=http://streams.radiomast.io/6441db21-9a8e-4745-af4d-ab0251c5312e?token=aPJD_9Sc&channel=mix1&filetype=.pls
+  mode: single
+  icon: mdi:play
+play_jazz_groove_1:
+  alias: Jazz Groove 1
+  sequence:
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.zebra
+    data:
+      media_content_type: music
+      media_content_id: https://listen.jazzgroove.org/generate?url=http://streams.radiomast.io/6441db21-9a8e-4745-af4d-ab0251c5312e?token=aPJD_9Sc&channel=mix1&filetype=.pls
+  mode: single
+  icon: mdi:play
+play_jazz_groove_2:
+  alias: Jazz Groove 2
+  sequence:
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.zebra
+    data:
+      media_content_type: music
+      media_content_id: https://listen.jazzgroove.org/generate?url=http://streams.radiomast.io/05de889c-5678-4a40-a36d-177e9ead2aa9?token=aPJD_9Sc&channel=mix2&filetype=.pls
+  mode: single
+  icon: mdi:play
+play_jazz_groove_dreams:
+  alias: Jazz Groove Dreams
+  sequence:
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.zebra
+    data:
+      media_content_type: music
+      media_content_id: https://listen.jazzgroove.org/generate?url=http://streams.radiomast.io/6cced571-fcb1-4410-84af-1f93aa434809?token=aPJD_9Sc&channel=dreams&filetype=.pls
+  mode: single
+  icon: mdi:play
+'1700346137465':
+  alias: Jazz Groove Christmas
+  sequence:
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.zebra
+    data:
+      media_content_type: music
+      media_content_id: https://listen.jazzgroove.org/generate?url=http://streams.radiomast.io/e156218c-3d28-4a1c-a262-f0c1ece0baee?token=aPJD_9Sc&channel=christmas&filetype=.pls
+  mode: single
+  icon: mdi:play
+kmun:
+  alias: KMUN Coast Radio
+  sequence:
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.zebra
+    data:
+      media_content_id: media-source://radio_browser/961c67d6-0601-11e8-ae97-52543be04c81
+      media_content_type: audio/aac
+    metadata:
+      title: KMUN 91.9 "Coast Community Radio" Astoria, OR
+      thumbnail: https://kmun.org/wp-content/uploads/2021/10/cropped-site-icon-600x600-01-180x180.png
+      media_class: music
+      children_media_class:
+      navigateIds:
+      - {}
+      - media_content_type: app
+        media_content_id: media-source://radio_browser
+      - media_content_type: music
+        media_content_id: media-source://radio_browser/tag
+      - media_content_type: music
+        media_content_id: media-source://radio_browser/tag/community radio
+  mode: single
