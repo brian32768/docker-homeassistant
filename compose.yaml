@@ -2,61 +2,30 @@
 #   WE RUN THIS IN COMPOSE BECAUSE OF "DEVICES"
 #   It might work in Swarm but so what, it definitely works in Compose
 #
-
-volumes:
-#  nodered_data:
-#    name: nodered_data
-  certs:
-    # These live in the letsencrypt project now
-    name: certs
+networks:
+  homeassistant:
+    name: homeassistant
     external: true
 
 services:
   server:
-    depends_on:
-      - "mosquitto"
-    image: "homeassistant/home-assistant:latest"
+    image: homeassistant/home-assistant:latest
     volumes:
       - ${PWD}/config:/config
-      - certs:/certs:ro
     ports:
-      #- "80:80" # Required for Amazon Echo set up but interferes with proxy
-      - "8123:8123"
+      - "80:80" # Required for Amazon Echo set up but interferes with proxy (which I no longer use. :-)
       - "22222:22222" # ssh (debug only)
       - "5683:5683" # CoIot for Shelly 1
+#      - "8123:8123"
     environment:
       TZ: "America/Los_Angeles"
-    devices:
-      - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if00-port0:/dev/ttyUSB0" # Z-Wave
-      - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if01-port0:/dev/ttyUSB1" # Zigbee
+    # ZHA needs this to access the Nortek.
+#    devices:
+#      - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if00-port0:/dev/ttyUSB0" # Z-Wave
+#      - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if01-port0:/dev/ttyUSB1" # Zigbee
     restart: unless-stopped
-
-    
-#  node-red:
-#    # Build our own image to get the homeassistant node module
-#    build:
-#      context: .
-#      dockerfile: Dockerfile.nodered
-#    volumes:
-#      - "nodered_data:/data"
-#    ports:
-#      - "1880:1880"
-#    networks:
-#      proxy:
-#        aliases:
-#          - node-red
-#    restart: unless-stopped
-    
-  mosquitto:
-    image: eclipse-mosquitto:latest
-    volumes:
-      - ${PWD}/mosquitto_config:/mosquitto/config
-    environment:
-      TZ: "America/Los_Angeles"
-    # I use mqtt to talk to IoT hardware so
-    # some ports have to be open to the LAN.
-    ports:
-      - "9001:9001"
-      - "1883:1883"
-    restart: unless-stopped
+    networks:
+      homeassistant:
+        aliases:
+          - homeassistant
     
