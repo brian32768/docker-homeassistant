@@ -2,13 +2,14 @@
 #
 #  Back up the critical files for Home Assistant to the Synology server.
 #
-#
 # I wish this was part of the compose file
-#
+
+# How many old files to keep online
+KEEPDAYS=30
 
 datestamp=`date "+%Y%m%d"`
 
-# 2021-09 I changed this from a Docker volume to a local directory
+# 2021-09 I changed config from a Docker volume to a local directory
 # Name of Home Assistant config volume
 #HOME_ASSISTANT=home-assistant_config
 HOME_ASSISTANT=${PWD}/config
@@ -21,20 +22,30 @@ fi
 
 echo Backing up home assistant on $datestamp to $OUTPUT_DIR
 
-# docker build wildsong/sqlite3 -f Dockerfile.backup build
+# docker buildx build -f Dockerfile.backup sqlite3
 
 for database in home-assistant_v2 zigbee; do
     echo -n "...working on $database"
     docker run --rm --net=proxy -v $HOME_ASSISTANT:/config -v $OUTPUT_DIR:/target \
-       wildsong/sqlite3:latest \
+       sqlite3:latest \
        sqlite3 ${database}.db ".backup /target/${database}-$datestamp.db"
     echo
 done
 
 echo Backing up home assistant files to files-$datestamp.tgz
 docker run --rm --net=proxy -v $HOME_ASSISTANT:/config -v $OUTPUT_DIR:/target \
-       wildsong/sqlite3:latest \
+       sqlite3:latest \
        tar czf /target/files-$datestamp.tgz --exclude='*.db' .
 
-# The asterisk messes me up, but I don't really care about this right now.
-#docker run --rm --net=proxy -v $OUTPUT_DIR:/target wildsong/sqlite3:latest chmod 600 /target/*tgz
+# Make things a little more private
+docker run --rm --net=proxy -v $OUTPUT_DIR:/target sqlite3:latest chmod 600 '/target/*tgz'
+
+# NB doing this with dockers works better because the files are owned by root.
+
+echo Deleting $KEEPDAYS day old backup files.
+
+docker run --rm --net=proxy -v $OUTPUT_DIR:/target sqlite3:latest \
+  find /target/ -name '*.db' -mtime +$KEEPDAYS -print -exec rm -f {} \;
+
+docker run --rm --net=proxy -v $OUTPUT_DIR:/target sqlite3:latest \
+  find /target/ -name '*.tgz' -mtime +$KEEPDAYS -print -exec rm -f {} \;
