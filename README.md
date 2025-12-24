@@ -4,6 +4,11 @@ This is my Docker set up for Home Assistant.
 I used to include Mosquitto and the hardware setup for the Zigbee dongle
 but that's been moved to the docker-z2m project.
 
+I am 150 miles from home right now and want to do some work
+with Esphome and an ESP32-C6 device, so I am trying to run
+Home Assistant locally on my Windows 11 laptop. Theory is
+that I don't need Mosquitto or Zigbee2MQTT to do this.
+
 ## Node Red
 
 I've tried it and find it tediously difficult. I want to just code in Python.
