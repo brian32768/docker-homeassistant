@@ -1,0 +1,831 @@
+- id: '1615096020895'
+  name: eLab bright
+  entities:
+    light.cree_connected_a_19_60w_equivalent_2ea506fe_level_on_off:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 150
+      off_brightness:
+      friendly_name: Elab globe 18
+      supported_features: 41
+      state: 'on'
+- id: '1636316689904'
+  name: eLab off
+  entities:
+    light.cree_connected_a_19_60w_equivalent_2ea506fe_level_on_off:
+      supported_color_modes:
+      - brightness
+      off_brightness:
+      friendly_name: Elab globe 18
+      supported_features: 41
+      state: 'off'
+- id: '1698636195846'
+  name: Closet OFF
+  entities:
+    switch.closet_light_switch_1:
+      device_class: outlet
+      friendly_name: Closet light Switch 1
+      state: 'off'
+  icon: mdi:alarm-light-off
+  metadata: {}
+- id: '1699732396663'
+  name: Volume up
+  entities:
+    media_player.zebra:
+      group_members:
+      - media_player.squeezelite_2
+      - media_player.zebra
+      volume_level: 0.21
+      is_volume_muted: false
+      media_content_id: http://audio-edge-4ev3b.lax.g.radiomast.io/0fc134ba-991c-4b1f-9b06-7e0358f1d680?token=aPJD_9Sc
+      media_content_type: music
+      media_position: 649
+      media_position_updated_at: '2023-11-11T19:53:06.977406+00:00'
+      media_title: Non-Profit & Listener-Supported
+      media_artist: The Jazz Groove
+      media_channel: 'Jazz Groove #1'
+      shuffle: false
+      repeat: 'off'
+      query_result: {}
+      sync_group:
+      - media_player.squeezelite_2
+      - media_player.zebra
+      entity_picture: /api/media_player_proxy/media_player.zebra?token=73deca3bf94173b20835b62775cd5651cf4eeeb379b3217a07fd77bf3be78cfa&cache=8dfa804b6638d0d4
+      friendly_name: zebra
+      supported_features: 3077055
+      state: playing
+    media_player.squeezelite_2:
+      group_members:
+      - media_player.squeezelite_2
+      - media_player.zebra
+      volume_level: 0.15
+      is_volume_muted: false
+      media_content_id: http://audio-edge-4ev3b.lax.g.radiomast.io/0fc134ba-991c-4b1f-9b06-7e0358f1d680?token=aPJD_9Sc
+      media_content_type: music
+      media_position: 649
+      media_position_updated_at: '2023-11-11T19:53:06.973366+00:00'
+      media_title: Non-Profit & Listener-Supported
+      media_artist: The Jazz Groove
+      media_channel: 'Jazz Groove #1'
+      shuffle: false
+      repeat: 'off'
+      query_result: {}
+      sync_group:
+      - media_player.squeezelite_2
+      - media_player.zebra
+      entity_picture: /api/media_player_proxy/media_player.squeezelite_2?token=9049020c8150a5bc69251d8c64f3072eda172f66aa740ec2d9bf00c84cac1ee9&cache=8dfa804b6638d0d4
+      friendly_name: okapi
+      supported_features: 3077055
+      state: playing
+  metadata: {}
+- id: '1735263448791'
+  name: Paper evening
+  entities:
+    light.0x14b457fffe63845c:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      - colorloop
+      - stop_colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect:
+      color_mode: xy
+      brightness: 191
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      - 5.783
+      - 65.098
+      rgb_color:
+      - 255
+      - 105
+      - 89
+      xy_color:
+      - 0.592996
+      - 0.320989
+      friendly_name: IKEA Opal E12
+      supported_features: 44
+      state: 'on'
+    light.0x086bd7fffe1b1ec2:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      effect:
+      color_mode: brightness
+      brightness: 71
+      friendly_name: IKEA E12 1
+      supported_features: 44
+      state: 'on'
+    light.0x086bd7fffe218716:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      effect:
+      color_mode: brightness
+      brightness: 20
+      friendly_name: IKEA E12 2
+      supported_features: 44
+      state: 'on'
+  metadata: {}
+- id: '1735263494067'
+  name: Paper bedtime
+  entities:
+    light.0x14b457fffe63845c:
+      supported_color_modes:
+      - xy
+      friendly_name: IKEA Opal E12
+      supported_features: 40
+      color_mode: xy
+      brightness: 82
+      hs_color:
+      - 5.783
+      - 65.098
+      rgb_color:
+      - 255
+      - 105
+      - 89
+      xy_color:
+      - 0.592996
+      - 0.320989
+      off_with_transition: false
+      off_brightness:
+      state: 'on'
+    light.0x086bd7fffe1b1ec2:
+      supported_color_modes:
+      - brightness
+      friendly_name: IKEA E12 1
+      supported_features: 40
+      color_mode: brightness
+      brightness: 69
+      off_with_transition: false
+      off_brightness:
+      state: 'on'
+  metadata: {}
+- id: '1735346695483'
+  name: Xmas ON
+  entities:
+    switch.shelly2_441793a45c58:
+      friendly_name: shelly2
+      state: 'on'
+    switch.shelly4_bcff4dfce776:
+      friendly_name: shelly4
+      state: 'on'
+  icon: mdi:string-lights
+  metadata: {}
+- id: '1735346765712'
+  name: Xmas OFF
+  entities:
+    switch.shelly2_441793a45c58:
+      friendly_name: shelly2
+      state: 'off'
+    switch.shelly4_bcff4dfce776:
+      friendly_name: shelly4
+      state: 'off'
+  icon: mdi:string-lights-off
+  metadata: {}
+- id: '1737096527918'
+  name: Kitchen Counter Morning
+  entities:
+    light.0x00158d00068a5228:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      - colorloop
+      - stop_colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect:
+      color_mode: xy
+      brightness: 128
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      - 41.818
+      - 38.824
+      rgb_color:
+      - 255
+      - 225
+      - 156
+      xy_color:
+      - 0.413
+      - 0.398
+      friendly_name: Nue RGBW 1
+      supported_features: 44
+      state: 'on'
+    light.0x00158d00068a53a8:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      - colorloop
+      - stop_colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect:
+      color_mode: color_temp
+      brightness: 148
+      color_temp_kelvin: 4975
+      color_temp: 201
+      hs_color:
+      - 26.976
+      - 19.584
+      rgb_color:
+      - 255
+      - 228
+      - 205
+      xy_color:
+      - 0.372
+      - 0.35
+      friendly_name: Nue RGBW 2
+      supported_features: 44
+      state: 'on'
+    light.0x00158d00068a5114:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      - colorloop
+      - stop_colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect:
+      color_mode: color_temp
+      brightness: 166
+      color_temp_kelvin: 4166
+      color_temp: 240
+      hs_color:
+      - 26.752
+      - 31.945
+      rgb_color:
+      - 255
+      - 210
+      - 174
+      xy_color:
+      - 0.41
+      - 0.362
+      friendly_name: Nue RGBW 3
+      supported_features: 44
+      state: 'on'
+  metadata: {}
+- id: '1737096663433'
+  name: Kitchen Counter Movie Night
+  entities:
+    light.0x00158d00068a5228:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      - colorloop
+      - stop_colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect:
+      color_mode: xy
+      brightness: 82
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      - 341.905
+      - 49.412
+      rgb_color:
+      - 255
+      - 129
+      - 167
+      xy_color:
+      - 0.475
+      - 0.279
+      friendly_name: Nue RGBW 1
+      supported_features: 44
+      state: 'on'
+    light.0x00158d00068a53a8:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      - colorloop
+      - stop_colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect:
+      color_mode: xy
+      brightness: 92
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      - 341.905
+      - 49.412
+      rgb_color:
+      - 255
+      - 129
+      - 167
+      xy_color:
+      - 0.475
+      - 0.279
+      friendly_name: Nue RGBW 2
+      supported_features: 44
+      state: 'on'
+    light.0x00158d00068a5114:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      - colorloop
+      - stop_colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect:
+      color_mode: xy
+      brightness: 107
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      - 341.905
+      - 49.412
+      rgb_color:
+      - 255
+      - 129
+      - 167
+      xy_color:
+      - 0.475
+      - 0.279
+      friendly_name: Nue RGBW 3
+      supported_features: 44
+      state: 'on'
+  metadata: {}
+- id: '1737096758697'
+  name: Kitchen Counter 100
+  entities:
+    light.0x00158d00068a5228:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      - colorloop
+      - stop_colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect:
+      color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 6535
+      color_temp: 153
+      hs_color:
+      - 54.768
+      - 1.6
+      rgb_color:
+      - 255
+      - 255
+      - 251
+      xy_color:
+      - 0.325
+      - 0.333
+      friendly_name: Nue RGBW 1
+      supported_features: 44
+      state: 'on'
+    light.0x00158d00068a53a8:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      - colorloop
+      - stop_colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect:
+      color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 6535
+      color_temp: 153
+      hs_color:
+      - 54.768
+      - 1.6
+      rgb_color:
+      - 255
+      - 255
+      - 251
+      xy_color:
+      - 0.325
+      - 0.333
+      friendly_name: Nue RGBW 2
+      supported_features: 44
+      state: 'on'
+    light.0x00158d00068a5114:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      - colorloop
+      - stop_colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect:
+      color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 6535
+      color_temp: 153
+      hs_color:
+      - 54.768
+      - 1.6
+      rgb_color:
+      - 255
+      - 255
+      - 251
+      xy_color:
+      - 0.325
+      - 0.333
+      friendly_name: Nue RGBW 3
+      supported_features: 44
+      state: 'on'
+  metadata: {}
+- id: '1737097442408'
+  name: Kitchen Counter 0
+  entities:
+    light.0x00158d00068a5228:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      - colorloop
+      - stop_colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect:
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Nue RGBW 1
+      supported_features: 44
+      state: 'off'
+    light.0x00158d00068a53a8:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      - colorloop
+      - stop_colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect:
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Nue RGBW 2
+      supported_features: 44
+      state: 'off'
+    light.0x00158d00068a5114:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      - colorloop
+      - stop_colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect:
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Nue RGBW 3
+      supported_features: 44
+      state: 'off'
+  metadata: {}
+- id: '1737611208507'
+  name: Kitchen Warm
+  entities:
+    light.0x00158d00068a5228:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      - colorloop
+      - stop_colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect:
+      color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 3584
+      color_temp: 279
+      hs_color:
+      - 27.093
+      - 42.979
+      rgb_color:
+      - 255
+      - 195
+      - 145
+      xy_color:
+      - 0.448
+      - 0.373
+      friendly_name: Nue RGBW 1
+      supported_features: 44
+      state: 'on'
+    light.0x00158d00068a53a8:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      - colorloop
+      - stop_colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect:
+      color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 3584
+      color_temp: 279
+      hs_color:
+      - 27.093
+      - 42.979
+      rgb_color:
+      - 255
+      - 195
+      - 145
+      xy_color:
+      - 0.448
+      - 0.373
+      friendly_name: Nue RGBW 2
+      supported_features: 44
+      state: 'on'
+    light.0x00158d00068a5114:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      - colorloop
+      - stop_colorloop
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect:
+      color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 3584
+      color_temp: 279
+      hs_color:
+      - 27.093
+      - 42.979
+      rgb_color:
+      - 255
+      - 195
+      - 145
+      xy_color:
+      - 0.448
+      - 0.373
+      friendly_name: Nue RGBW 3
+      supported_features: 44
+      state: 'on'
+  icon: mdi:account-group
+  metadata: {}
+- id: '1755735529989'
+  name: Dining room warm
+  entities:
+    light.dining_room_light:
+      min_color_temp_kelvin: 2200
+      max_color_temp_kelvin: 6500
+      min_mireds: 153
+      max_mireds: 454
+      effect_list:
+      - clarity
+      - dinner-party
+      - valentines-day
+      - getting-ready
+      - sleep
+      - wake-up
+      - chill
+      - rainbow
+      - christmas
+      - nightlight
+      - focus
+      - moonlight
+      - july-4th
+      - jump-3
+      - jump-7
+      - flash
+      - fade-7
+      - fade-3
+      supported_color_modes:
+      - color_temp
+      - rgb
+      friendly_name: Dining room table Light
+      supported_features: 4
+      effect:
+      color_mode: color_temp
+      brightness: 166
+      color_temp_kelvin: 3100
+      color_temp: 322
+      hs_color:
+      - 27.668
+      - 54.245
+      rgb_color:
+      - 255
+      - 180
+      - 117
+      xy_color:
+      - 0.487
+      - 0.381
+      state: 'on'
+  metadata: {}
+- id: '1755735641055'
+  name: Dining room Daylight
+  entities:
+    light.dining_room_light:
+      min_color_temp_kelvin: 2200
+      max_color_temp_kelvin: 6500
+      min_mireds: 153
+      max_mireds: 454
+      effect_list:
+      - clarity
+      - dinner-party
+      - valentines-day
+      - getting-ready
+      - sleep
+      - wake-up
+      - chill
+      - rainbow
+      - christmas
+      - nightlight
+      - focus
+      - moonlight
+      - july-4th
+      - jump-3
+      - jump-7
+      - flash
+      - fade-7
+      - fade-3
+      supported_color_modes:
+      - color_temp
+      - rgb
+      friendly_name: Dining room table Light
+      supported_features: 4
+      effect:
+      color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 4900
+      color_temp: 204
+      hs_color:
+      - 26.909
+      - 20.618
+      rgb_color:
+      - 255
+      - 226
+      - 202
+      xy_color:
+      - 0.376
+      - 0.351
+      state: 'on'
+  metadata: {}
