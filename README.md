@@ -24,8 +24,19 @@ Home Assistant is in config/.
 
 ## Deploy
 
+On first run you might have to create the network, 
+
 ```bash
-   docker compose up -d
+docker network create homeassistant
+```
+
+This works on Linux or on Windows with Docker Desktop running and using WSL2.
+Once I see it runs on Windows, I restart it just using Docker Desktop. There are
+lots of errors because it's not seeing my home full of devices but I don't care
+about that right now.
+
+```bash
+docker compose up -d
 ```
 
 ## Backups
