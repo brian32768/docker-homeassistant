@@ -15,10 +15,10 @@ datestamp=`date "+%Y%m%d"`
 HOME_ASSISTANT=${PWD}/config
 
 # Where to write output data
-OUTPUT_DIR=/net/Wenda/volume1/Wildsong/Backups/home-assistant
-if [ ! -e ${OUTPUT_DIR} ]; then
-    mkdir -p $OUTPUT_DIR
-fi
+#OUTPUT_DIR=/net/wenda/volume1/Wildsong/Backups/home-assistant
+OUTPUT_DIR=/tmp/home-assistant
+ls -d $OUTPUT_DIR
+sleep 2
 
 echo Backing up home assistant on $datestamp to $OUTPUT_DIR
 
@@ -38,7 +38,9 @@ docker run --rm --net=proxy -v $HOME_ASSISTANT:/config -v $OUTPUT_DIR:/target \
        tar czf /target/files-$datestamp.tgz --exclude='*.db' .
 
 # Make things a little more private
-docker run --rm --net=proxy -v $OUTPUT_DIR:/target sqlite3:latest chmod 600 '/target/*tgz'
+docker run --rm --net=proxy -v $OUTPUT_DIR:/target \
+       sqlite3:latest \
+       chmod 600 /target/files-$datestamp.tgz
 
 # NB doing this with dockers works better because the files are owned by root.
 

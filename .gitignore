@@ -1,5 +1,3 @@
 *~
 .env
-mosquitto.passwords
 config/
-mosquitto_config/

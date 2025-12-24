@@ -1,10 +1,8 @@
-# home-assistant
+# docker-homeassistant
 
-I'm running home-assistant and mosquitto here.
-
-I run it in Docker Compose because it's easier to deal with the Nortec USB stick than in Swarm.
-
-I share certs maintained by docker-letsencrpyt, they will be in a Docker volume called "certs".
+This is my Docker set up for Home Assistant.
+I used to include Mosquitto and the hardware setup for the Zigbee dongle
+but that's been moved to the docker-z2m project.
 
 ## Node Red
 
@@ -12,49 +10,18 @@ I've tried it and find it tediously difficult. I want to just code in Python.
 
 Information on Node-Red in docker: https://nodered.org/docs/getting-started/docker
 
-## MQTT Broker
-
-I chose Mosquitto because it's very minimal and well supported in HA.
-
-I wanted to try RabbitMQ, but let's face it, MQTT is just not that interesting.
-I am sticking with Mosquitto and moving along to other things.
-
-2021-09-28 -- I had to add "allow_anonymous true" to  mosquitto.conf
-to get rid of an error message that popped up in the log about auth from HA.
-
-### Mosquitto passwords
-
-Let mosquitto create its config volume then fix its permissions
-
-    docker compose up mosquitto
-    ^C
-    sudo chmod 660 mosquitto_config/
-
-Copy the template mosquitto.conf file into mosquitto_conf and customize it.
-
-Create a new password file using the password entry you put in config/configuration.yml
-
-To create credential pairs, use the mosquitto_passwd command to create a new file and put a password for homeassistant in it.
-
-   docker run -it --rm -v mosquitto_config:/mosquitto/config eclipse-mosquitto:latest mosquitto_passwd -c /mosquitto/config/passwd homeassistant
-
-To create additional credentials, leave off the -c. For example, 
-
-   docker run -it --rm -v mosquitto_config:/mosquitto/config eclipse-mosquitto:latest mosquitto_passwd /mosquitto/config/passwd wemos
-
-
 ## Volumes
 
-It's just easier here to keep configuration for home assistant in local folders.
-Home Assistant is in config/ and mosquitto is in mosquitto_config/.
+I am not using Docker volumes right now because it's easier here to
+keep configuration for home assistant in local folders.
+
+Home Assistant is in config/.
 
 ## Deploy
 
-Swarm mode does not work because of the "devices" option needed to talk to the USB devices.
-
-Instead use
-
+```bash
    docker compose up -d
+```
 
 ## Backups
 
@@ -66,6 +33,18 @@ Normally I run my instance here,
 
    https://homeassistant.wildsong.biz/
 
+## Update firmware in Nortek
+
+(or is it spelled Nortec??)
+
+   docker run --rm --device=/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if01-port0:/dev/ttyUSB1 -it walthowd/husbzb-firmware bash
+
 ## TODO
 
 * build an image with log file redirection (see unifi for example)
+
+### Music Assistant
+
+mkdir music_assistant_data
+docker run -v ./music_assistant_data:/data --network host --cap-add=DAC_READ_SEARCH --cap-add=SYS_ADMIN ghcr.io/music-assistant/server
+

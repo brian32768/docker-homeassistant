@@ -1,512 +1,180 @@
 - id: '1590422923262'
-  alias: Bedtime - Opal light DOWN
+  alias: Bedtime - Paper light DOWN
   description: ''
-  trigger:
-  - at: '22:45:00'
-    platform: time
-  condition: []
-  action:
-  - type: brightness_decrease
-    device_id: 478d0e35af9d4bf5a04b8c04c019fbdf
-    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_cws_opal_600lm_5c8463fe_level_light_color_on_off
+  triggers:
+  - at: '22:30:00'
+    trigger: time
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data:
+      transition: 23
+    target:
+      entity_id:
+      - scene.paper_evening
+      - scene.paper_bedtime
+  - type: turn_on
+    device_id: 5bf16bb6e1a97a176149430156bf275f
+    entity_id: 64fb4d8a643bfd65775d6f639c78b4b6
     domain: light
-  - type: brightness_decrease
-    device_id: 23d5919d5c2e457bad1b7c0c5ab27b9b
-    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_w_op_ch_400lm_c21e1bfe_level_on_off
-    domain: light
+    brightness_pct: 5
   mode: single
 - id: '1591331160985'
-  alias: Lights after sunset
+  alias: Sunset
   description: ''
-  trigger:
+  triggers:
   - event: sunset
-    offset: +00:15
-    platform: sun
-  condition: []
-  action:
-  - device_id: 478d0e35af9d4bf5a04b8c04c019fbdf
-    domain: light
-    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_cws_opal_600lm_5c8463fe_level_light_color_on_off
-    type: turn_on
-    brightness_pct: 50
-  - device_id: 23d5919d5c2e457bad1b7c0c5ab27b9b
-    domain: light
-    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_w_op_ch_400lm_c21e1bfe_level_on_off
-    type: turn_on
-    brightness_pct: 50
-  - type: turn_on
-    device_id: 7140dac7b8b04d85b51cb0e9f1c1c775
-    entity_id: light.ikea_of_sweden_tradfri_bulb_e26_ws_opal_1000lm_15362ffe_level_light_color_on_off
-    domain: light
-    brightness_pct: 20
-  - type: turn_on
-    device_id: a79096a647654051899678193d7ee396
-    entity_id: light.centralite_systems_4200_c_499d96fe_on_off
-    domain: light
-  - type: turn_on
-    device_id: 8cc375f27af241dfbf21ccabb8609977
-    entity_id: light.centralite_outlet_2_21a196fe_on_off
-    domain: light
-  - service: timer.cancel
+    offset: +00:20
+    trigger: sun
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
     target:
+      entity_id: scene.paper_evening
+  - target:
       entity_id: timer.living_room
     data: {}
+    action: timer.cancel
+  - type: turn_off
+    device_id: 51a3e64d56b7c35c06fc497a18006353
+    entity_id: 4b494b3874790bc5caa87c859e5403bd
+    domain: switch
+  - action: light.turn_on
+    metadata: {}
+    data:
+      brightness_pct: 19
+    target:
+      area_id: entrance
   - type: turn_on
-    device_id: fdfb51a95dde3a197fee7de56955b39b
-    entity_id: switch.shelly3
+    device_id: 94c2a6183ea5a31694f9ff3185fb2858
+    entity_id: 091aaa887f532f2c42215b946e7d98da
     domain: switch
   mode: single
 - id: '1591494004057'
   alias: BED TIME
   description: Turn off many lights at bedtime
-  trigger:
+  triggers:
   - at: '23:00:00'
-    platform: time
-  condition: []
-  action:
-  - device_id: 478d0e35af9d4bf5a04b8c04c019fbdf
-    domain: light
-    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_cws_opal_600lm_5c8463fe_level_light_color_on_off
-    type: turn_off
-  - device_id: 23d5919d5c2e457bad1b7c0c5ab27b9b
-    domain: light
-    entity_id: light.ikea_of_sweden_tradfri_bulb_e12_w_op_ch_400lm_c21e1bfe_level_on_off
-    type: turn_off
+    trigger: time
+  conditions: []
+  actions:
   - type: turn_off
-    device_id: a79096a647654051899678193d7ee396
-    entity_id: light.centralite_systems_4200_c_499d96fe_on_off
+    device_id: 7e72af23ab6c89038b904d403ad200b7
+    entity_id: f8c1580dd28f299aa3ca7d2abb2f3295
     domain: light
-  - type: turn_off
-    device_id: 8cc375f27af241dfbf21ccabb8609977
-    entity_id: light.centralite_outlet_2_21a196fe_on_off
-    domain: light
-  - type: turn_off
-    device_id: 2004cedabeda99cf3dc9e91cf057d2dc
-    entity_id: light.dining_room_light
-    domain: light
-  - type: turn_off
-    device_id: e80946c48fc5bcb7738f7a3188b8fb14
-    entity_id: light.nook_light
-    domain: light
-  - type: turn_off
-    device_id: 7140dac7b8b04d85b51cb0e9f1c1c775
-    entity_id: light.ikea_of_sweden_tradfri_bulb_e26_ws_opal_1000lm_15362ffe_level_light_color_on_off
-    domain: light
-  - type: turn_off
-    device_id: 4875c40f2029e77d1419f704734c7180
-    entity_id: switch.porch_relay
-    domain: switch
-  - type: turn_off
-    device_id: 4875c40f2029e77d1419f704734c7180
-    entity_id: light.porch_red_led
-    domain: light
-  - type: turn_off
-    device_id: 65c7021390c06de7c5cd101c598b2ad6
-    entity_id: switch.driveway_relay
-    domain: switch
-  - type: turn_off
-    device_id: 65c7021390c06de7c5cd101c598b2ad6
-    entity_id: light.driveway_red_led
-    domain: light
-  - type: turn_off
-    device_id: fdfb51a95dde3a197fee7de56955b39b
-    entity_id: switch.shelly3
-    domain: switch
-  mode: single
-- id: '1595269748324'
-  alias: Toggle eLab lights
-  description: ''
-  trigger:
-  - device_id: eea0d418798943b9b45e73efd03299fc
-    domain: zha
-    platform: device
-    subtype: turn_on
-    type: remote_button_short_press
-  condition:
-  - condition: or
-    conditions:
-    - condition: and
-      conditions:
-      - condition: device
-        type: is_off
-        device_id: 6ed0e21df1b84787bda6f237296235ff
-        entity_id: light.cree_connected_a_19_60w_equivalent_2ea506fe_level_on_off
-        domain: light
-      - condition: device
-        type: is_off
-        device_id: 85ad071c383244928c929282071ecccf
-        entity_id: light.cree_connected_a_19_60w_equivalent_70e108fe_level_on_off
-        domain: light
-    - condition: and
-      conditions:
-      - condition: device
-        type: is_on
-        device_id: 6ed0e21df1b84787bda6f237296235ff
-        entity_id: light.cree_connected_a_19_60w_equivalent_2ea506fe_level_on_off
-        domain: light
-      - condition: device
-        type: is_on
-        device_id: 85ad071c383244928c929282071ecccf
-        entity_id: light.cree_connected_a_19_60w_equivalent_70e108fe_level_on_off
-        domain: light
-  action:
-  - type: toggle
-    device_id: 6ed0e21df1b84787bda6f237296235ff
-    entity_id: light.cree_connected_a_19_60w_equivalent_2ea506fe_level_on_off
-    domain: light
-  - type: toggle
-    device_id: 85ad071c383244928c929282071ecccf
-    entity_id: light.cree_connected_a_19_60w_equivalent_70e108fe_level_on_off
-    domain: light
-  - service: timer.cancel
+  - action: scene.turn_on
+    metadata: {}
     data: {}
-    entity_id: timer.elab
-  mode: single
-- id: '1595269892212'
-  alias: eLab bright
-  description: ''
-  trigger:
-  - device_id: eea0d418798943b9b45e73efd03299fc
-    domain: zha
-    platform: device
-    subtype: dim_up
-    type: remote_button_short_press
-  condition: []
-  action:
-  - type: brightness_increase
-    device_id: 6ed0e21df1b84787bda6f237296235ff
-    entity_id: light.cree_connected_a_19_60w_equivalent_2ea506fe_level_on_off
-    domain: light
-  - type: brightness_increase
-    device_id: 85ad071c383244928c929282071ecccf
-    entity_id: light.cree_connected_a_19_60w_equivalent_70e108fe_level_on_off
-    domain: light
-  mode: single
-- id: '1595269962540'
-  alias: eLab dim
-  description: ''
-  trigger:
-  - device_id: eea0d418798943b9b45e73efd03299fc
-    domain: zha
-    platform: device
-    subtype: dim_down
-    type: remote_button_short_press
-  condition: []
-  action:
-  - type: brightness_decrease
-    device_id: 6ed0e21df1b84787bda6f237296235ff
-    entity_id: light.cree_connected_a_19_60w_equivalent_2ea506fe_level_on_off
-    domain: light
-  - type: brightness_decrease
-    device_id: 85ad071c383244928c929282071ecccf
-    entity_id: light.cree_connected_a_19_60w_equivalent_70e108fe_level_on_off
-    domain: light
-  mode: single
-- id: '1597293048059'
-  alias: Motion eLab Night
-  description: Only triggers after sunset and when the globe lights are off
-  trigger:
-  - type: turned_on
-    platform: device
-    device_id: 0e35e05a3c025fbe0ef731088ce644ed
-    entity_id: 0a00d740890994ddd5f3eb627ddfc1b3
-    domain: binary_sensor
-  condition:
-  - condition: and
-    conditions:
-    - condition: sun
-      after: sunset
-    - condition: and
-      conditions:
-      - condition: device
-        type: is_off
-        device_id: 6ed0e21df1b84787bda6f237296235ff
-        entity_id: light.cree_connected_a_19_60w_equivalent_2ea506fe_level_on_off
-        domain: light
-      - condition: device
-        type: is_off
-        device_id: 85ad071c383244928c929282071ecccf
-        entity_id: light.cree_connected_a_19_60w_equivalent_70e108fe_level_on_off
-        domain: light
-  - condition: device
-    type: is_off
-    device_id: 85ad071c383244928c929282071ecccf
-    entity_id: light.cree_connected_a_19_60w_equivalent_70e108fe_level_on_off
-    domain: light
-  action:
-  - type: turn_on
-    device_id: 4f2bf33f4d51d6d26f67fc503a72383b
-    entity_id: 3b34a9ac0fb4727e9be46ba153404781
-    domain: light
-    brightness_pct: 70
+    target:
+      entity_id: scene.xmas_off
+  - type: turn_off
+    device_id: e759e526524abdccc563c154e16989d6
+    entity_id: 67e4a2d6d6f69251fdc090f1a56d1c07
+    domain: switch
   - delay:
       hours: 0
-      minutes: 5
+      minutes: 3
       seconds: 0
       milliseconds: 0
   - type: turn_off
-    device_id: 4f2bf33f4d51d6d26f67fc503a72383b
-    entity_id: 3b34a9ac0fb4727e9be46ba153404781
-    domain: light
-    metadata:
-      secondary: false
-  mode: restart
-- id: '1610085445182'
-  alias: Testing ESP32
-  description: ''
-  trigger:
-  - platform: mqtt
-    topic: ESP32/Testing
-  condition: []
-  action:
-  - type: turn_on
-    device_id: f468c2a3790b31772756c0a5f7306931
-    entity_id: light.4736863710521cfbde78
-    domain: light
-  mode: single
-- id: '1611621770954'
-  alias: Julie arrived home in the evening
-  description: The porch light is on, so it must be evening, and we've detected Julie's
-    phone, so welcome her home by turning on the Nook at setting Ecobee to HOME
-  trigger:
-  - platform: device
-    device_id: 6ebf391641f7a1d72a9480386b5afbe8
-    domain: device_tracker
-    entity_id: device_tracker.julies_phone
-    type: enters
-    zone: zone.home
-  condition:
-  - condition: device
-    type: is_on
-    device_id: 4875c40f2029e77d1419f704734c7180
-    entity_id: 985d118bd815ffa15237a8d1309e5663
+    device_id: 51a3e64d56b7c35c06fc497a18006353
+    entity_id: 4b494b3874790bc5caa87c859e5403bd
     domain: switch
-  action:
-  - device_id: 233353ebf3a4f303f3d6622cec9eda54
-    domain: climate
-    entity_id: climate.ecobee
-    type: set_preset_mode
-    preset_mode: Home
-  - type: turn_on
-    device_id: e80946c48fc5bcb7738f7a3188b8fb14
-    entity_id: 5676c1402e97362d74a5c6934dacdecd
-    domain: light
-  mode: single
-- id: '1611629123187'
-  alias: Tab battery needs charging
-  description: ''
-  trigger:
-  - type: battery_level
-    platform: device
-    device_id: 245709fd40b41924b82d1d96010516ae
-    entity_id: sensor.sm_t387t_battery_level
-    domain: sensor
-    below: 22
-  condition: []
-  action:
-  - service: notify.toasted_cheese
-    data:
-      message: Tablet battery needs charging.
-  mode: single
-- id: '1611865321213'
-  alias: Julie arrived at CC office
-  description: ''
-  trigger:
-  - platform: zone
-    entity_id: device_tracker.julies_phone
-    zone: zone.clatsop_county_office
-    event: enter
-  condition: []
-  action:
-  - service: notify.toasted_cheese
-    data:
-      title: Julie is here!
-      message: Julie has entered the Clatsop Zone.
-  mode: single
-- id: '1613269841799'
-  alias: Timer turns off bedroom light
-  description: ''
-  trigger:
-  - platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.bedroom
-  condition: []
-  action:
   - type: turn_off
-    device_id: bbf254d6ff5941cb88c2e869073fb7e8
-    entity_id: light.osram_lightify_a19_on_off_dim_10_year_d7100c00_level_on_off
-    domain: light
-  mode: single
-- id: '1613522589112'
-  alias: Brian arrived at home
-  description: ''
-  trigger:
-  - platform: device
-    device_id: 9aa0b92b37676e435d243e746d60b1f3
-    domain: device_tracker
-    entity_id: device_tracker.brians_phone
-    type: enters
-    zone: zone.home
-  condition: []
-  action:
-  - service: notify.toasted_cheese
-    data:
-      message: Brian arrived at home. Changing Ecobee to Home.
-  - device_id: 233353ebf3a4f303f3d6622cec9eda54
-    domain: climate
-    entity_id: climate.ecobee
-    type: set_preset_mode
-    preset_mode: Home
-  mode: single
-- id: '1615095673495'
-  alias: Elab lights on
-  description: ''
-  trigger:
-  - device_id: eea0d418798943b9b45e73efd03299fc
-    domain: zha
-    platform: device
-    type: remote_button_long_press
-    subtype: turn_on
-  condition: []
-  action:
-  - type: turn_on
-    device_id: 6ed0e21df1b84787bda6f237296235ff
-    entity_id: light.cree_connected_a_19_60w_equivalent_2ea506fe_level_on_off
-    domain: light
-  - type: turn_on
-    device_id: 85ad071c383244928c929282071ecccf
-    entity_id: light.cree_connected_a_19_60w_equivalent_70e108fe_level_on_off
-    domain: light
-  - service: timer.cancel
+    device_id: 94c2a6183ea5a31694f9ff3185fb2858
+    entity_id: 091aaa887f532f2c42215b946e7d98da
+    domain: switch
+  - action: light.turn_off
+    metadata: {}
     data: {}
-    entity_id: timer.elab
+    target:
+      label_id: paper_lamp
+  - type: turn_off
+    device_id: a99932f3182f5632e84ee54fea8405e9
+    entity_id: d26e1f67aae19f255415989789883d53
+    domain: switch
+  - type: turn_off
+    device_id: dd3241d251ab5f3998316992a43c1a95
+    entity_id: 40c4da99aa2e41fabb65aca00ac478e2
+    domain: light
   mode: single
 - id: '1619369588715'
   alias: Turn off forgotten lights
   description: Sometimes when hurry out the door for work I forget to turn off the
     lights.
-  trigger:
-  - platform: time
-    at: '10:00:00'
-  condition:
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    after: 08:00:00
-    before: 00:00:00
-  action:
+  triggers:
+  - at: '10:00:00'
+    trigger: time
+  conditions: []
+  actions:
   - type: turn_off
-    device_id: d45b048a0c942774f9be3ccd14696b99
-    entity_id: light.master_bath_light
+    device_id: 7e72af23ab6c89038b904d403ad200b7
+    entity_id: f8c1580dd28f299aa3ca7d2abb2f3295
     domain: light
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.xmas_off
+  - action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      label_id: paper_lamp
   - type: turn_off
-    device_id: 091d89bb434619f4d7a94610b19167a1
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_14518a06_level_light_color_on_off
+    device_id: b896e8e5867d247c8482d31f256fe663
+    entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
     domain: light
+    enabled: true
   - type: turn_off
-    device_id: e699449687b6b5e963cf54d721a5b501
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_a8538a06_level_light_color_on_off
-    domain: light
-  - type: turn_off
-    device_id: 3494f09916e5b88d37bf8c29afc37601
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_28528a06_level_light_color_on_off
-    domain: light
-  - type: turn_off
-    device_id: adcc7c3da68166d52df47bd411d461d9
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_level_light_color_on_off
-    domain: light
-  - type: turn_off
-    device_id: e80946c48fc5bcb7738f7a3188b8fb14
-    entity_id: light.nook_light
-    domain: light
-  - type: turn_off
-    device_id: 3e13ce4191564b13b862107bfdf9b7e0
-    entity_id: light.osram_lightify_a19_on_off_dim_10_year_76170c00_level_on_off
-    domain: light
-  - type: turn_off
-    device_id: 8cc375f27af241dfbf21ccabb8609977
-    entity_id: light.centralite_outlet_2_21a196fe_on_off
+    device_id: ce1329324e86318f7f82b6ee512030c9
+    entity_id: b955eb84adc8034b4cb8eb36535edc96
     domain: light
   mode: single
 - id: '1623292664104'
-  alias: Counter BRIGHTER
+  alias: IKEA remote BRIGHTER
   description: ''
-  trigger:
-  - device_id: eea0d418798943b9b45e73efd03299fc
-    domain: zha
-    platform: device
-    type: remote_button_long_press
-    subtype: dim_up
-  - device_id: eea0d418798943b9b45e73efd03299fc
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: dim_up
-  condition:
+  triggers:
+  - domain: mqtt
+    device_id: 71e858db2e8efdcf0e1c6a470f0736ce
+    type: action
+    subtype: brightness_up_click
+    trigger: device
+  conditions:
   - condition: device
     type: is_on
-    device_id: 091d89bb434619f4d7a94610b19167a1
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_14518a06_level_light_color_on_off
+    device_id: ce1329324e86318f7f82b6ee512030c9
+    entity_id: b955eb84adc8034b4cb8eb36535edc96
     domain: light
-  action:
-  - type: brightness_increase
-    device_id: 3494f09916e5b88d37bf8c29afc37601
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_28528a06_level_light_color_on_off
+  actions:
+  - device_id: ce1329324e86318f7f82b6ee512030c9
     domain: light
-  - type: brightness_increase
-    device_id: 091d89bb434619f4d7a94610b19167a1
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_14518a06_level_light_color_on_off
-    domain: light
-  - type: brightness_increase
-    device_id: adcc7c3da68166d52df47bd411d461d9
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_level_light_color_on_off
-    domain: light
-  - type: brightness_increase
-    device_id: e699449687b6b5e963cf54d721a5b501
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_a8538a06_level_light_color_on_off
-    domain: light
+    entity_id: b955eb84adc8034b4cb8eb36535edc96
+    type: brightness_increase
   mode: single
 - id: '1623292768373'
-  alias: Counter DIMMER
+  alias: IKEA remote DIMMER
   description: ''
-  trigger:
-  - device_id: eea0d418798943b9b45e73efd03299fc
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: dim_down
-  - device_id: eea0d418798943b9b45e73efd03299fc
-    domain: zha
-    platform: device
-    type: remote_button_long_press
-    subtype: dim_down
-  condition:
+  triggers:
+  - domain: mqtt
+    device_id: 71e858db2e8efdcf0e1c6a470f0736ce
+    type: action
+    subtype: brightness_down_click
+    trigger: device
+  conditions:
   - condition: device
     type: is_on
-    device_id: 091d89bb434619f4d7a94610b19167a1
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_14518a06_level_light_color_on_off
+    device_id: ce1329324e86318f7f82b6ee512030c9
+    entity_id: b955eb84adc8034b4cb8eb36535edc96
     domain: light
-  action:
-  - type: brightness_decrease
-    device_id: 3494f09916e5b88d37bf8c29afc37601
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_28528a06_level_light_color_on_off
+  actions:
+  - device_id: ce1329324e86318f7f82b6ee512030c9
     domain: light
-  - type: brightness_decrease
-    device_id: adcc7c3da68166d52df47bd411d461d9
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_level_light_color_on_off
-    domain: light
-  - type: brightness_decrease
-    device_id: 091d89bb434619f4d7a94610b19167a1
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_14518a06_level_light_color_on_off
-    domain: light
-  - type: brightness_decrease
-    device_id: e699449687b6b5e963cf54d721a5b501
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_a8538a06_level_light_color_on_off
-    domain: light
+    entity_id: b955eb84adc8034b4cb8eb36535edc96
+    type: brightness_decrease
   mode: single
 - id: '1631513328763'
   alias: Start timer when bathroom light is turned on
@@ -515,9 +183,8 @@
   - platform: device
     type: turned_on
     device_id: d45b048a0c942774f9be3ccd14696b99
-    entity_id: light.master_bath_light
+    entity_id: 09f126f7aca88922b11d34ed01b7bf37
     domain: light
-    id: MBath_turned_on
   condition: []
   action:
   - service: timer.start
@@ -537,171 +204,26 @@
   action:
   - type: turn_off
     device_id: d45b048a0c942774f9be3ccd14696b99
-    entity_id: light.master_bath_light
+    entity_id: 09f126f7aca88922b11d34ed01b7bf37
     domain: light
   mode: restart
-- id: '1632278308910'
-  alias: Lights in vacation mode
-  description: ''
-  trigger:
-  - platform: sun
-    event: sunset
-    offset: +00:20
-  condition:
-  - condition: state
-    entity_id: input_boolean.vacation_mode
-    state: 'on'
-  action:
-  - type: turn_on
-    device_id: 2004cedabeda99cf3dc9e91cf057d2dc
-    entity_id: light.dining_room_light
-    domain: light
-  - type: turn_on
-    device_id: 2277b117527543b3bcd8a35ba84c2879
-    entity_id: light.ikea_of_sweden_tradfri_bulb_gu10_ww_400lm_eae3aafe_level_on_off
-    domain: light
-  mode: single
-- id: '1632668888738'
-  alias: Counter TOGGLE
-  description: ''
-  trigger:
-  - device_id: eea0d418798943b9b45e73efd03299fc
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: turn_on
-  condition: []
-  action:
-  - type: toggle
-    device_id: 091d89bb434619f4d7a94610b19167a1
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_14518a06_level_light_color_on_off
-    domain: light
-  - type: toggle
-    device_id: e699449687b6b5e963cf54d721a5b501
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_a8538a06_level_light_color_on_off
-    domain: light
-  - type: toggle
-    device_id: 3494f09916e5b88d37bf8c29afc37601
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_28528a06_level_light_color_on_off
-    domain: light
-  - type: toggle
-    device_id: adcc7c3da68166d52df47bd411d461d9
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_level_light_color_on_off
-    domain: light
-  - type: toggle
-    device_id: 8cc375f27af241dfbf21ccabb8609977
-    entity_id: light.centralite_outlet_2_21a196fe_on_off
-    domain: light
-  mode: single
-- id: '1632669187676'
-  alias: Counter ALL ON
-  description: ''
-  trigger:
-  - device_id: eea0d418798943b9b45e73efd03299fc
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: turn_on
-  condition:
-  - condition: device
-    type: is_off
-    device_id: 091d89bb434619f4d7a94610b19167a1
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_14518a06_level_light_color_on_off
-    domain: light
-  action:
-  - type: turn_on
-    device_id: 091d89bb434619f4d7a94610b19167a1
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_14518a06_level_light_color_on_off
-    domain: light
-  - type: turn_on
-    device_id: e699449687b6b5e963cf54d721a5b501
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_a8538a06_level_light_color_on_off
-    domain: light
-  - type: turn_on
-    device_id: 3494f09916e5b88d37bf8c29afc37601
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_28528a06_level_light_color_on_off
-    domain: light
-  - type: turn_on
-    device_id: adcc7c3da68166d52df47bd411d461d9
-    entity_id: light.3a_smart_home_de_lxt56_ls27lx1_7_level_light_color_on_off
-    domain: light
-  - type: turn_on
-    device_id: 8cc375f27af241dfbf21ccabb8609977
-    entity_id: light.centralite_outlet_2_21a196fe_on_off
-    domain: light
-  mode: single
 - id: '1632669604356'
-  alias: Counter Movie Scene
+  alias: IKEA remote left button
   description: ''
-  trigger:
-  - device_id: eea0d418798943b9b45e73efd03299fc
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: left
-  condition: []
-  action:
-  - scene: scene.colorful_kitchen
-  mode: single
-- id: '1632968908571'
-  alias: Motion bedroom morning
-  description: ''
-  trigger:
-  - platform: mqtt
-    topic: WEMOS/Motion
-    payload: '1'
-  condition:
-  - condition: and
-    conditions:
-    - condition: sun
-      before: sunrise
-    - condition: time
-      after: 06:15:00
-      weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
-  action:
+  triggers:
+  - domain: mqtt
+    device_id: 71e858db2e8efdcf0e1c6a470f0736ce
+    type: action
+    subtype: arrow_left_click
+    trigger: device
+  conditions: []
+  actions:
   - type: turn_on
-    device_id: bbf254d6ff5941cb88c2e869073fb7e8
-    entity_id: light.osram_lightify_a19_on_off_dim_10_year_d7100c00_level_on_off
+    device_id: ce1329324e86318f7f82b6ee512030c9
+    entity_id: b955eb84adc8034b4cb8eb36535edc96
     domain: light
+    brightness_pct: 12
   mode: single
-- id: '1635215775295'
-  alias: Telegram test
-  description: ''
-  trigger:
-  - platform: device
-    type: turned_on
-    device_id: d9457450295983e13d9bf7a24f835095
-    entity_id: light.4736863710521cfbdf9e
-    domain: light
-  condition: []
-  action:
-  - service: notify.toasted_cheese
-    data:
-      message: Living room light turned on.
-      title: Telegram test
-  mode: single
-- id: '1635297285742'
-  alias: Bedroom light goes on
-  description: ''
-  trigger:
-  - platform: device
-    type: turned_on
-    device_id: 0eadcfd6411cc6327fc4e812d8c5b382
-    entity_id: light.bedroom_light_light
-    domain: light
-  condition: []
-  action:
-  - service: timer.start
-    data:
-      duration: '180'
-    target:
-      entity_id: timer.bedroom
-  mode: restart
 - id: '1635521053106'
   alias: Ecobee occupancy
   description: ''
@@ -718,71 +240,6 @@
       title: Ecobee
       message: Occupancy detected upstairs
   mode: single
-- id: '1635521232458'
-  alias: Ecobee Sensor occupancy
-  description: ''
-  trigger:
-  - type: occupied
-    platform: device
-    device_id: efb6f08281774f84cad13627e73cbb59
-    entity_id: binary_sensor.ecobee_sensor_occupancy
-    domain: binary_sensor
-  condition: []
-  action:
-  - service: notify.toasted_cheese
-    data:
-      title: Ecobee Sensor
-      message: Occupancy detected downstairs
-  mode: single
-- id: '1635743156251'
-  alias: Brian arrived at CC office
-  description: ''
-  trigger:
-  - platform: zone
-    entity_id: device_tracker.brians_phone
-    zone: zone.clatsop_county_office
-    event: enter
-  condition: []
-  action:
-  - service: notify.toasted_cheese
-    data:
-      message: Brian has entered the Clatsop Zone.
-  mode: single
-- id: '1635828973219'
-  alias: Motion living room night
-  description: ''
-  trigger:
-  - type: motion
-    platform: device
-    device_id: a411a12fb94d6c80bc9b26fccc1c31f0
-    entity_id: binary_sensor.wemos03_motion
-    domain: binary_sensor
-  condition:
-  - condition: and
-    conditions:
-    - condition: sun
-      after: sunset
-    - condition: device
-      type: is_off
-      device_id: 7140dac7b8b04d85b51cb0e9f1c1c775
-      entity_id: light.ikea_of_sweden_tradfri_bulb_e26_ws_opal_1000lm_15362ffe_level_light_color_on_off
-      domain: light
-  action:
-  - type: turn_on
-    device_id: 7140dac7b8b04d85b51cb0e9f1c1c775
-    entity_id: light.ikea_of_sweden_tradfri_bulb_e26_ws_opal_1000lm_15362ffe_level_light_color_on_off
-    domain: light
-    brightness_pct: 0
-  - service: timer.start
-    data:
-      duration: '180'
-    target:
-      entity_id: timer.living_room
-  - type: turn_off
-    device_id: 4f2bf33f4d51d6d26f67fc503a72383b
-    entity_id: 3b34a9ac0fb4727e9be46ba153404781
-    domain: light
-  mode: single
 - id: '1635829483223'
   alias: Timer turns off living room lamp
   description: ''
@@ -798,766 +255,753 @@
     entity_id: light.ikea_of_sweden_tradfri_bulb_e26_ws_opal_1000lm_15362ffe_level_light_color_on_off
     domain: light
   mode: single
-- id: '1635993706045'
-  alias: Library lights on at night (motion)
-  description: ''
-  trigger:
-  - type: motion
-    platform: device
-    device_id: 438252833fcf9a23e49ffcbb49574c51
-    entity_id: binary_sensor.ikea_of_sweden_tradfri_motion_sensor_76fb1dfe_on_off
-    domain: binary_sensor
-  condition:
-  - condition: sun
-    after: sunset
-  action:
-  - type: turn_on
-    device_id: 0a797050992c9021fdd5614166e060c7
-    entity_id: light.library_light_light
-    domain: light
-    brightness_pct: 30
-  - delay:
-      hours: 0
-      minutes: 6
-      seconds: 0
-      milliseconds: 0
-  - type: turn_off
-    device_id: 0a797050992c9021fdd5614166e060c7
-    entity_id: light.library_light_light
-    domain: light
-  mode: restart
-- id: '1636000234336'
-  alias: Timer turns off library light
-  description: ''
-  trigger:
-  - platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.library
-  condition: []
-  action:
-  - type: turn_off
-    device_id: 3e13ce4191564b13b862107bfdf9b7e0
-    entity_id: light.osram_lightify_a19_on_off_dim_10_year_76170c00_level_on_off
-    domain: light
-  mode: single
-- id: '1636044568015'
-  alias: Motion living room morning
-  description: ''
-  trigger:
-  - type: motion
-    platform: device
-    device_id: a411a12fb94d6c80bc9b26fccc1c31f0
-    entity_id: binary_sensor.wemos03_motion
-    domain: binary_sensor
-  condition:
-  - condition: and
-    conditions:
-    - condition: sun
-      before: sunrise
-    - condition: time
-      after: 04:00:00
-      weekday:
-      - sun
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
-      - sat
-  action:
-  - type: turn_on
-    device_id: 7140dac7b8b04d85b51cb0e9f1c1c775
-    entity_id: light.ikea_of_sweden_tradfri_bulb_e26_ws_opal_1000lm_15362ffe_level_light_color_on_off
-    domain: light
-    brightness_pct: 0
-  - scene: scene.kitchen_counter_morning
-  - service: timer.start
-    data:
-      duration: '300'
-    target:
-      entity_id: timer.living_room
-  mode: single
-- id: '1636077591978'
-  alias: Tradfri battery check
-  description: ''
-  trigger:
-  - type: battery_level
-    platform: device
-    device_id: eea0d418798943b9b45e73efd03299fc
-    entity_id: sensor.tradfri_remote_power
-    domain: sensor
-    below: 10
-  - type: battery_level
-    platform: device
-    device_id: 2cd22672418b11801f7a288094070bf6
-    entity_id: sensor.tradfri_on_off_switch_power
-    domain: sensor
-    below: 10
-  - type: battery_level
-    platform: device
-    device_id: 438252833fcf9a23e49ffcbb49574c51
-    entity_id: sensor.ikea_of_sweden_tradfri_motion_sensor_76fb1dfe_power
-    domain: sensor
-    below: 10
-  condition: []
-  action:
-  - service: notify.toasted_cheese
-    data:
-      message: Tradfri battery is low
-  mode: single
-- id: '1636340986709'
-  alias: Motion master bath
-  description: ''
-  trigger:
-  - type: motion
-    platform: device
-    device_id: a411a12fb94d6c80bc9b26fccc1c31f0
-    entity_id: binary_sensor.wemos03_motion
-    domain: binary_sensor
-  condition: []
-  action:
-  - type: turn_on
-    device_id: 06f52f9ac69352224d8ce555ce9733cc
-    entity_id: light.4736863710521cd6697f
-    domain: light
-    brightness_pct: 0
-  - service: timer.start
-    data:
-      duration: '60'
-    target:
-      entity_id: timer.mbath
-  mode: restart
 - id: '1636383750506'
-  alias: Motion eLab Morning
-  description: Turn on overhead light before sunrise, and turn light off after 2 minutes
-  trigger:
+  alias: eLab Morning
+  description: ''
+  triggers:
   - type: turned_on
-    platform: device
     device_id: 0e35e05a3c025fbe0ef731088ce644ed
-    entity_id: 0a00d740890994ddd5f3eb627ddfc1b3
+    entity_id: 689afba2ec052e13a75da4034fbf8a07
     domain: binary_sensor
-  condition:
+    trigger: device
+  conditions:
   - condition: sun
     before: sunrise
-  action:
+  actions:
   - type: turn_on
-    device_id: 4f2bf33f4d51d6d26f67fc503a72383b
-    entity_id: 3b34a9ac0fb4727e9be46ba153404781
+    device_id: 71e64bcc03e47d4df35e43eba4877908
+    entity_id: 65d05437b24f359119fdaaaea0ddd8ba
     domain: light
-    brightness_pct: 60
+    brightness_pct: 10
   - delay:
       hours: 0
       minutes: 2
       seconds: 0
       milliseconds: 0
   - type: turn_off
-    device_id: 4f2bf33f4d51d6d26f67fc503a72383b
-    entity_id: 3b34a9ac0fb4727e9be46ba153404781
+    device_id: 71e64bcc03e47d4df35e43eba4877908
+    entity_id: 65d05437b24f359119fdaaaea0ddd8ba
     domain: light
+  mode: restart
+- id: '1639627522911'
+  alias: Timer turns off elab
+  description: ''
+  triggers:
+  - event_type: timer.finished
+    event_data:
+      entity_id: timer.elab
+    trigger: event
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    target:
+      entity_id: scene.elab_off
+    data: {}
+  mode: restart
+- id: '1646009854876'
+  alias: Xmas lights go on
+  description: ''
+  triggers:
+  - event: sunset
+    offset: 0
+    trigger: sun
+  conditions: []
+  actions:
+  - type: turn_on
+    device_id: e759e526524abdccc563c154e16989d6
+    entity_id: 67e4a2d6d6f69251fdc090f1a56d1c07
+    domain: switch
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.xmas_on
+  mode: single
+- id: '1696567186919'
+  alias: IKEA remote right button
+  description: ''
+  triggers:
+  - domain: mqtt
+    device_id: 71e858db2e8efdcf0e1c6a470f0736ce
+    type: action
+    subtype: arrow_right_click
+    trigger: device
+  conditions: []
+  actions:
+  - type: turn_on
+    device_id: ce1329324e86318f7f82b6ee512030c9
+    entity_id: b955eb84adc8034b4cb8eb36535edc96
+    domain: light
+    brightness_pct: 100
+  mode: single
+- id: '1700275898717'
+  alias: Strybar turns on media players
+  description: ''
+  triggers:
+  - domain: mqtt
+    device_id: 1c9447ff977939ab5e92cddf861cc162
+    type: action
+    subtype: brightness_move_up
+    trigger: device
+  conditions:
+  - condition: device
+    device_id: a6e765ed063163684250fcc180b03b6c
+    domain: media_player
+    entity_id: 2d3974a2bf6db5568340acbb5bb1ecad
+    type: is_off
+  actions:
+  - data: {}
+    action: media_player.turn_on
+    target:
+      area_id: 44668f66393bf53de2f0e48ddd4b66ed
+  - data: {}
+    action: media_player.turn_on
+    target:
+      area_id: 38657e0e845c52113952e700281e5bba
+  mode: single
+- id: '1700283933565'
+  alias: Strybar turns off media players
+  description: ''
+  triggers:
+  - domain: mqtt
+    device_id: 1c9447ff977939ab5e92cddf861cc162
+    type: action
+    subtype: brightness_move_down
+    trigger: device
+  conditions: []
+  actions:
+  - data: {}
+    target:
+      device_id: a6e765ed063163684250fcc180b03b6c
+    action: media_player.turn_off
+  - target:
+      device_id: 8275432864aa140cdf7093aa7316071d
+    data: {}
+    action: media_player.turn_off
+  mode: single
+- id: '1700284316502'
+  alias: Strybar volume up
+  description: ''
+  triggers:
+  - domain: mqtt
+    device_id: 1c9447ff977939ab5e92cddf861cc162
+    type: action
+    subtype: 'on'
+    trigger: device
+  conditions: []
+  actions:
+  - data: {}
+    action: media_player.volume_up
+    target:
+      area_id: 44668f66393bf53de2f0e48ddd4b66ed
+  - data: {}
+    action: media_player.volume_up
+    target:
+      area_id: 38657e0e845c52113952e700281e5bba
+  mode: single
+- id: '1700284379947'
+  alias: Strybar volume down
+  description: ''
+  triggers:
+  - domain: mqtt
+    device_id: 1c9447ff977939ab5e92cddf861cc162
+    type: action
+    subtype: 'off'
+    trigger: device
+  conditions: []
+  actions:
+  - data: {}
+    action: media_player.volume_down
+    target:
+      area_id: 44668f66393bf53de2f0e48ddd4b66ed
+  - data: {}
+    action: media_player.volume_down
+    target:
+      area_id: 38657e0e845c52113952e700281e5bba
+  mode: single
+- id: '1702743052510'
+  alias: Good Morning
+  description: We're getting up on a weekday
+  triggers:
+  - at: 07:15:00
+    trigger: time
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.kitchen_counter_morning
+  mode: single
+- id: '1731514934475'
+  alias: BEDTIME almost
+  description: Turn off table lamp no really really
+  triggers:
+  - at: '22:00:00'
+    trigger: time
+  conditions: []
+  actions:
+  - action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      area_id: entrance
+  - type: turn_on
+    device_id: ce1329324e86318f7f82b6ee512030c9
+    entity_id: b955eb84adc8034b4cb8eb36535edc96
+    domain: light
+    brightness_pct: 12
+    enabled: false
+  mode: single
+- id: '1737132481383'
+  alias: Table lamp Rodret
+  description: ''
+  use_blueprint:
+    path: damru/ikea-rodret_E2201_ZHA-Z2M_control-anything.yaml
+    input:
+      remote_name: IKEA Rodret 1
+      on_press_action:
+      - device_id: 7e72af23ab6c89038b904d403ad200b7
+        domain: light
+        entity_id: f8c1580dd28f299aa3ca7d2abb2f3295
+        type: brightness_increase
+      off_press_action:
+      - device_id: 7e72af23ab6c89038b904d403ad200b7
+        domain: light
+        entity_id: f8c1580dd28f299aa3ca7d2abb2f3295
+        type: brightness_decrease
+      on_hold_action:
+      - type: turn_on
+        device_id: 7e72af23ab6c89038b904d403ad200b7
+        entity_id: f8c1580dd28f299aa3ca7d2abb2f3295
+        domain: light
+      off_hold_action:
+      - type: turn_off
+        device_id: 7e72af23ab6c89038b904d403ad200b7
+        entity_id: f8c1580dd28f299aa3ca7d2abb2f3295
+        domain: light
+- id: '1737475505337'
+  alias: Good morning
+  description: ''
+  triggers:
+  - trigger: time
+    at: 07:45:00
+    weekday:
+    - sun
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+  conditions: []
+  actions:
+  - type: turn_on
+    device_id: 51a3e64d56b7c35c06fc497a18006353
+    entity_id: 4b494b3874790bc5caa87c859e5403bd
+    domain: switch
+  mode: single
+- id: '1755737342581'
+  alias: eLab occupied
+  description: ''
+  triggers:
+  - type: occupied
+    device_id: f4274d0baf2ad5ec40a2ed6e8f97bd76
+    entity_id: 9c19223e32d00b0dbd0c124dccfdbb0b
+    domain: binary_sensor
     metadata:
       secondary: false
-  mode: restart
-- id: '1636476421186'
-  alias: Brian left CC office
-  description: ''
-  trigger:
-  - platform: zone
-    entity_id: device_tracker.brians_phone
-    zone: zone.clatsop_county_office
-    event: leave
-  condition: []
-  action:
-  - service: notify.toasted_cheese
-    data:
-      message: Brian has left the Clatsop Zone.
-  mode: single
-- id: '1636476573988'
-  alias: Brian left home
-  description: ''
-  trigger:
-  - platform: device
-    device_id: 9aa0b92b37676e435d243e746d60b1f3
-    domain: device_tracker
-    entity_id: device_tracker.brians_phone
-    type: leaves
-    zone: zone.home
-  condition:
-  - condition: device
-    device_id: 6ebf391641f7a1d72a9480386b5afbe8
-    domain: device_tracker
-    entity_id: device_tracker.julies_phone
-    type: is_not_home
-  action:
-  - service: notify.toasted_cheese
-    data:
-      message: Brian left and Julie is away. Switching Ecobee to AWAY
-  - device_id: 233353ebf3a4f303f3d6622cec9eda54
-    domain: climate
-    entity_id: climate.ecobee
-    type: set_preset_mode
-    preset_mode: Away
-  mode: single
-- id: '1636476877621'
-  alias: Julie left home
-  description: ''
-  trigger:
-  - platform: device
-    device_id: 6ebf391641f7a1d72a9480386b5afbe8
-    domain: device_tracker
-    entity_id: device_tracker.julies_phone
-    type: leaves
-    zone: zone.home
-  condition:
-  - condition: device
-    device_id: 9aa0b92b37676e435d243e746d60b1f3
-    domain: device_tracker
-    entity_id: device_tracker.brians_phone
-    type: is_not_home
-  action:
-  - service: notify.toasted_cheese
-    data:
-      message: Julie left and Brian is away. Switching Ecobee to AWAY
-  - device_id: 233353ebf3a4f303f3d6622cec9eda54
-    domain: climate
-    entity_id: climate.ecobee
-    type: set_preset_mode
-    preset_mode: Away
-  mode: single
-- id: '1637130850478'
-  alias: Porch light on at sunset
-  description: Turn porch light on at sunset
-  trigger:
-  - platform: sun
-    event: sunset
-    offset: -00:15
-  condition: []
-  action:
+    trigger: device
+  conditions: []
+  actions:
   - type: turn_on
-    device_id: 53570c2550d443e8722b473ed552f7e3
-    entity_id: 85e7bfde5d484f7876cca9090f6e3692
-    domain: switch
-  - type: turn_on
-    device_id: 7e74357aaa3decc43da010e2f137e9ca
-    entity_id: b10b5b6a023899301c3277e680da20b1
-    domain: switch
-  mode: single
-- id: '1637633426623'
-  alias: Library lights on at sunrise (motion)
-  description: Stay on longer, as I am probably exercising.
-  trigger:
-  - type: motion
-    platform: device
-    device_id: 438252833fcf9a23e49ffcbb49574c51
-    entity_id: binary_sensor.ikea_of_sweden_tradfri_motion_sensor_76fb1dfe_on_off
-    domain: binary_sensor
-  condition:
-  - condition: sun
-    before: sunrise
-  action:
-  - type: turn_on
-    device_id: 0a797050992c9021fdd5614166e060c7
-    entity_id: light.library_light_light
+    device_id: da62fc3e8177f807cb7b023ae9750035
+    entity_id: 947a7254d08d8fa11ca937ba515575db
     domain: light
-    brightness_pct: 25
+  - type: turn_on
+    device_id: b896e8e5867d247c8482d31f256fe663
+    entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
+    domain: light
   - delay:
       hours: 0
       minutes: 15
       seconds: 0
       milliseconds: 0
   - type: turn_off
-    device_id: 0a797050992c9021fdd5614166e060c7
-    entity_id: light.library_light_light
+    device_id: b896e8e5867d247c8482d31f256fe663
+    entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
+    domain: light
+  - type: turn_off
+    device_id: da62fc3e8177f807cb7b023ae9750035
+    entity_id: 947a7254d08d8fa11ca937ba515575db
     domain: light
   mode: restart
-- id: '1637633788642'
-  alias: Grow lights ON
-  description: Turn on grow lights in the morning.
-  trigger:
-  - platform: time
-    at: 09:00:00
-  condition: []
-  action:
+- id: '1755791774486'
+  alias: Pantry light on
+  description: When pantry door opens turn on hall light 100%
+  triggers:
+  - type: opened
+    device_id: e466815a7d4537b1926253cd070d029f
+    entity_id: ab20706f77ce30ab69cbf4280e635beb
+    domain: binary_sensor
+    metadata:
+      secondary: false
+    trigger: device
+  conditions: []
+  actions:
   - type: turn_on
-    device_id: 6f7afd0f199c9a95742aa4ad26fc9c32
-    entity_id: light.living_room_light
-    domain: light
-    brightness_pct: 100
-  - type: turn_on
-    device_id: 2004cedabeda99cf3dc9e91cf057d2dc
-    entity_id: light.dining_room_light
-    domain: light
-    brightness_pct: 100
-  mode: single
-- id: '1639627522911'
-  alias: Timer turns off elab
-  description: ''
-  trigger:
-  - platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.elab
-  condition: []
-  action:
-  - scene: scene.elab_off
-  - type: turn_off
-    device_id: be2d01b65df827fbf6c01c0a95f9665e
-    entity_id: light.wemos05_light
-    domain: light
-  mode: restart
-- id: '1646009854876'
-  alias: Xmas lights go on
-  description: ''
-  trigger:
-  - platform: time
-    at: '20:30:00'
-  condition:
-  - condition: or
-    conditions:
-    - condition: device
-      device_id: 9aa0b92b37676e435d243e746d60b1f3
-      domain: device_tracker
-      entity_id: device_tracker.brians_phone
-      type: is_home
-    - condition: device
-      device_id: 6ebf391641f7a1d72a9480386b5afbe8
-      domain: device_tracker
-      entity_id: device_tracker.julies_phone
-      type: is_home
-  action:
-  - type: turn_on
-    device_id: 8cc375f27af241dfbf21ccabb8609977
-    entity_id: light.centralite_outlet_2_21a196fe_on_off
-    domain: light
-  mode: single
-- id: '1646009936172'
-  alias: Xmas lights go off
-  description: ''
-  trigger:
-  - platform: time
-    at: '23:30:00'
-  condition: []
-  action:
-  - type: turn_off
-    device_id: 8cc375f27af241dfbf21ccabb8609977
-    entity_id: light.centralite_outlet_2_21a196fe_on_off
-    domain: light
-  mode: single
-- id: '1650693641577'
-  alias: Garage door opening
-  description: ''
-  trigger:
-  - platform: device
-    device_id: 118353d09a64ce774edb228b355cdd9e
-    domain: cover
-    entity_id: cover.albahome
-    type: opening
-  condition: []
-  action:
-  - type: turn_on
-    device_id: 65c7021390c06de7c5cd101c598b2ad6
-    entity_id: switch.driveway_relay
-    domain: switch
-  - type: turn_on
-    device_id: 65c7021390c06de7c5cd101c598b2ad6
-    entity_id: light.driveway_red_led
-    domain: light
-  mode: restart
-- id: '1650693754217'
-  alias: Garage door closing
-  description: Because the Garage Door Closed action never seems to fire.
-  trigger:
-  - platform: device
-    device_id: 118353d09a64ce774edb228b355cdd9e
-    domain: cover
-    entity_id: cover.albahome
-    type: closing
-  condition: []
-  action:
-  - delay:
-      hours: 0
-      minutes: 1
-      seconds: 0
-      milliseconds: 0
-  - type: turn_off
-    device_id: 65c7021390c06de7c5cd101c598b2ad6
-    entity_id: switch.driveway_relay
-    domain: switch
-  - type: turn_off
-    device_id: 65c7021390c06de7c5cd101c598b2ad6
-    entity_id: light.driveway_red_led
-    domain: light
-  mode: single
-- id: '1668186607197'
-  alias: Porch light off 2 hours after sunset
-  description: ''
-  trigger:
-  - platform: sun
-    event: sunset
-    offset: 02:00
-  condition: []
-  action:
-  - type: turn_off
-    device_id: 53570c2550d443e8722b473ed552f7e3
-    entity_id: 85e7bfde5d484f7876cca9090f6e3692
-    domain: switch
-  - type: turn_off
-    device_id: 7e74357aaa3decc43da010e2f137e9ca
-    entity_id: b10b5b6a023899301c3277e680da20b1
+    device_id: 6ac1eb399c0067ca7d8daa1857c76b5d
+    entity_id: 704d2144fa642677b4550331326c95fb
     domain: switch
   mode: single
-- id: '1668203195819'
-  alias: Brian's Garmin Edge arrives home
-  description: ''
-  trigger:
-  - platform: device
-    device_id: 3a1d9023ec6940ec8fc77f5e8947d5fc
-    domain: device_tracker
-    entity_id: device_tracker.garmin_edge_830_0c32ee66acd1
-    type: enters
-    zone: zone.home
-  condition: []
-  action:
-  - type: turn_on
-    device_id: 65c7021390c06de7c5cd101c598b2ad6
-    entity_id: switch.driveway_relay
-    domain: switch
-  - type: turn_on
-    device_id: 65c7021390c06de7c5cd101c598b2ad6
-    entity_id: light.driveway_red_led
-    domain: light
-  - delay:
-      hours: 0
-      minutes: 10
-      seconds: 0
-      milliseconds: 0
+- id: '1755792081818'
+  alias: Pantry light OFF
+  description: When pantry door closes turn off hall light
+  triggers:
+  - type: not_opened
+    device_id: e466815a7d4537b1926253cd070d029f
+    entity_id: ab20706f77ce30ab69cbf4280e635beb
+    domain: binary_sensor
+    trigger: device
+  conditions: []
+  actions:
   - type: turn_off
-    device_id: 65c7021390c06de7c5cd101c598b2ad6
-    entity_id: switch.driveway_relay
-    domain: switch
-  - type: turn_off
-    device_id: 65c7021390c06de7c5cd101c598b2ad6
-    entity_id: light.driveway_red_led
-    domain: light
-  mode: single
-- id: '1670654294029'
-  alias: Porch Xmas Lights
-  description: On at sunset, off at 11pm
-  trigger:
-  - platform: sun
-    event: sunset
-    offset: 0
-  condition: []
-  action:
-  - type: turn_on
-    device_id: b6352ac9fd36a9da7ba75971fb95b87c
-    entity_id: switch.shelly1_switch_0
-    domain: switch
-  - wait_for_trigger:
-    - platform: time
-      at: '23:00:00'
-  - type: turn_off
-    device_id: b6352ac9fd36a9da7ba75971fb95b87c
-    entity_id: switch.shelly1_switch_0
+    device_id: 6ac1eb399c0067ca7d8daa1857c76b5d
+    entity_id: 704d2144fa642677b4550331326c95fb
     domain: switch
   mode: single
-- id: '1696567186919'
-  alias: Counter morning scene
+- id: '1755797462865'
+  alias: Occupied turns on centralite 2
   description: ''
-  trigger:
-  - device_id: eea0d418798943b9b45e73efd03299fc
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: right
-  condition: []
-  action:
-  - service: scene.turn_on
-    target:
-      entity_id: scene.kitchen_always
+  triggers:
+  - type: occupied
+    device_id: dc4c546a863a94fd9dfc9de699e4557f
+    entity_id: e3b28a4b6225528ef279258e798d753e
+    domain: binary_sensor
+    metadata:
+      secondary: false
+    trigger: device
+  conditions: []
+  actions: []
+  mode: single
+- id: '1760198680245'
+  alias: Kitchen Somrig
+  description: ''
+  use_blueprint:
+    path: blueprint-somrig-1-2.bearstorm.workers.dev/.yaml
+    input:
+      dots_1_press_action:
+      - if:
+        - condition: device
+          type: is_on
+          device_id: b896e8e5867d247c8482d31f256fe663
+          entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
+          domain: light
+        then:
+        - device_id: b896e8e5867d247c8482d31f256fe663
+          domain: light
+          entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
+          type: brightness_decrease
+        else:
+        - type: turn_off
+          device_id: b896e8e5867d247c8482d31f256fe663
+          entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
+          domain: light
+      dots_2_press_action:
+      - if:
+        - condition: device
+          type: is_off
+          device_id: b896e8e5867d247c8482d31f256fe663
+          entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
+          domain: light
+        then:
+        - type: turn_on
+          device_id: b896e8e5867d247c8482d31f256fe663
+          entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
+          domain: light
+        else:
+        - device_id: b896e8e5867d247c8482d31f256fe663
+          domain: light
+          entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
+          type: brightness_increase
+      remote_device: b72f23abeb23e1715190bd485a715c27
+      dots_1_hold_action:
+      - type: turn_off
+        device_id: b896e8e5867d247c8482d31f256fe663
+        entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
+        domain: light
+      dots_2_hold_action:
+      - if:
+        - condition: device
+          type: is_on
+          device_id: b896e8e5867d247c8482d31f256fe663
+          entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
+          domain: light
+        then:
+        - type: turn_on
+          device_id: b896e8e5867d247c8482d31f256fe663
+          entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
+          domain: light
+          brightness_pct: 100
+        else:
+        - type: turn_on
+          device_id: b896e8e5867d247c8482d31f256fe663
+          entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
+          domain: light
+- id: '1761108115454'
+  alias: eLab switched off
+  description: ''
+  triggers:
+  - type: turned_off
+    device_id: da62fc3e8177f807cb7b023ae9750035
+    entity_id: 947a7254d08d8fa11ca937ba515575db
+    domain: light
+    trigger: device
+  conditions: []
+  actions:
+  - type: turn_off
+    device_id: b896e8e5867d247c8482d31f256fe663
+    entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
+    domain: light
+  mode: single
+- id: '1761195802809'
+  alias: IKEA Tradfri remote toggle
+  description: ''
+  triggers:
+  - domain: mqtt
+    device_id: 71e858db2e8efdcf0e1c6a470f0736ce
+    type: action
+    subtype: toggle
+    trigger: device
+  conditions: []
+  actions:
+  - action: script.1761186166670
     metadata: {}
+    data: {}
   mode: single
-- id: '1696637850551'
-  alias: Rodret Dimmer (ZHA/Z2M)
+- id: '1761361560301'
+  alias: Closet door opened
+  description: ''
+  triggers:
+  - type: opened
+    device_id: ea8d2be548af310138ae7c8acc7eef57
+    entity_id: ea6832f5f0750f8776d4830985c1d493
+    domain: binary_sensor
+    trigger: device
+  conditions: []
+  actions:
+  - type: turn_on
+    device_id: 94c2a6183ea5a31694f9ff3185fb2858
+    entity_id: 091aaa887f532f2c42215b946e7d98da
+    domain: switch
+  mode: single
+- id: '1761361602242'
+  alias: Closet door closed
+  description: ''
+  triggers:
+  - type: not_opened
+    device_id: ea8d2be548af310138ae7c8acc7eef57
+    entity_id: ea6832f5f0750f8776d4830985c1d493
+    domain: binary_sensor
+    trigger: device
+  conditions: []
+  actions:
+  - type: turn_off
+    device_id: 94c2a6183ea5a31694f9ff3185fb2858
+    entity_id: 091aaa887f532f2c42215b946e7d98da
+    domain: switch
+  mode: single
+- id: '1761934345878'
+  alias: Lavatory occupied
+  description: ''
+  triggers:
+  - type: occupied
+    device_id: dc4c546a863a94fd9dfc9de699e4557f
+    entity_id: e3b28a4b6225528ef279258e798d753e
+    domain: binary_sensor
+    trigger: device
+  - type: occupied
+    device_id: 1c7e86f1421d5a8fe29736ca75a8d54e
+    entity_id: f63eca43521c21e4a5f448a4a4bf83ee
+    domain: binary_sensor
+    trigger: device
+  conditions:
+  - condition: time
+    after: 06:30:00
+    before: '23:30:00'
+  actions:
+  - type: turn_on
+    device_id: 8f0cb7502678acf2753e7fbe41bdefc9
+    entity_id: 37229c5ef0f943f2084ed7b96cbac870
+    domain: light
+  - delay:
+      hours: 0
+      minutes: 8
+      seconds: 0
+      milliseconds: 0
+  - type: turn_off
+    device_id: 8f0cb7502678acf2753e7fbe41bdefc9
+    entity_id: 37229c5ef0f943f2084ed7b96cbac870
+    domain: light
+  mode: restart
+- id: '1761934439143'
+  alias: Lavatory unoccupied
+  description: ''
+  triggers:
+  - type: not_occupied
+    device_id: dc4c546a863a94fd9dfc9de699e4557f
+    entity_id: e3b28a4b6225528ef279258e798d753e
+    domain: binary_sensor
+    trigger: device
+  - type: not_occupied
+    device_id: 1c7e86f1421d5a8fe29736ca75a8d54e
+    entity_id: f63eca43521c21e4a5f448a4a4bf83ee
+    domain: binary_sensor
+    trigger: device
+  conditions: []
+  actions:
+  - type: turn_off
+    device_id: 8f0cb7502678acf2753e7fbe41bdefc9
+    entity_id: 37229c5ef0f943f2084ed7b96cbac870
+    domain: light
+  mode: single
+- id: '1761962840189'
+  alias: Shop became occupied
+  description: ''
+  triggers:
+  - type: occupied
+    device_id: d011befbddf1f2ff9e841709b20c594f
+    entity_id: 29bada471b35dbc199ef1e6058205bc7
+    domain: binary_sensor
+    trigger: device
+  conditions: []
+  actions:
+  - type: turn_on
+    device_id: e759e526524abdccc563c154e16989d6
+    entity_id: 67e4a2d6d6f69251fdc090f1a56d1c07
+    domain: switch
+  - type: turn_on
+    device_id: 64a3c68f0fe79f0f0d50868aebb242c6
+    entity_id: 5d51aaad1430295882af8179a46392b0
+    domain: switch
+  mode: restart
+- id: '1762049431579'
+  alias: Studio became occupied
+  description: ''
+  triggers:
+  - type: occupied
+    device_id: 36ec6329a4a1b048dc69844f1726c4ae
+    entity_id: db610a74de7df02c1a473125b9e91fcb
+    domain: binary_sensor
+    trigger: device
+  conditions:
+  - condition: state
+    entity_id: sensor.0xc4d8c8fffe1d2443_illumination
+    attribute: dim
+    state: ''
+    enabled: false
+  actions:
+  - type: turn_on
+    device_id: 8801fae5750d73a71be38f9a6c4d4190
+    entity_id: b1dfda240e24ccc2448c8a12e147ddb8
+    domain: light
+    brightness_pct: 50
+  mode: single
+- id: '1762136157961'
+  alias: Garage relay switches off workbench
+  description: ''
+  triggers:
+  - type: turned_off
+    device_id: 64a3c68f0fe79f0f0d50868aebb242c6
+    entity_id: 5d51aaad1430295882af8179a46392b0
+    domain: switch
+    trigger: device
+  conditions: []
+  actions:
+  - type: turn_off
+    device_id: e759e526524abdccc563c154e16989d6
+    entity_id: 67e4a2d6d6f69251fdc090f1a56d1c07
+    domain: switch
+  mode: single
+- id: '1762136229138'
+  alias: Garage relay switches on workbench
+  description: ''
+  triggers:
+  - type: turned_on
+    device_id: 64a3c68f0fe79f0f0d50868aebb242c6
+    entity_id: f00bf6144a5a65f59116b2e2ed974220
+    domain: light
+    trigger: device
+  conditions: []
+  actions:
+  - type: turn_on
+    device_id: e759e526524abdccc563c154e16989d6
+    entity_id: 67e4a2d6d6f69251fdc090f1a56d1c07
+    domain: switch
+  mode: single
+- id: '1762483694022'
+  alias: Kitchen Range Rodret
   description: ''
   use_blueprint:
     path: damru/ikea-rodret_E2201_ZHA-Z2M_control-anything.yaml
     input:
-      remote_device: b31f7362bc54a644aae842e47d27f271
+      remote_name: IKEA Rodret 2
       on_press_action:
       - if:
         - condition: device
-          device_id: 8275432864aa140cdf7093aa7316071d
-          domain: media_player
-          entity_id: 9183a809209e0147eb6526e8d92c04ad
           type: is_off
+          device_id: 9969cfac9643623285453a1649ba6839
+          entity_id: a65a9d62fabdf2069516187fe224bb9e
+          domain: light
         then:
-        - service: media_player.turn_on
-          data: {}
-          target:
-            device_id: 8275432864aa140cdf7093aa7316071d
+        - type: turn_on
+          device_id: 9969cfac9643623285453a1649ba6839
+          entity_id: a65a9d62fabdf2069516187fe224bb9e
+          domain: light
+          brightness_pct: 100
         else:
-        - service: media_player.volume_up
-          data: {}
-          target:
-            device_id: 8275432864aa140cdf7093aa7316071d
+        - device_id: 9969cfac9643623285453a1649ba6839
+          domain: light
+          entity_id: a65a9d62fabdf2069516187fe224bb9e
+          type: brightness_increase
+      off_press_action:
+      - device_id: 9969cfac9643623285453a1649ba6839
+        domain: light
+        entity_id: a65a9d62fabdf2069516187fe224bb9e
+        type: brightness_decrease
+      on_hold_action:
       - if:
         - condition: device
-          device_id: a6e765ed063163684250fcc180b03b6c
-          domain: media_player
-          entity_id: 2d3974a2bf6db5568340acbb5bb1ecad
           type: is_off
+          device_id: 9969cfac9643623285453a1649ba6839
+          entity_id: a65a9d62fabdf2069516187fe224bb9e
+          domain: light
         then:
-        - service: media_player.turn_on
-          data: {}
-          target:
-            device_id: a6e765ed063163684250fcc180b03b6c
+        - type: turn_on
+          device_id: 9969cfac9643623285453a1649ba6839
+          entity_id: a65a9d62fabdf2069516187fe224bb9e
+          domain: light
+          brightness_pct: 100
         else:
-        - service: media_player.volume_up
-          data: {}
-          target:
-            device_id: a6e765ed063163684250fcc180b03b6c
-      off_press_action:
-      - service: media_player.volume_down
-        data: {}
-        target:
-          device_id:
-          - 8275432864aa140cdf7093aa7316071d
-          - a6e765ed063163684250fcc180b03b6c
-      on_hold_action:
-      - service: media_player.turn_on
-        data: {}
-        target:
-          device_id:
-          - 8275432864aa140cdf7093aa7316071d
-          - a6e765ed063163684250fcc180b03b6c
-        enabled: false
+        - device_id: 9969cfac9643623285453a1649ba6839
+          domain: light
+          entity_id: a65a9d62fabdf2069516187fe224bb9e
+          type: brightness_increase
       off_hold_action:
-      - service: media_player.turn_off
-        data: {}
-        target:
-          device_id:
-          - 8275432864aa140cdf7093aa7316071d
-          - a6e765ed063163684250fcc180b03b6c
-- id: '1697257640660'
-  alias: Good Morning
-  description: We're getting up on a weekday
-  trigger:
-  - platform: time
-    at: 06:20:00
-  condition:
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
-    after: 06:00:00
-    before: 08:00:00
-  action:
-  - type: turn_on
-    device_id: d45b048a0c942774f9be3ccd14696b99
-    entity_id: 09f126f7aca88922b11d34ed01b7bf37
-    domain: light
-    brightness_pct: 10
-  - type: turn_on
-    device_id: 8cc375f27af241dfbf21ccabb8609977
-    entity_id: d45673032323ba44a5544e4573f3cf6a
-    domain: light
-  - service: scene.turn_on
-    target:
-      entity_id: scene.kitchen_always
-    metadata: {}
-  mode: single
-- id: '1698636352107'
-  alias: Closet ON
+      - type: turn_off
+        device_id: 9969cfac9643623285453a1649ba6839
+        entity_id: a65a9d62fabdf2069516187fe224bb9e
+        domain: light
+- id: '1762497183701'
+  alias: Entrance turns off flood
   description: ''
-  trigger:
-  - type: turned_on
-    platform: device
-    device_id: c03d9ad54d931570d099c604c36ef9d1
-    entity_id: 84c9a085bdfb5b8bd1e65fe0e9d52bfc
+  triggers:
+  - type: turned_off
+    device_id: dd3241d251ab5f3998316992a43c1a95
+    entity_id: 40c4da99aa2e41fabb65aca00ac478e2
+    domain: light
+    trigger: device
+  conditions: []
+  actions:
+  - type: turn_off
+    device_id: a99932f3182f5632e84ee54fea8405e9
+    entity_id: d26e1f67aae19f255415989789883d53
+    domain: switch
+  mode: single
+- id: '1764971619544'
+  alias: Coat closet door turns on Foyer
+  description: ''
+  triggers:
+  - type: opened
+    device_id: c8df000b8899d5ec0ebd538f822b64db
+    entity_id: 97d155e2cab67767ed357b0395259475
     domain: binary_sensor
-    for:
+    metadata:
+      secondary: false
+    trigger: device
+  conditions: []
+  actions:
+  - type: turn_on
+    device_id: 98b33468be4a5f7dc6197cc7cbfd07a7
+    entity_id: 7fbe8fdf02a3429c95f483a81ffb4e19
+    domain: switch
+  mode: single
+- id: '1764971707404'
+  alias: Coat closet turns off Foyer
+  description: ''
+  triggers:
+  - type: not_opened
+    device_id: c8df000b8899d5ec0ebd538f822b64db
+    entity_id: 97d155e2cab67767ed357b0395259475
+    domain: binary_sensor
+    trigger: device
+  conditions: []
+  actions:
+  - type: turn_off
+    device_id: 98b33468be4a5f7dc6197cc7cbfd07a7
+    entity_id: 7fbe8fdf02a3429c95f483a81ffb4e19
+    domain: switch
+  mode: single
+- id: '1764999662417'
+  alias: Studio became empty
+  description: ''
+  triggers:
+  - type: not_occupied
+    device_id: 36ec6329a4a1b048dc69844f1726c4ae
+    entity_id: db610a74de7df02c1a473125b9e91fcb
+    domain: binary_sensor
+    trigger: device
+  conditions: []
+  actions:
+  - type: turn_off
+    device_id: 8801fae5750d73a71be38f9a6c4d4190
+    entity_id: b1dfda240e24ccc2448c8a12e147ddb8
+    domain: light
+  mode: single
+- id: '1765057159592'
+  alias: Shop became unoccupied
+  description: ''
+  triggers:
+  - type: not_occupied
+    device_id: d011befbddf1f2ff9e841709b20c594f
+    entity_id: 29bada471b35dbc199ef1e6058205bc7
+    domain: binary_sensor
+    trigger: device
+  conditions:
+  - type: is_not_open
+    condition: device
+    device_id: 8f2ed4d70ec0396734c38b9dc5b60302
+    entity_id: 1d83b9abff33df68037d94a7990b90f0
+    domain: binary_sensor
+  actions:
+  - type: turn_off
+    device_id: 64a3c68f0fe79f0f0d50868aebb242c6
+    entity_id: 5d51aaad1430295882af8179a46392b0
+    domain: switch
+  - delay:
       hours: 0
       minutes: 0
-      seconds: 0
-  condition: []
-  action:
-  - type: turn_on
-    device_id: 00579130cac6513afea1c1791e06034a
-    entity_id: 5f37c9c7815645025187f369c7a03f78
-    domain: switch
-  - delay:
-      hours: 0
-      minutes: 4
-      seconds: 0
+      seconds: 30
       milliseconds: 0
   - type: turn_off
-    device_id: 00579130cac6513afea1c1791e06034a
-    entity_id: 5f37c9c7815645025187f369c7a03f78
+    device_id: e759e526524abdccc563c154e16989d6
+    entity_id: 67e4a2d6d6f69251fdc090f1a56d1c07
     domain: switch
   mode: restart
-- id: '1698719289991'
-  alias: Closet OFF
+- id: '1765070595811'
+  alias: Garage door opens
   description: ''
-  trigger:
-  - type: turned_off
-    platform: device
-    device_id: c03d9ad54d931570d099c604c36ef9d1
-    entity_id: 84c9a085bdfb5b8bd1e65fe0e9d52bfc
+  triggers:
+  - type: opened
+    device_id: 8f2ed4d70ec0396734c38b9dc5b60302
+    entity_id: 1d83b9abff33df68037d94a7990b90f0
     domain: binary_sensor
-  condition:
-  - condition: device
-    type: is_on
-    device_id: 00579130cac6513afea1c1791e06034a
-    entity_id: 5f37c9c7815645025187f369c7a03f78
-    domain: switch
-  action:
-  - type: turn_off
-    device_id: 00579130cac6513afea1c1791e06034a
-    entity_id: 5f37c9c7815645025187f369c7a03f78
-    domain: switch
-  mode: single
-- id: '1698806221481'
-  alias: Motion Studio Morning
-  description: Turn on overhead light before sunrise, and turn light off after 2 minutes
-  trigger:
-  - type: turned_on
-    platform: device
-    device_id: e7746f7920db8edf8f2f9d2a1f2ffa2e
-    entity_id: 63fb14acd67b415166ec769247305815
-    domain: binary_sensor
-  condition:
-  - condition: sun
-    before: sunrise
-  action:
-  - type: turn_on
-    device_id: aad3ddd7626438762d30155719d2250a
-    entity_id: 44699eea7b839fbbecf0cbee7b761c1a
-    domain: light
-  - delay:
-      hours: 0
-      minutes: 2
-      seconds: 0
-      milliseconds: 0
-  - type: turn_off
-    device_id: aad3ddd7626438762d30155719d2250a
-    entity_id: 44699eea7b839fbbecf0cbee7b761c1a
-    domain: light
-  mode: restart
-- id: '1698806687059'
-  alias: Motion Studio Night
-  description: Only triggers after sunset and when the globe lights are off
-  trigger:
-  - type: turned_on
-    platform: device
-    device_id: e7746f7920db8edf8f2f9d2a1f2ffa2e
-    entity_id: 63fb14acd67b415166ec769247305815
-    domain: binary_sensor
-  condition:
-  - condition: sun
-    after: sunset
-  action:
-  - type: turn_on
-    device_id: aad3ddd7626438762d30155719d2250a
-    entity_id: 44699eea7b839fbbecf0cbee7b761c1a
-    domain: light
-    brightness_pct: 60
-  - delay:
-      hours: 0
-      minutes: 5
-      seconds: 0
-      milliseconds: 0
-  - type: turn_off
-    device_id: aad3ddd7626438762d30155719d2250a
-    entity_id: 44699eea7b839fbbecf0cbee7b761c1a
-    domain: light
-  mode: restart
-- id: '1699929443599'
-  alias: Grow lights OFF
-  description: Turn on grow lights in the morning.
-  trigger:
-  - platform: time
-    at: '17:00:00'
-  condition: []
-  action:
-  - type: turn_off
-    device_id: 6f7afd0f199c9a95742aa4ad26fc9c32
-    entity_id: 6b9c28535a23d6680ee744966f7712b2
-    domain: light
-  - type: turn_off
-    device_id: 2004cedabeda99cf3dc9e91cf057d2dc
-    entity_id: 2fc40d211b36b30dd5fb673f15890640
-    domain: light
-  mode: single
-- id: '1700275898717'
-  alias: Strybar turns on Zebra
-  description: ''
-  trigger:
-  - device_id: 6194f2265b6605140ab35fec2e11ecc7
-    domain: zha
-    platform: device
-    type: remote_button_long_press
-    subtype: dim_up
-  condition:
-  - condition: device
-    device_id: a6e765ed063163684250fcc180b03b6c
-    domain: media_player
-    entity_id: 2d3974a2bf6db5568340acbb5bb1ecad
-    type: is_off
-  action:
-  - service: media_player.turn_on
+    trigger: device
+  conditions: []
+  actions:
+  - action: switch.turn_on
+    metadata: {}
     data: {}
     target:
-      entity_id: media_player.zebra
-  mode: single
-- id: '1700283933565'
-  alias: Strybar turns off Zebra
-  description: ''
-  trigger:
-  - device_id: 6194f2265b6605140ab35fec2e11ecc7
-    domain: zha
-    platform: device
-    type: remote_button_long_press
-    subtype: dim_down
-  condition: []
-  action:
-  - service: media_player.turn_off
-    data: {}
-    target:
-      device_id: a6e765ed063163684250fcc180b03b6c
-  mode: single
-- id: '1700284316502'
-  alias: Strybar volume up
-  description: ''
-  trigger:
-  - device_id: 6194f2265b6605140ab35fec2e11ecc7
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: turn_on
-  condition: []
-  action:
-  - service: media_player.volume_up
-    data: {}
-    target:
-      device_id: a6e765ed063163684250fcc180b03b6c
-  mode: single
-- id: '1700284379947'
-  alias: Strybar volume down
-  description: ''
-  trigger:
-  - device_id: 6194f2265b6605140ab35fec2e11ecc7
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: turn_off
-  condition: []
-  action:
-  - service: media_player.volume_down
-    data: {}
-    target:
-      device_id: a6e765ed063163684250fcc180b03b6c
+      entity_id: switch.garage_interior_lights
   mode: single

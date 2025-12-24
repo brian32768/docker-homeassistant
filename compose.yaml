@@ -1,8 +1,13 @@
-#
-#   WE RUN THIS IN COMPOSE BECAUSE OF "DEVICES"
-#   It might work in Swarm but so what, it definitely works in Compose
-#
+# This config runs only HA,
+# the Mosquitto and Z2M instances are in their own containers under z2m.
+
 networks:
+  # Allow access from Internet over Cloudflare, works great 
+  # but blocks local network access so all IP connected devices become unavailable.
+#  warp:
+#    name: zero-trust
+#    external: true
+  # Internal network for HA and Z2M
   homeassistant:
     name: homeassistant
     external: true
@@ -13,19 +18,17 @@ services:
     volumes:
       - ${PWD}/config:/config
     ports:
-      - "80:80" # Required for Amazon Echo set up but interferes with proxy (which I no longer use. :-)
+      - "80:80" # Required for Amazon Echo set up but interferes with proxy / letsencrypt if I run that.
       - "22222:22222" # ssh (debug only)
       - "5683:5683" # CoIot for Shelly 1
 #      - "8123:8123"
     environment:
       TZ: "America/Los_Angeles"
-    # ZHA needs this to access the Nortek.
-#    devices:
-#      - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if00-port0:/dev/ttyUSB0" # Z-Wave
-#      - "/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if01-port0:/dev/ttyUSB1" # Zigbee
     restart: unless-stopped
     networks:
+#      warp:
+#        aliases:
+#          - homeassistant
       homeassistant:
-        aliases:
-          - homeassistant
+
     

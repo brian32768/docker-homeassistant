@@ -119,3 +119,62 @@ kmun:
       - media_content_type: music
         media_content_id: media-source://radio_browser/tag/community radio
   mode: single
+kitchen_motion_at_night:
+  alias: Kitchen motion at night
+  sequence:
+  - condition: time
+    after: '22:00:00'
+    before: 07:00:00
+    weekday:
+    - sun
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+  - condition: device
+    type: is_off
+    device_id: b896e8e5867d247c8482d31f256fe663
+    entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
+    domain: light
+  - action: light.turn_on
+    metadata: {}
+    data:
+      kelvin: 2579
+      brightness_pct: 10
+    target:
+      device_id: aaa114ff3b2ad07b9fe760b98734fbc8
+  - delay:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - type: turn_off
+    device_id: aaa114ff3b2ad07b9fe760b98734fbc8
+    entity_id: 8c39879d8356fd49b240833e3ffcac9a
+    domain: light
+  description: If it's night and motion is detected,  turn on the kitchen light in
+    nightlight mode
+'1761186166670':
+  sequence:
+  - if:
+    - condition: or
+      conditions:
+      - condition: device
+        type: is_off
+        device_id: ce1329324e86318f7f82b6ee512030c9
+        entity_id: b955eb84adc8034b4cb8eb36535edc96
+        domain: light
+    then:
+    - type: turn_on
+      device_id: ce1329324e86318f7f82b6ee512030c9
+      entity_id: b955eb84adc8034b4cb8eb36535edc96
+      domain: light
+    else:
+    - type: turn_off
+      device_id: ce1329324e86318f7f82b6ee512030c9
+      entity_id: b955eb84adc8034b4cb8eb36535edc96
+      domain: light
+  alias: IKEA remote TOGGLE
+  description: ''

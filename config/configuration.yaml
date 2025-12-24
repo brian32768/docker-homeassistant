@@ -6,7 +6,9 @@ homeassistant:
   auth_providers:
     - type: trusted_networks
       trusted_networks:
-        - 192.168.123.0/24
+        - 192.168.1.0/24
+#        - 192.168.100.0/24
+#        - 192.168.123.0/24
         - 127.0.0.1
       allow_bypass_login: true
     - type: homeassistant
@@ -18,8 +20,7 @@ homeassistant:
 # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 5
 
-# metric for Metric, imperial for Imperial
-  unit_system: imperial
+  unit_system: us_customary
 
 # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Los_Angeles
@@ -29,8 +30,8 @@ homeassistant:
 
   currency: USD
 
-  external_url: https://homeassistant.wildsong.biz/
-  internal_url: http://homeassistant.wildsong.biz:8123/
+  external_url: http://homeassistant.wildsong.biz
+  internal_url: http://192.168.2.2
 
 # This entry is only here to attempt to override the default radius of 100m
 zone:
@@ -54,10 +55,19 @@ scene: !include scenes.yaml
 
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 http:
-   ip_ban_enabled: true
-   login_attempts_threshold: 3
-   ssl_certificate: /certs/live/bellman.wildsong.biz/fullchain.pem
-   ssl_key: /certs/live/bellman.wildsong.biz/privkey.pem
+  server_port: 80
+  ip_ban_enabled: false
+  login_attempts_threshold: 3
+  #ssl_certificate: /certs/live/certs/fullchain.pem
+  #ssl_key: /certs/live/certs/privkey.pem
+# 2025-03-31 added this for access through tunnel from Cloudflare zero trust
+# 2025-04-05 not working!!
+# 2025-09-06 trying again!!! I wonder how often the IP address changes in Docker
+#  base_url: https://homeassistant.wildsong.biz
+#  use_x_forwarded_for: true
+#  trusted_proxies:
+#    - 192.168.0.4
+#    - 127.0.0.1
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
@@ -67,9 +77,6 @@ history:
 
 # View all events in a logbook
 logbook:
-
-# Enables a map showing the location of tracked devices
-map:
 
 # Track the sun
 sun:
@@ -106,18 +113,8 @@ logger:
   logs:
     homeassistant.core: info
     homeassistant.components.zha: warning
-    homeassistant.components.device_tracker: warning
+    homeassistant.components.device_tracker: debug
     homeassistant.components.device_automation: warning
-    bellows.zigbee.application: warning
-    bellows.ezsp: warning
-#    zigpy: warning
-    zigpy_cc: debug
-#    zigpy_deconz.zigbee.application: debug
-#    zigpy_deconz.api: debug
-#    zigpy_xbee.zigbee.application: debug
-#    zigpy_xbee.api: debug
-#    zigpy_zigate: debug
-#    zhaquirks: debug
 
 #group: !include groups.yaml
 automation: !include automations.yaml
@@ -126,60 +123,8 @@ script: !include scripts.yaml
 
 #scene: !include scene.yaml
 
-# DOES NOT WORK
-#emulated_hue:
-#  listen_port: 80
-#  advertise_ip: 71.8.168.155
-#  exposed_domains:
-#    - light
-
-# Rheem water heater
-#water_heater:
-#  - platform: econet
-#    username: brian@wildsong.biz
-#    password: !secret econet
-
-
-zha:
-  zigpy_config:
-    ota:
-      otau_directory: /config/zigpy_ota
-      ikea_provider: true
-      ledvance_provider: false
-    
 alexa:
   smart_home:
-
-#notify:
-#  - platform: telegram
-#    name: toasted_cheese
-#    chat_id: 2024646225 # Brian
-
-
-# RGBW:
-#light:
-#  - platform: mqtt
-#    schema: json
-#    name: mqtt_hallway
-#    state_topic: "home/rgbw"
-#    command_topic: "home/rgbw/set"
-#    brightness: true
-#    rgb: true
-#    white_value: true
-#    effect: true
-#    effect_list: [colorfade_slow, colorfade_fast, flash]
-#    optimistic: false
-#    qos: 0
-
-light:
-  - platform: limitlessled
-    bridges:
-      - host: 192.168.123.235
-        groups:
-        - number: 1
-          name: Island
-          type: rgbww
-          #type: white, dimmer did not work
 
 timer:
   bathroom:
@@ -222,4 +167,3 @@ input_number:
     min: 0
     max: 200
     step: 1
-  
