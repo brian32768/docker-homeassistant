@@ -795,17 +795,16 @@
     domain: binary_sensor
     trigger: device
   conditions:
-  - condition: state
-    entity_id: sensor.0xc4d8c8fffe1d2443_illumination
-    attribute: dim
-    state: ''
-    enabled: false
+  - condition: sun
+    after: sunset
+  - condition: time
+    before: '23:00:00'
   actions:
   - type: turn_on
     device_id: 8801fae5750d73a71be38f9a6c4d4190
     entity_id: b1dfda240e24ccc2448c8a12e147ddb8
     domain: light
-    brightness_pct: 50
+    brightness_pct: 20
   mode: single
 - id: '1762136157961'
   alias: Garage relay switches off workbench
