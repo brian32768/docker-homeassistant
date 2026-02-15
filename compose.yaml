@@ -1,4 +1,4 @@
-# This config runs only HA,
+# This config runs Home Assistant and Matter
 # the Mosquitto and Z2M instances are in their own containers under z2m.
 
 networks:
@@ -21,14 +21,22 @@ services:
       - "80:80" # Required for Amazon Echo set up but interferes with proxy / letsencrypt if I run that.
       - "22222:22222" # ssh (debug only)
       - "5683:5683" # CoIot for Shelly 1
-#      - "8123:8123"
+      - "8123:8123" # For Wyoming
     environment:
       TZ: "America/Los_Angeles"
     restart: unless-stopped
     networks:
-#      warp:
-#        aliases:
-#          - homeassistant
       homeassistant:
+        aliases:
+          - homeassistant
 
-    
+  matter:
+    image: ghcr.io/matter-js/python-matter-server:stable
+    environment:
+      TZ: "America/Los_Angeles"
+    volumes:
+      - ${PWD}/matter_data:/data
+    networks:
+      homeassistant:
+        aliases
+    	  - matter
