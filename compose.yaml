@@ -39,4 +39,4 @@ services:
     networks:
       homeassistant:
         aliases
-    	  - matter
+          - matter
