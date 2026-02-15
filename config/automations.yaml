@@ -134,48 +134,6 @@
     entity_id: b955eb84adc8034b4cb8eb36535edc96
     domain: light
   mode: single
-- id: '1623292664104'
-  alias: IKEA remote BRIGHTER
-  description: ''
-  triggers:
-  - domain: mqtt
-    device_id: 71e858db2e8efdcf0e1c6a470f0736ce
-    type: action
-    subtype: brightness_up_click
-    trigger: device
-  conditions:
-  - condition: device
-    type: is_on
-    device_id: ce1329324e86318f7f82b6ee512030c9
-    entity_id: b955eb84adc8034b4cb8eb36535edc96
-    domain: light
-  actions:
-  - device_id: ce1329324e86318f7f82b6ee512030c9
-    domain: light
-    entity_id: b955eb84adc8034b4cb8eb36535edc96
-    type: brightness_increase
-  mode: single
-- id: '1623292768373'
-  alias: IKEA remote DIMMER
-  description: ''
-  triggers:
-  - domain: mqtt
-    device_id: 71e858db2e8efdcf0e1c6a470f0736ce
-    type: action
-    subtype: brightness_down_click
-    trigger: device
-  conditions:
-  - condition: device
-    type: is_on
-    device_id: ce1329324e86318f7f82b6ee512030c9
-    entity_id: b955eb84adc8034b4cb8eb36535edc96
-    domain: light
-  actions:
-  - device_id: ce1329324e86318f7f82b6ee512030c9
-    domain: light
-    entity_id: b955eb84adc8034b4cb8eb36535edc96
-    type: brightness_decrease
-  mode: single
 - id: '1631513328763'
   alias: Start timer when bathroom light is turned on
   description: ''
@@ -207,23 +165,6 @@
     entity_id: 09f126f7aca88922b11d34ed01b7bf37
     domain: light
   mode: restart
-- id: '1632669604356'
-  alias: IKEA remote left button
-  description: ''
-  triggers:
-  - domain: mqtt
-    device_id: 71e858db2e8efdcf0e1c6a470f0736ce
-    type: action
-    subtype: arrow_left_click
-    trigger: device
-  conditions: []
-  actions:
-  - type: turn_on
-    device_id: ce1329324e86318f7f82b6ee512030c9
-    entity_id: b955eb84adc8034b4cb8eb36535edc96
-    domain: light
-    brightness_pct: 12
-  mode: single
 - id: '1635521053106'
   alias: Ecobee occupancy
   description: ''
@@ -317,25 +258,8 @@
     target:
       entity_id: scene.xmas_on
   mode: single
-- id: '1696567186919'
-  alias: IKEA remote right button
-  description: ''
-  triggers:
-  - domain: mqtt
-    device_id: 71e858db2e8efdcf0e1c6a470f0736ce
-    type: action
-    subtype: arrow_right_click
-    trigger: device
-  conditions: []
-  actions:
-  - type: turn_on
-    device_id: ce1329324e86318f7f82b6ee512030c9
-    entity_id: b955eb84adc8034b4cb8eb36535edc96
-    domain: light
-    brightness_pct: 100
-  mode: single
 - id: '1700275898717'
-  alias: Strybar turns on media players
+  alias: Strybar long press turns on media players
   description: ''
   triggers:
   - domain: mqtt
@@ -360,7 +284,7 @@
       area_id: 38657e0e845c52113952e700281e5bba
   mode: single
 - id: '1700283933565'
-  alias: Strybar turns off media players
+  alias: Strybar long press turns off media players
   description: ''
   triggers:
   - domain: mqtt
@@ -665,7 +589,7 @@
     domain: light
   mode: single
 - id: '1761195802809'
-  alias: IKEA Tradfri remote toggle
+  alias: Kitchen toggle
   description: ''
   triggers:
   - domain: mqtt
@@ -675,9 +599,10 @@
     trigger: device
   conditions: []
   actions:
-  - action: script.1761186166670
-    metadata: {}
-    data: {}
+  - type: toggle
+    device_id: 9bfd755802d4e3a9d519f7386f740877
+    entity_id: 431784d7492e3dfeac3c0791e7403fe4
+    domain: light
   mode: single
 - id: '1761361560301'
   alias: Closet door opened
@@ -720,26 +645,12 @@
     entity_id: e3b28a4b6225528ef279258e798d753e
     domain: binary_sensor
     trigger: device
-  - type: occupied
-    device_id: 1c7e86f1421d5a8fe29736ca75a8d54e
-    entity_id: f63eca43521c21e4a5f448a4a4bf83ee
-    domain: binary_sensor
-    trigger: device
   conditions:
   - condition: time
     after: 06:30:00
     before: '23:30:00'
   actions:
   - type: turn_on
-    device_id: 8f0cb7502678acf2753e7fbe41bdefc9
-    entity_id: 37229c5ef0f943f2084ed7b96cbac870
-    domain: light
-  - delay:
-      hours: 0
-      minutes: 8
-      seconds: 0
-      milliseconds: 0
-  - type: turn_off
     device_id: 8f0cb7502678acf2753e7fbe41bdefc9
     entity_id: 37229c5ef0f943f2084ed7b96cbac870
     domain: light
@@ -751,11 +662,6 @@
   - type: not_occupied
     device_id: dc4c546a863a94fd9dfc9de699e4557f
     entity_id: e3b28a4b6225528ef279258e798d753e
-    domain: binary_sensor
-    trigger: device
-  - type: not_occupied
-    device_id: 1c7e86f1421d5a8fe29736ca75a8d54e
-    entity_id: f63eca43521c21e4a5f448a4a4bf83ee
     domain: binary_sensor
     trigger: device
   conditions: []
@@ -1003,4 +909,172 @@
     data: {}
     target:
       entity_id: switch.garage_interior_lights
+  mode: single
+- id: '1769144249520'
+  alias: Kitchen brighter
+  description: ''
+  triggers:
+  - domain: mqtt
+    device_id: 71e858db2e8efdcf0e1c6a470f0736ce
+    type: action
+    subtype: brightness_up_click
+    trigger: device
+  conditions: []
+  actions:
+  - device_id: 9bfd755802d4e3a9d519f7386f740877
+    domain: light
+    entity_id: 431784d7492e3dfeac3c0791e7403fe4
+    type: brightness_increase
+  mode: single
+- id: '1769144329366'
+  alias: Kitchen darker
+  description: ''
+  triggers:
+  - domain: mqtt
+    device_id: 71e858db2e8efdcf0e1c6a470f0736ce
+    type: action
+    subtype: brightness_down_click
+    trigger: device
+  conditions: []
+  actions:
+  - device_id: 9bfd755802d4e3a9d519f7386f740877
+    domain: light
+    entity_id: 431784d7492e3dfeac3c0791e7403fe4
+    type: brightness_decrease
+  mode: single
+- id: '1769144580269'
+  alias: Pantry darker
+  description: ''
+  triggers:
+  - domain: mqtt
+    device_id: 71e858db2e8efdcf0e1c6a470f0736ce
+    type: action
+    subtype: arrow_left_click
+    trigger: device
+  conditions: []
+  actions:
+  - device_id: b3f289d7fab485b931ec614c62fdc055
+    domain: light
+    entity_id: 9daeed9681c17a209b6ff3d59a851fab
+    type: brightness_decrease
+  mode: single
+- id: '1769145232489'
+  alias: Pantry brighter
+  description: ''
+  triggers:
+  - domain: mqtt
+    device_id: 71e858db2e8efdcf0e1c6a470f0736ce
+    type: action
+    subtype: arrow_right_click
+    trigger: device
+  conditions: []
+  actions:
+  - device_id: b3f289d7fab485b931ec614c62fdc055
+    domain: light
+    entity_id: 9daeed9681c17a209b6ff3d59a851fab
+    type: brightness_increase
+  mode: single
+- id: '1769216122732'
+  alias: Pantry ON 100
+  description: ''
+  triggers:
+  - domain: mqtt
+    device_id: 71e858db2e8efdcf0e1c6a470f0736ce
+    type: action
+    subtype: arrow_right_hold
+    trigger: device
+  conditions: []
+  actions:
+  - type: turn_on
+    device_id: b3f289d7fab485b931ec614c62fdc055
+    entity_id: 9daeed9681c17a209b6ff3d59a851fab
+    domain: light
+    brightness_pct: 100
+  mode: single
+- id: '1769216156658'
+  alias: Pantry OFF 0
+  description: ''
+  triggers:
+  - domain: mqtt
+    device_id: 71e858db2e8efdcf0e1c6a470f0736ce
+    type: action
+    subtype: arrow_left_hold
+    trigger: device
+  conditions: []
+  actions:
+  - type: turn_off
+    device_id: b3f289d7fab485b931ec614c62fdc055
+    entity_id: 9daeed9681c17a209b6ff3d59a851fab
+    domain: light
+  mode: single
+- id: '1769270652486'
+  alias: Kitchen ON 5
+  description: ''
+  triggers:
+  - domain: mqtt
+    device_id: 71e858db2e8efdcf0e1c6a470f0736ce
+    type: action
+    subtype: brightness_down_hold
+    trigger: device
+  conditions: []
+  actions:
+  - type: turn_on
+    device_id: 9bfd755802d4e3a9d519f7386f740877
+    entity_id: 431784d7492e3dfeac3c0791e7403fe4
+    domain: light
+    brightness_pct: 5
+  mode: single
+- id: '1769270695446'
+  alias: Kitchen ON 100
+  description: ''
+  triggers:
+  - domain: mqtt
+    device_id: 71e858db2e8efdcf0e1c6a470f0736ce
+    type: action
+    subtype: brightness_up_hold
+    trigger: device
+  conditions: []
+  actions:
+  - type: turn_on
+    device_id: 9bfd755802d4e3a9d519f7386f740877
+    entity_id: 431784d7492e3dfeac3c0791e7403fe4
+    domain: light
+    brightness_pct: 100
+  mode: single
+- id: '1769485073368'
+  alias: Toggle dining room light
+  description: ''
+  triggers:
+  - domain: mqtt
+    device_id: 2c2d6c37647f8cff7e2d25358aa5b994
+    type: action
+    subtype: 'on'
+    trigger: device
+  conditions: []
+  actions:
+  - type: toggle
+    device_id: aaa114ff3b2ad07b9fe760b98734fbc8
+    entity_id: 8c39879d8356fd49b240833e3ffcac9a
+    domain: light
+  mode: single
+- id: '1770089225852'
+  alias: Lavatory turn off after 8 minutes
+  description: ''
+  triggers:
+  - type: turned_on
+    device_id: 8f0cb7502678acf2753e7fbe41bdefc9
+    entity_id: 37229c5ef0f943f2084ed7b96cbac870
+    domain: light
+    trigger: device
+  conditions: []
+  actions:
+  - delay:
+      hours: 0
+      minutes: 8
+      seconds: 0
+      milliseconds: 0
+  - type: turn_off
+    device_id: 8f0cb7502678acf2753e7fbe41bdefc9
+    entity_id: 37229c5ef0f943f2084ed7b96cbac870
+    domain: light
   mode: single
