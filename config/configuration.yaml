@@ -7,18 +7,17 @@ homeassistant:
     - type: trusted_networks
       trusted_networks:
         - 192.168.1.0/24
-#        - 192.168.100.0/24
-#        - 192.168.123.0/24
+        - 192.168.2.0/24
         - 127.0.0.1
       allow_bypass_login: true
     - type: homeassistant
   
 # Location required to calculate the time the sun rises and sets
-  latitude: 46.17441
-  longitude: -123.83788
+  latitude: 44.564568
+  longitude: -123.262047
 
 # Impacts weather/sunrise data (altitude above sea level in meters)
-  elevation: 5
+  elevation: 69
 
   unit_system: us_customary
 
@@ -31,13 +30,13 @@ homeassistant:
   currency: USD
 
   external_url: http://homeassistant.wildsong.biz
-  internal_url: http://192.168.2.2
+  internal_url: http://homeassistant.wildsong.lan
 
 # This entry is only here to attempt to override the default radius of 100m
 zone:
   - name: Home
-    latitude: 46.17441
-    longitude: -123.83788
+    latitude: 44.546921
+    longitude: -123.256388
     radius: 30
     icon: mdi:account-multiple
       

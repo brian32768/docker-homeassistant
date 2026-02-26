@@ -100,6 +100,14 @@
     device_id: dd3241d251ab5f3998316992a43c1a95
     entity_id: 40c4da99aa2e41fabb65aca00ac478e2
     domain: light
+  - device_id: 5d06c53e8eed39d5eb524937e685d95d
+    domain: select
+    entity_id: 48e3971820c1ad5963a04ea02d43e05d
+    type: select_last
+  - type: turn_on
+    device_id: 5d06c53e8eed39d5eb524937e685d95d
+    entity_id: b5728938d3c4c62d543cbf9e732bf566
+    domain: switch
   mode: single
 - id: '1619369588715'
   alias: Turn off forgotten lights
@@ -129,10 +137,6 @@
     entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
     domain: light
     enabled: true
-  - type: turn_off
-    device_id: ce1329324e86318f7f82b6ee512030c9
-    entity_id: b955eb84adc8034b4cb8eb36535edc96
-    domain: light
   mode: single
 - id: '1631513328763'
   alias: Start timer when bathroom light is turned on
@@ -345,21 +349,30 @@
   mode: single
 - id: '1702743052510'
   alias: Good Morning
-  description: We're getting up on a weekday
+  description: We're getting up now
   triggers:
   - at: 07:15:00
     trigger: time
   conditions: []
   actions:
+  - type: turn_on
+    device_id: 51a3e64d56b7c35c06fc497a18006353
+    entity_id: 4b494b3874790bc5caa87c859e5403bd
+    domain: switch
   - action: scene.turn_on
     metadata: {}
     data: {}
     target:
       entity_id: scene.kitchen_counter_morning
+  - device_id: 5d06c53e8eed39d5eb524937e685d95d
+    domain: select
+    entity_id: 48e3971820c1ad5963a04ea02d43e05d
+    type: select_option
+    option: Brightness preset 3
   mode: single
 - id: '1731514934475'
   alias: BEDTIME almost
-  description: Turn off table lamp no really really
+  description: Turn off entrance light
   triggers:
   - at: '22:00:00'
     trigger: time
@@ -370,12 +383,6 @@
     data: {}
     target:
       area_id: entrance
-  - type: turn_on
-    device_id: ce1329324e86318f7f82b6ee512030c9
-    entity_id: b955eb84adc8034b4cb8eb36535edc96
-    domain: light
-    brightness_pct: 12
-    enabled: false
   mode: single
 - id: '1737132481383'
   alias: Table lamp Rodret
@@ -404,27 +411,6 @@
         device_id: 7e72af23ab6c89038b904d403ad200b7
         entity_id: f8c1580dd28f299aa3ca7d2abb2f3295
         domain: light
-- id: '1737475505337'
-  alias: Good morning
-  description: ''
-  triggers:
-  - trigger: time
-    at: 07:45:00
-    weekday:
-    - sun
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
-    - sat
-  conditions: []
-  actions:
-  - type: turn_on
-    device_id: 51a3e64d56b7c35c06fc497a18006353
-    entity_id: 4b494b3874790bc5caa87c859e5403bd
-    domain: switch
-  mode: single
 - id: '1755737342581'
   alias: eLab occupied
   description: ''
@@ -692,7 +678,7 @@
     domain: switch
   mode: restart
 - id: '1762049431579'
-  alias: Studio became occupied
+  alias: Bathroom occupied
   description: ''
   triggers:
   - type: occupied
@@ -700,17 +686,17 @@
     entity_id: db610a74de7df02c1a473125b9e91fcb
     domain: binary_sensor
     trigger: device
-  conditions:
-  - condition: sun
-    after: sunset
-  - condition: time
-    before: '23:00:00'
+  - type: occupied
+    device_id: 1c7e86f1421d5a8fe29736ca75a8d54e
+    entity_id: f63eca43521c21e4a5f448a4a4bf83ee
+    domain: binary_sensor
+    trigger: device
+  conditions: []
   actions:
   - type: turn_on
-    device_id: 8801fae5750d73a71be38f9a6c4d4190
-    entity_id: b1dfda240e24ccc2448c8a12e147ddb8
+    device_id: 5d06c53e8eed39d5eb524937e685d95d
+    entity_id: 7c7c1d08adcd4f9141f070cf5b6d5e8d
     domain: light
-    brightness_pct: 20
   mode: single
 - id: '1762136157961'
   alias: Garage relay switches off workbench
@@ -734,8 +720,8 @@
   triggers:
   - type: turned_on
     device_id: 64a3c68f0fe79f0f0d50868aebb242c6
-    entity_id: f00bf6144a5a65f59116b2e2ed974220
-    domain: light
+    entity_id: 5d51aaad1430295882af8179a46392b0
+    domain: switch
     trigger: device
   conditions: []
   actions:
@@ -846,22 +832,6 @@
     device_id: 98b33468be4a5f7dc6197cc7cbfd07a7
     entity_id: 7fbe8fdf02a3429c95f483a81ffb4e19
     domain: switch
-  mode: single
-- id: '1764999662417'
-  alias: Studio became empty
-  description: ''
-  triggers:
-  - type: not_occupied
-    device_id: 36ec6329a4a1b048dc69844f1726c4ae
-    entity_id: db610a74de7df02c1a473125b9e91fcb
-    domain: binary_sensor
-    trigger: device
-  conditions: []
-  actions:
-  - type: turn_off
-    device_id: 8801fae5750d73a71be38f9a6c4d4190
-    entity_id: b1dfda240e24ccc2448c8a12e147ddb8
-    domain: light
   mode: single
 - id: '1765057159592'
   alias: Shop became unoccupied
@@ -1076,5 +1046,47 @@
   - type: turn_off
     device_id: 8f0cb7502678acf2753e7fbe41bdefc9
     entity_id: 37229c5ef0f943f2084ed7b96cbac870
+    domain: light
+  mode: single
+- id: '1771204703967'
+  alias: Bathroom unoccupied
+  description: ''
+  triggers:
+  - type: not_occupied
+    device_id: 36ec6329a4a1b048dc69844f1726c4ae
+    entity_id: db610a74de7df02c1a473125b9e91fcb
+    domain: binary_sensor
+    trigger: device
+  conditions:
+  - type: is_not_occupied
+    condition: device
+    device_id: 1c7e86f1421d5a8fe29736ca75a8d54e
+    entity_id: f63eca43521c21e4a5f448a4a4bf83ee
+    domain: binary_sensor
+  actions:
+  - type: turn_off
+    device_id: 5d06c53e8eed39d5eb524937e685d95d
+    entity_id: 7c7c1d08adcd4f9141f070cf5b6d5e8d
+    domain: light
+  mode: restart
+- id: '1771205460973'
+  alias: Bathroom light turn off in 8 minutes
+  description: ''
+  triggers:
+  - type: turned_on
+    device_id: 5d06c53e8eed39d5eb524937e685d95d
+    entity_id: 7c7c1d08adcd4f9141f070cf5b6d5e8d
+    domain: light
+    trigger: device
+  conditions: []
+  actions:
+  - delay:
+      hours: 0
+      minutes: 8
+      seconds: 0
+      milliseconds: 0
+  - type: turn_off
+    device_id: 5d06c53e8eed39d5eb524937e685d95d
+    entity_id: 7c7c1d08adcd4f9141f070cf5b6d5e8d
     domain: light
   mode: single

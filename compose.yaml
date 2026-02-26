@@ -29,14 +29,20 @@ services:
       homeassistant:
         aliases:
           - homeassistant
-
   matter:
     image: ghcr.io/matter-js/python-matter-server:stable
     environment:
       TZ: "America/Los_Angeles"
+    security_opt:
+      # Required for Bluetooth via D-Bus
+      - apparmor:unconfined
     volumes:
       - ${PWD}/matter_data:/data
+      # Required for Bluetooth via D-Bus
+      - /run/dbus:/run/dbus:ro
+    ports:
+      - "5580:5580"
     networks:
       homeassistant:
-        aliases
+        aliases:
           - matter

@@ -209,7 +209,7 @@
 - id: '1737096527918'
   name: Kitchen Counter Morning
   entities:
-    light.0x00158d00068a5228:
+    light.3a_rgbw_1:
       min_color_temp_kelvin: 2000
       max_color_temp_kelvin: 6666
       min_mireds: 150
@@ -228,27 +228,24 @@
       - xy
       effect:
       color_mode: xy
-      brightness: 128
+      brightness: 204
       color_temp_kelvin:
       color_temp:
       hs_color:
-      - 41.818
-      - 38.824
+      - 44.571
+      - 27.451
       rgb_color:
       - 255
-      - 225
-      - 156
+      - 237
+      - 185
       xy_color:
-      - 0.413
-      - 0.398
-      friendly_name: Nue RGBW 1
+      - 0.381
+      - 0.382
+      friendly_name: 3A RGBW 1
       supported_features: 44
+      icon: mdi:led-strip-variant
       state: 'on'
-    light.0x00158d00068a53a8:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6666
-      min_mireds: 150
-      max_mireds: 500
+    light.ikea_tradfri_10w_driver:
       effect_list:
       - blink
       - breathe
@@ -256,62 +253,12 @@
       - channel_change
       - finish_effect
       - stop_effect
-      - colorloop
-      - stop_colorloop
       supported_color_modes:
-      - color_temp
-      - xy
+      - brightness
       effect:
-      color_mode: color_temp
-      brightness: 148
-      color_temp_kelvin: 4975
-      color_temp: 201
-      hs_color:
-      - 26.976
-      - 19.584
-      rgb_color:
-      - 255
-      - 228
-      - 205
-      xy_color:
-      - 0.372
-      - 0.35
-      friendly_name: Nue RGBW 2
-      supported_features: 44
-      state: 'on'
-    light.0x00158d00068a5114:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6666
-      min_mireds: 150
-      max_mireds: 500
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
-      - colorloop
-      - stop_colorloop
-      supported_color_modes:
-      - color_temp
-      - xy
-      effect:
-      color_mode: color_temp
-      brightness: 166
-      color_temp_kelvin: 4166
-      color_temp: 240
-      hs_color:
-      - 26.752
-      - 31.945
-      rgb_color:
-      - 255
-      - 210
-      - 174
-      xy_color:
-      - 0.41
-      - 0.362
-      friendly_name: Nue RGBW 3
+      color_mode: brightness
+      brightness: 76
+      friendly_name: Ikea Tradfri 10W driver
       supported_features: 44
       state: 'on'
   metadata: {}
@@ -427,7 +374,7 @@
 - id: '1737096758697'
   name: Kitchen Counter 100
   entities:
-    light.0x00158d00068a5228:
+    light.3a_rgbw_1:
       min_color_temp_kelvin: 2000
       max_color_temp_kelvin: 6666
       min_mireds: 150
@@ -445,28 +392,25 @@
       - color_temp
       - xy
       effect:
-      color_mode: color_temp
+      color_mode: xy
       brightness: 255
-      color_temp_kelvin: 6535
-      color_temp: 153
+      color_temp_kelvin:
+      color_temp:
       hs_color:
-      - 54.768
-      - 1.6
+      - 42.692
+      - 20.392
       rgb_color:
       - 255
-      - 255
-      - 251
+      - 240
+      - 203
       xy_color:
-      - 0.325
-      - 0.333
-      friendly_name: Nue RGBW 1
+      - 0.3663
+      - 0.3674
+      friendly_name: 3A RGBW 1
       supported_features: 44
+      icon: mdi:led-strip-variant
       state: 'on'
-    light.0x00158d00068a53a8:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6666
-      min_mireds: 150
-      max_mireds: 500
+    light.ikea_tradfri_10w_driver:
       effect_list:
       - blink
       - breathe
@@ -474,69 +418,19 @@
       - channel_change
       - finish_effect
       - stop_effect
-      - colorloop
-      - stop_colorloop
       supported_color_modes:
-      - color_temp
-      - xy
+      - brightness
       effect:
-      color_mode: color_temp
+      color_mode: brightness
       brightness: 255
-      color_temp_kelvin: 6535
-      color_temp: 153
-      hs_color:
-      - 54.768
-      - 1.6
-      rgb_color:
-      - 255
-      - 255
-      - 251
-      xy_color:
-      - 0.325
-      - 0.333
-      friendly_name: Nue RGBW 2
-      supported_features: 44
-      state: 'on'
-    light.0x00158d00068a5114:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6666
-      min_mireds: 150
-      max_mireds: 500
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
-      - colorloop
-      - stop_colorloop
-      supported_color_modes:
-      - color_temp
-      - xy
-      effect:
-      color_mode: color_temp
-      brightness: 255
-      color_temp_kelvin: 6535
-      color_temp: 153
-      hs_color:
-      - 54.768
-      - 1.6
-      rgb_color:
-      - 255
-      - 255
-      - 251
-      xy_color:
-      - 0.325
-      - 0.333
-      friendly_name: Nue RGBW 3
+      friendly_name: Ikea Tradfri 10W driver
       supported_features: 44
       state: 'on'
   metadata: {}
 - id: '1737097442408'
   name: Kitchen Counter 0
   entities:
-    light.0x00158d00068a5228:
+    light.3a_rgbw_1:
       min_color_temp_kelvin: 2000
       max_color_temp_kelvin: 6666
       min_mireds: 150
@@ -561,14 +455,11 @@
       hs_color:
       rgb_color:
       xy_color:
-      friendly_name: Nue RGBW 1
+      friendly_name: 3A RGBW 1
       supported_features: 44
+      icon: mdi:led-strip-variant
       state: 'off'
-    light.0x00158d00068a53a8:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6666
-      min_mireds: 150
-      max_mireds: 500
+    light.ikea_tradfri_10w_driver:
       effect_list:
       - blink
       - breathe
@@ -576,48 +467,12 @@
       - channel_change
       - finish_effect
       - stop_effect
-      - colorloop
-      - stop_colorloop
       supported_color_modes:
-      - color_temp
-      - xy
+      - brightness
       effect:
       color_mode:
       brightness:
-      color_temp_kelvin:
-      color_temp:
-      hs_color:
-      rgb_color:
-      xy_color:
-      friendly_name: Nue RGBW 2
-      supported_features: 44
-      state: 'off'
-    light.0x00158d00068a5114:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6666
-      min_mireds: 150
-      max_mireds: 500
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
-      - colorloop
-      - stop_colorloop
-      supported_color_modes:
-      - color_temp
-      - xy
-      effect:
-      color_mode:
-      brightness:
-      color_temp_kelvin:
-      color_temp:
-      hs_color:
-      rgb_color:
-      xy_color:
-      friendly_name: Nue RGBW 3
+      friendly_name: Ikea Tradfri 10W driver
       supported_features: 44
       state: 'off'
   metadata: {}
