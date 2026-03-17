@@ -14,11 +14,12 @@ networks:
 
 services:
   server:
+    container_name: homeassistant
     image: homeassistant/home-assistant:latest
     volumes:
       - ${PWD}/config:/config
     ports:
-      - "80:80" # Required for Amazon Echo set up but interferes with proxy / letsencrypt if I run that.
+      - "80:80"
       - "22222:22222" # ssh (debug only)
       - "5683:5683" # CoIot for Shelly 1
       - "8123:8123" # For Wyoming
@@ -26,9 +27,8 @@ services:
       TZ: "America/Los_Angeles"
     restart: unless-stopped
     networks:
-      homeassistant:
-        aliases:
-          - homeassistant
+      - homeassistant
+
   matter:
     image: ghcr.io/matter-js/python-matter-server:stable
     environment:

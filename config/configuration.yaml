@@ -13,8 +13,8 @@ homeassistant:
     - type: homeassistant
   
 # Location required to calculate the time the sun rises and sets
-  latitude: 44.564568
-  longitude: -123.262047
+  latitude: 44.546993
+  longitude: -123.256057
 
 # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 69

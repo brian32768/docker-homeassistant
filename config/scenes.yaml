@@ -684,3 +684,146 @@
       - 0.351
       state: 'on'
   metadata: {}
+- id: '1772502765794'
+  name: Torchierre Red
+  entities:
+    light.torchierre_light:
+      min_color_temp_kelvin: 2200
+      max_color_temp_kelvin: 6500
+      min_mireds: 153
+      max_mireds: 454
+      effect_list:
+      - Alarm
+      - Bedtime
+      - Candlelight
+      - Christmas
+      - Cozy
+      - Cool white
+      - Daylight
+      - Diwali
+      - Deep dive
+      - Fall
+      - Fireplace
+      - Forest
+      - Focus
+      - Golden white
+      - Halloween
+      - Jungle
+      - Mojito
+      - Night light
+      - Ocean
+      - Party
+      - Pulse
+      - Pastel colors
+      - Plantgrowth
+      - Romance
+      - Relax
+      - Sunset
+      - Spring
+      - Summer
+      - Steampunk
+      - True colors
+      - TV time
+      - White
+      - Wake-up
+      - Warm white
+      - Rhythm
+      supported_color_modes:
+      - color_temp
+      - rgbw
+      effect:
+      color_mode: rgbw
+      brightness: 255
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      - 351.22
+      - 64.314
+      rgb_color:
+      - 255
+      - 91
+      - 115
+      xy_color:
+      - 0.568
+      - 0.29
+      rgbw_color:
+      - 255
+      - 10
+      - 46
+      - 125
+      friendly_name: Torchierre Light
+      supported_features: 4
+      state: 'on'
+  metadata: {}
+- id: '1772502815935'
+  name: Torchierre Green
+  entities:
+    light.torchierre_light:
+      min_color_temp_kelvin: 2200
+      max_color_temp_kelvin: 6500
+      min_mireds: 153
+      max_mireds: 454
+      effect_list:
+      - Alarm
+      - Bedtime
+      - Candlelight
+      - Christmas
+      - Cozy
+      - Cool white
+      - Daylight
+      - Diwali
+      - Deep dive
+      - Fall
+      - Fireplace
+      - Forest
+      - Focus
+      - Golden white
+      - Halloween
+      - Jungle
+      - Mojito
+      - Night light
+      - Ocean
+      - Party
+      - Pulse
+      - Pastel colors
+      - Plantgrowth
+      - Romance
+      - Relax
+      - Sunset
+      - Spring
+      - Summer
+      - Steampunk
+      - True colors
+      - TV time
+      - White
+      - Wake-up
+      - Warm white
+      - Rhythm
+      supported_color_modes:
+      - color_temp
+      - rgbw
+      effect:
+      color_mode: rgbw
+      brightness: 255
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      - 112.044
+      - 70.98
+      rgb_color:
+      - 98
+      - 255
+      - 74
+      xy_color:
+      - 0.226
+      - 0.646
+      rgbw_color:
+      - 45
+      - 255
+      - 12
+      - 87
+      friendly_name: Torchierre Light
+      supported_features: 4
+      state: 'on'
+  metadata: {}
+  icon: mdi:floor-lamp-torchiere-outline

@@ -96,18 +96,10 @@
     device_id: a99932f3182f5632e84ee54fea8405e9
     entity_id: d26e1f67aae19f255415989789883d53
     domain: switch
-  - type: turn_off
-    device_id: dd3241d251ab5f3998316992a43c1a95
-    entity_id: 40c4da99aa2e41fabb65aca00ac478e2
-    domain: light
   - device_id: 5d06c53e8eed39d5eb524937e685d95d
     domain: select
     entity_id: 48e3971820c1ad5963a04ea02d43e05d
     type: select_last
-  - type: turn_on
-    device_id: 5d06c53e8eed39d5eb524937e685d95d
-    entity_id: b5728938d3c4c62d543cbf9e732bf566
-    domain: switch
   mode: single
 - id: '1619369588715'
   alias: Turn off forgotten lights
@@ -138,53 +130,6 @@
     domain: light
     enabled: true
   mode: single
-- id: '1631513328763'
-  alias: Start timer when bathroom light is turned on
-  description: ''
-  trigger:
-  - platform: device
-    type: turned_on
-    device_id: d45b048a0c942774f9be3ccd14696b99
-    entity_id: 09f126f7aca88922b11d34ed01b7bf37
-    domain: light
-  condition: []
-  action:
-  - service: timer.start
-    data: {}
-    target:
-      entity_id: timer.mbath
-  mode: single
-- id: '1631541366997'
-  alias: Timer turns off master bath
-  description: ''
-  trigger:
-  - platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.mbath
-  condition: []
-  action:
-  - type: turn_off
-    device_id: d45b048a0c942774f9be3ccd14696b99
-    entity_id: 09f126f7aca88922b11d34ed01b7bf37
-    domain: light
-  mode: restart
-- id: '1635521053106'
-  alias: Ecobee occupancy
-  description: ''
-  trigger:
-  - type: occupied
-    platform: device
-    device_id: 233353ebf3a4f303f3d6622cec9eda54
-    entity_id: binary_sensor.ecobee_occupancy
-    domain: binary_sensor
-  condition: []
-  action:
-  - service: notify.toasted_cheese
-    data:
-      title: Ecobee
-      message: Occupancy detected upstairs
-  mode: single
 - id: '1635829483223'
   alias: Timer turns off living room lamp
   description: ''
@@ -200,34 +145,6 @@
     entity_id: light.ikea_of_sweden_tradfri_bulb_e26_ws_opal_1000lm_15362ffe_level_light_color_on_off
     domain: light
   mode: single
-- id: '1636383750506'
-  alias: eLab Morning
-  description: ''
-  triggers:
-  - type: turned_on
-    device_id: 0e35e05a3c025fbe0ef731088ce644ed
-    entity_id: 689afba2ec052e13a75da4034fbf8a07
-    domain: binary_sensor
-    trigger: device
-  conditions:
-  - condition: sun
-    before: sunrise
-  actions:
-  - type: turn_on
-    device_id: 71e64bcc03e47d4df35e43eba4877908
-    entity_id: 65d05437b24f359119fdaaaea0ddd8ba
-    domain: light
-    brightness_pct: 10
-  - delay:
-      hours: 0
-      minutes: 2
-      seconds: 0
-      milliseconds: 0
-  - type: turn_off
-    device_id: 71e64bcc03e47d4df35e43eba4877908
-    entity_id: 65d05437b24f359119fdaaaea0ddd8ba
-    domain: light
-  mode: restart
 - id: '1639627522911'
   alias: Timer turns off elab
   description: ''
@@ -321,11 +238,11 @@
   - data: {}
     action: media_player.volume_up
     target:
-      area_id: 44668f66393bf53de2f0e48ddd4b66ed
+      entity_id: media_player.living_room
   - data: {}
     action: media_player.volume_up
     target:
-      area_id: 38657e0e845c52113952e700281e5bba
+      entity_id: media_player.kitchen
   mode: single
 - id: '1700284379947'
   alias: Strybar volume down
@@ -341,11 +258,11 @@
   - data: {}
     action: media_player.volume_down
     target:
-      area_id: 44668f66393bf53de2f0e48ddd4b66ed
+      entity_id: media_player.living_room
   - data: {}
     action: media_player.volume_down
     target:
-      area_id: 38657e0e845c52113952e700281e5bba
+      entity_id: media_player.kitchen
   mode: single
 - id: '1702743052510'
   alias: Good Morning
@@ -353,6 +270,14 @@
   triggers:
   - at: 07:15:00
     trigger: time
+    weekday:
+    - thu
+    - wed
+    - tue
+    - mon
+    - sun
+    - fri
+    - sat
   conditions: []
   actions:
   - type: turn_on
@@ -425,9 +350,10 @@
   conditions: []
   actions:
   - type: turn_on
-    device_id: da62fc3e8177f807cb7b023ae9750035
-    entity_id: 947a7254d08d8fa11ca937ba515575db
+    device_id: 1bfffb6f6765f244541903d8dc447321
+    entity_id: 4a0a689e33c9de53d4ba1c9e1e437f36
     domain: light
+    brightness_pct: 50
   - type: turn_on
     device_id: b896e8e5867d247c8482d31f256fe663
     entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
@@ -442,8 +368,8 @@
     entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
     domain: light
   - type: turn_off
-    device_id: da62fc3e8177f807cb7b023ae9750035
-    entity_id: 947a7254d08d8fa11ca937ba515575db
+    device_id: 1bfffb6f6765f244541903d8dc447321
+    entity_id: 4a0a689e33c9de53d4ba1c9e1e437f36
     domain: light
   mode: restart
 - id: '1755791774486'
@@ -460,8 +386,8 @@
   conditions: []
   actions:
   - type: turn_on
-    device_id: 6ac1eb399c0067ca7d8daa1857c76b5d
-    entity_id: 704d2144fa642677b4550331326c95fb
+    device_id: 8e1a98423a3c5c60f3aa311a055863e3
+    entity_id: 88bcf134085ee4f8504eadf79e5be208
     domain: switch
   mode: single
 - id: '1755792081818'
@@ -476,8 +402,8 @@
   conditions: []
   actions:
   - type: turn_off
-    device_id: 6ac1eb399c0067ca7d8daa1857c76b5d
-    entity_id: 704d2144fa642677b4550331326c95fb
+    device_id: 8e1a98423a3c5c60f3aa311a055863e3
+    entity_id: 88bcf134085ee4f8504eadf79e5be208
     domain: switch
   mode: single
 - id: '1755797462865'
@@ -563,8 +489,8 @@
   description: ''
   triggers:
   - type: turned_off
-    device_id: da62fc3e8177f807cb7b023ae9750035
-    entity_id: 947a7254d08d8fa11ca937ba515575db
+    device_id: 1bfffb6f6765f244541903d8dc447321
+    entity_id: 4a0a689e33c9de53d4ba1c9e1e437f36
     domain: light
     trigger: device
   conditions: []
@@ -586,8 +512,8 @@
   conditions: []
   actions:
   - type: toggle
-    device_id: 9bfd755802d4e3a9d519f7386f740877
-    entity_id: 431784d7492e3dfeac3c0791e7403fe4
+    device_id: 3fcf30bb8c2bbcd42401a196689329e6
+    entity_id: 95609106e1095bcf8f80cc43e16aff85
     domain: light
   mode: single
 - id: '1761361560301'
@@ -637,8 +563,8 @@
     before: '23:30:00'
   actions:
   - type: turn_on
-    device_id: 8f0cb7502678acf2753e7fbe41bdefc9
-    entity_id: 37229c5ef0f943f2084ed7b96cbac870
+    device_id: f271c425508b0412a2b5683ce821391a
+    entity_id: ea815bee1fcabdfd21bd19691d934f6a
     domain: light
   mode: restart
 - id: '1761934439143'
@@ -653,12 +579,12 @@
   conditions: []
   actions:
   - type: turn_off
-    device_id: 8f0cb7502678acf2753e7fbe41bdefc9
-    entity_id: 37229c5ef0f943f2084ed7b96cbac870
+    device_id: f271c425508b0412a2b5683ce821391a
+    entity_id: ea815bee1fcabdfd21bd19691d934f6a
     domain: light
   mode: single
 - id: '1761962840189'
-  alias: Shop became occupied
+  alias: Garage became occupied
   description: ''
   triggers:
   - type: occupied
@@ -666,7 +592,10 @@
     entity_id: 29bada471b35dbc199ef1e6058205bc7
     domain: binary_sensor
     trigger: device
-  conditions: []
+  conditions:
+  - condition: time
+    after: 07:30:00
+    before: '10:25:00'
   actions:
   - type: turn_on
     device_id: e759e526524abdccc563c154e16989d6
@@ -694,8 +623,8 @@
   conditions: []
   actions:
   - type: turn_on
-    device_id: 5d06c53e8eed39d5eb524937e685d95d
-    entity_id: 7c7c1d08adcd4f9141f070cf5b6d5e8d
+    device_id: 5a9b4a249f464c8570df19946a0bb157
+    entity_id: 2380eadf6385a697f72838298ef93310
     domain: light
   mode: single
 - id: '1762136157961'
@@ -788,8 +717,8 @@
   description: ''
   triggers:
   - type: turned_off
-    device_id: dd3241d251ab5f3998316992a43c1a95
-    entity_id: 40c4da99aa2e41fabb65aca00ac478e2
+    device_id: fddadeff3783c91ee35cd9776d879684
+    entity_id: 9acf17f8f92c46c8bfab356e5304294c
     domain: light
     trigger: device
   conditions: []
@@ -834,33 +763,33 @@
     domain: switch
   mode: single
 - id: '1765057159592'
-  alias: Shop became unoccupied
+  alias: Garage door closed
   description: ''
   triggers:
-  - type: not_occupied
-    device_id: d011befbddf1f2ff9e841709b20c594f
-    entity_id: 29bada471b35dbc199ef1e6058205bc7
-    domain: binary_sensor
-    trigger: device
-  conditions:
-  - type: is_not_open
-    condition: device
+  - type: not_opened
     device_id: 8f2ed4d70ec0396734c38b9dc5b60302
     entity_id: 1d83b9abff33df68037d94a7990b90f0
     domain: binary_sensor
+    trigger: device
+  conditions:
+  - type: is_not_occupied
+    condition: device
+    device_id: d011befbddf1f2ff9e841709b20c594f
+    entity_id: 29bada471b35dbc199ef1e6058205bc7
+    domain: binary_sensor
   actions:
   - type: turn_off
-    device_id: 64a3c68f0fe79f0f0d50868aebb242c6
-    entity_id: 5d51aaad1430295882af8179a46392b0
+    device_id: e759e526524abdccc563c154e16989d6
+    entity_id: 67e4a2d6d6f69251fdc090f1a56d1c07
     domain: switch
   - delay:
       hours: 0
       minutes: 0
-      seconds: 30
+      seconds: 60
       milliseconds: 0
   - type: turn_off
-    device_id: e759e526524abdccc563c154e16989d6
-    entity_id: 67e4a2d6d6f69251fdc090f1a56d1c07
+    device_id: 64a3c68f0fe79f0f0d50868aebb242c6
+    entity_id: 5d51aaad1430295882af8179a46392b0
     domain: switch
   mode: restart
 - id: '1765070595811'
@@ -891,9 +820,9 @@
     trigger: device
   conditions: []
   actions:
-  - device_id: 9bfd755802d4e3a9d519f7386f740877
+  - device_id: 3fcf30bb8c2bbcd42401a196689329e6
     domain: light
-    entity_id: 431784d7492e3dfeac3c0791e7403fe4
+    entity_id: 95609106e1095bcf8f80cc43e16aff85
     type: brightness_increase
   mode: single
 - id: '1769144329366'
@@ -907,9 +836,9 @@
     trigger: device
   conditions: []
   actions:
-  - device_id: 9bfd755802d4e3a9d519f7386f740877
+  - device_id: 3fcf30bb8c2bbcd42401a196689329e6
     domain: light
-    entity_id: 431784d7492e3dfeac3c0791e7403fe4
+    entity_id: 95609106e1095bcf8f80cc43e16aff85
     type: brightness_decrease
   mode: single
 - id: '1769144580269'
@@ -989,8 +918,8 @@
   conditions: []
   actions:
   - type: turn_on
-    device_id: 9bfd755802d4e3a9d519f7386f740877
-    entity_id: 431784d7492e3dfeac3c0791e7403fe4
+    device_id: 3fcf30bb8c2bbcd42401a196689329e6
+    entity_id: 95609106e1095bcf8f80cc43e16aff85
     domain: light
     brightness_pct: 5
   mode: single
@@ -1006,8 +935,8 @@
   conditions: []
   actions:
   - type: turn_on
-    device_id: 9bfd755802d4e3a9d519f7386f740877
-    entity_id: 431784d7492e3dfeac3c0791e7403fe4
+    device_id: 3fcf30bb8c2bbcd42401a196689329e6
+    entity_id: 95609106e1095bcf8f80cc43e16aff85
     domain: light
     brightness_pct: 100
   mode: single
@@ -1023,31 +952,31 @@
   conditions: []
   actions:
   - type: toggle
-    device_id: aaa114ff3b2ad07b9fe760b98734fbc8
-    entity_id: 8c39879d8356fd49b240833e3ffcac9a
+    device_id: 5d06c53e8eed39d5eb524937e685d95d
+    entity_id: 7c7c1d08adcd4f9141f070cf5b6d5e8d
     domain: light
   mode: single
 - id: '1770089225852'
-  alias: Lavatory turn off after 8 minutes
+  alias: Lavatory turn off after 40 minutes
   description: ''
   triggers:
   - type: turned_on
-    device_id: 8f0cb7502678acf2753e7fbe41bdefc9
-    entity_id: 37229c5ef0f943f2084ed7b96cbac870
-    domain: light
     trigger: device
+    device_id: f271c425508b0412a2b5683ce821391a
+    entity_id: ea815bee1fcabdfd21bd19691d934f6a
+    domain: light
   conditions: []
   actions:
   - delay:
       hours: 0
-      minutes: 8
+      minutes: 40
       seconds: 0
       milliseconds: 0
   - type: turn_off
-    device_id: 8f0cb7502678acf2753e7fbe41bdefc9
-    entity_id: 37229c5ef0f943f2084ed7b96cbac870
+    device_id: f271c425508b0412a2b5683ce821391a
+    entity_id: ea815bee1fcabdfd21bd19691d934f6a
     domain: light
-  mode: single
+  mode: restart
 - id: '1771204703967'
   alias: Bathroom unoccupied
   description: ''
@@ -1065,28 +994,109 @@
     domain: binary_sensor
   actions:
   - type: turn_off
-    device_id: 5d06c53e8eed39d5eb524937e685d95d
-    entity_id: 7c7c1d08adcd4f9141f070cf5b6d5e8d
+    device_id: 5a9b4a249f464c8570df19946a0bb157
+    entity_id: 2380eadf6385a697f72838298ef93310
     domain: light
   mode: restart
 - id: '1771205460973'
-  alias: Bathroom light turn off in 8 minutes
+  alias: Bathroom light turn off in 20 minutes
   description: ''
   triggers:
   - type: turned_on
-    device_id: 5d06c53e8eed39d5eb524937e685d95d
-    entity_id: 7c7c1d08adcd4f9141f070cf5b6d5e8d
+    device_id: 5a9b4a249f464c8570df19946a0bb157
+    entity_id: 2380eadf6385a697f72838298ef93310
     domain: light
     trigger: device
   conditions: []
   actions:
   - delay:
       hours: 0
-      minutes: 8
+      minutes: 20
       seconds: 0
       milliseconds: 0
   - type: turn_off
-    device_id: 5d06c53e8eed39d5eb524937e685d95d
-    entity_id: 7c7c1d08adcd4f9141f070cf5b6d5e8d
+    device_id: 5a9b4a249f464c8570df19946a0bb157
+    entity_id: 2380eadf6385a697f72838298ef93310
     domain: light
+  mode: restart
+- id: '1772502609190'
+  alias: Garage light turned on
+  description: ''
+  triggers:
+  - type: turned_on
+    device_id: 64a3c68f0fe79f0f0d50868aebb242c6
+    entity_id: 5d51aaad1430295882af8179a46392b0
+    domain: switch
+    trigger: device
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.torchierre_red
+  mode: single
+- id: '1772503131936'
+  alias: Garage light turned off
+  description: ''
+  triggers:
+  - type: turned_off
+    device_id: 64a3c68f0fe79f0f0d50868aebb242c6
+    entity_id: 5d51aaad1430295882af8179a46392b0
+    domain: switch
+    trigger: device
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.torchierre_green
+  - type: turn_off
+    device_id: b896e8e5867d247c8482d31f256fe663
+    entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
+    domain: light
+  mode: single
+- id: '1772561466110'
+  alias: Garage became unoccupied
+  description: ''
+  triggers:
+  - type: not_occupied
+    device_id: d011befbddf1f2ff9e841709b20c594f
+    entity_id: 29bada471b35dbc199ef1e6058205bc7
+    domain: binary_sensor
+    trigger: device
+  conditions:
+  - type: is_not_open
+    condition: device
+    device_id: 8f2ed4d70ec0396734c38b9dc5b60302
+    entity_id: 1d83b9abff33df68037d94a7990b90f0
+    domain: binary_sensor
+  actions:
+  - type: turn_off
+    device_id: 64a3c68f0fe79f0f0d50868aebb242c6
+    entity_id: 5d51aaad1430295882af8179a46392b0
+    domain: switch
+  - delay:
+      hours: 0
+      minutes: 2
+      seconds: 0
+      milliseconds: 0
+  - type: turn_off
+    device_id: e759e526524abdccc563c154e16989d6
+    entity_id: 67e4a2d6d6f69251fdc090f1a56d1c07
+    domain: switch
+  mode: restart
+- id: '1773512841100'
+  alias: Send test messages
+  description: ''
+  triggers: []
+  conditions: []
+  actions:
+  - device_id: 9aa0b92b37676e435d243e746d60b1f3
+    domain: mobile_app
+    type: notify
+    metadata: {}
+    message: Test message
+    title: Test
   mode: single
