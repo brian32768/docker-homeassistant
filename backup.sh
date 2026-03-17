@@ -20,12 +20,12 @@ HOME_ASSISTANT=${PWD}/config
 
 # Where to write output data
 #OUTPUT_DIR=/net/wenda/volume1/Wildsong/Backups/home-assistant
-OUTPUT_DIR=/tmp/home-assistant
+OUTPUT_DIR=${HOME}/Backups/home-assistant
 #if [ ! -d $OUTPUT_DIR ]; then
 #   mkdir ${OUTPUT_DIR}
 #fi
 ls -d $OUTPUT_DIR
-# Allow Synology to wake up
+# (When output is synology) allow time to wake up
 #sleep 2
 
 echo "Backing up Home Assistant and Z2M on $datestamp to $OUTPUT_DIR"
