@@ -3,3 +3,5 @@
 config/secrets.yaml
 config/home-assistant*
 config/.storage/*
+config/.HA_VERSION
+config/.ha_run.lock

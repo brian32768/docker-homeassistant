@@ -41,23 +41,16 @@ docker compose up -d
 
 ## Backups
 
-The script backup.sh will do a nightly backup to the Synology when invoked from cron.
+The script backup.sh will do a nightly backup when invoked from cron.
+Currently it puts files in /tmp/home-assistant and it's up to you to
+do something with them from there.
+
 
 ## URLs
 
 Normally I run my instance here,
 
    https://homeassistant.wildsong.biz/
-
-## Update firmware in Nortek
-
-(or is it spelled Nortec??)
-
-   docker run --rm --device=/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300CEB-if01-port0:/dev/ttyUSB1 -it walthowd/husbzb-firmware bash
-
-## TODO
-
-* build an image with log file redirection (see unifi for example)
 
 ### Music Assistant
 
