@@ -34,24 +34,25 @@
     data: {}
     target:
       entity_id: scene.paper_evening
-  - target:
-      entity_id: timer.living_room
-    data: {}
-    action: timer.cancel
-  - type: turn_off
-    device_id: 51a3e64d56b7c35c06fc497a18006353
-    entity_id: 4b494b3874790bc5caa87c859e5403bd
-    domain: switch
   - action: light.turn_on
     metadata: {}
     data:
       brightness_pct: 19
     target:
       area_id: entrance
-  - type: turn_on
+  - type: turn_off
+    device_id: 51a3e64d56b7c35c06fc497a18006353
+    entity_id: 4b494b3874790bc5caa87c859e5403bd
+    domain: switch
+  - type: turn_off
     device_id: 94c2a6183ea5a31694f9ff3185fb2858
     entity_id: 091aaa887f532f2c42215b946e7d98da
     domain: switch
+  - type: turn_off
+    device_id: 4b7d8823525b0b472baba2a1ea7fb640
+    entity_id: e5d578807081b5dcc1bc4aba9f846fc2
+    domain: light
+    enabled: false
   mode: single
 - id: '1591494004057'
   alias: BED TIME
@@ -74,19 +75,23 @@
     device_id: e759e526524abdccc563c154e16989d6
     entity_id: 67e4a2d6d6f69251fdc090f1a56d1c07
     domain: switch
-  - delay:
-      hours: 0
-      minutes: 3
-      seconds: 0
-      milliseconds: 0
+  - type: turn_off
+    device_id: 94c2a6183ea5a31694f9ff3185fb2858
+    entity_id: 091aaa887f532f2c42215b946e7d98da
+    domain: switch
   - type: turn_off
     device_id: 51a3e64d56b7c35c06fc497a18006353
     entity_id: 4b494b3874790bc5caa87c859e5403bd
     domain: switch
   - type: turn_off
-    device_id: 94c2a6183ea5a31694f9ff3185fb2858
-    entity_id: 091aaa887f532f2c42215b946e7d98da
-    domain: switch
+    device_id: 4b7d8823525b0b472baba2a1ea7fb640
+    entity_id: e5d578807081b5dcc1bc4aba9f846fc2
+    domain: light
+  - delay:
+      hours: 0
+      minutes: 3
+      seconds: 0
+      milliseconds: 0
   - action: light.turn_off
     metadata: {}
     data: {}
@@ -199,6 +204,7 @@
     action: media_player.turn_on
     target:
       area_id: 44668f66393bf53de2f0e48ddd4b66ed
+    enabled: false
   - data: {}
     action: media_player.turn_on
     target:
@@ -239,6 +245,7 @@
     action: media_player.volume_up
     target:
       entity_id: media_player.living_room
+    enabled: false
   - data: {}
     action: media_player.volume_up
     target:
@@ -259,6 +266,7 @@
     action: media_player.volume_down
     target:
       entity_id: media_player.living_room
+    enabled: false
   - data: {}
     action: media_player.volume_down
     target:
@@ -268,7 +276,7 @@
   alias: Good Morning
   description: We're getting up now
   triggers:
-  - at: 07:15:00
+  - at: 07:30:00
     trigger: time
     weekday:
     - thu
@@ -280,20 +288,19 @@
     - sat
   conditions: []
   actions:
-  - type: turn_on
-    device_id: 51a3e64d56b7c35c06fc497a18006353
-    entity_id: 4b494b3874790bc5caa87c859e5403bd
-    domain: switch
   - action: scene.turn_on
     metadata: {}
     data: {}
     target:
       entity_id: scene.kitchen_counter_morning
-  - device_id: 5d06c53e8eed39d5eb524937e685d95d
-    domain: select
-    entity_id: 48e3971820c1ad5963a04ea02d43e05d
-    type: select_option
-    option: Brightness preset 3
+  - type: turn_on
+    device_id: 51a3e64d56b7c35c06fc497a18006353
+    entity_id: 4b494b3874790bc5caa87c859e5403bd
+    domain: switch
+  - type: turn_on
+    device_id: 94c2a6183ea5a31694f9ff3185fb2858
+    entity_id: 091aaa887f532f2c42215b946e7d98da
+    domain: switch
   mode: single
 - id: '1731514934475'
   alias: BEDTIME almost
@@ -315,7 +322,7 @@
   use_blueprint:
     path: damru/ikea-rodret_E2201_ZHA-Z2M_control-anything.yaml
     input:
-      remote_name: IKEA Rodret 1
+      remote_name: Rodret 1
       on_press_action:
       - device_id: 7e72af23ab6c89038b904d403ad200b7
         domain: light
@@ -353,20 +360,11 @@
     device_id: 1bfffb6f6765f244541903d8dc447321
     entity_id: 4a0a689e33c9de53d4ba1c9e1e437f36
     domain: light
-    brightness_pct: 50
-  - type: turn_on
-    device_id: b896e8e5867d247c8482d31f256fe663
-    entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
-    domain: light
   - delay:
       hours: 0
       minutes: 15
       seconds: 0
       milliseconds: 0
-  - type: turn_off
-    device_id: b896e8e5867d247c8482d31f256fe663
-    entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
-    domain: light
   - type: turn_off
     device_id: 1bfffb6f6765f244541903d8dc447321
     entity_id: 4a0a689e33c9de53d4ba1c9e1e437f36
@@ -380,8 +378,6 @@
     device_id: e466815a7d4537b1926253cd070d029f
     entity_id: ab20706f77ce30ab69cbf4280e635beb
     domain: binary_sensor
-    metadata:
-      secondary: false
     trigger: device
   conditions: []
   actions:
@@ -484,22 +480,6 @@
           device_id: b896e8e5867d247c8482d31f256fe663
           entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
           domain: light
-- id: '1761108115454'
-  alias: eLab switched off
-  description: ''
-  triggers:
-  - type: turned_off
-    device_id: 1bfffb6f6765f244541903d8dc447321
-    entity_id: 4a0a689e33c9de53d4ba1c9e1e437f36
-    domain: light
-    trigger: device
-  conditions: []
-  actions:
-  - type: turn_off
-    device_id: b896e8e5867d247c8482d31f256fe663
-    entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
-    domain: light
-  mode: single
 - id: '1761195802809'
   alias: Kitchen toggle
   description: ''
@@ -512,8 +492,8 @@
   conditions: []
   actions:
   - type: toggle
-    device_id: 3fcf30bb8c2bbcd42401a196689329e6
-    entity_id: 95609106e1095bcf8f80cc43e16aff85
+    device_id: 5d06c53e8eed39d5eb524937e685d95d
+    entity_id: 7c7c1d08adcd4f9141f070cf5b6d5e8d
     domain: light
   mode: single
 - id: '1761361560301'
@@ -528,8 +508,17 @@
   conditions: []
   actions:
   - type: turn_on
-    device_id: 94c2a6183ea5a31694f9ff3185fb2858
-    entity_id: 091aaa887f532f2c42215b946e7d98da
+    device_id: db9b21bef30b884c919393cf0cde4d79
+    entity_id: 79dec6102f455a2b18134ca68be9dac9
+    domain: switch
+  - delay:
+      hours: 0
+      minutes: 30
+      seconds: 0
+      milliseconds: 0
+  - type: turn_off
+    device_id: db9b21bef30b884c919393cf0cde4d79
+    entity_id: 79dec6102f455a2b18134ca68be9dac9
     domain: switch
   mode: single
 - id: '1761361602242'
@@ -544,8 +533,8 @@
   conditions: []
   actions:
   - type: turn_off
-    device_id: 94c2a6183ea5a31694f9ff3185fb2858
-    entity_id: 091aaa887f532f2c42215b946e7d98da
+    device_id: db9b21bef30b884c919393cf0cde4d79
+    entity_id: 79dec6102f455a2b18134ca68be9dac9
     domain: switch
   mode: single
 - id: '1761934345878'
@@ -576,7 +565,12 @@
     entity_id: e3b28a4b6225528ef279258e798d753e
     domain: binary_sensor
     trigger: device
-  conditions: []
+  conditions:
+  - type: is_open
+    condition: device
+    device_id: 259066f1073d994ecbd64d5083179f6c
+    entity_id: ca68c81133d76536ce74acf637d41cf6
+    domain: binary_sensor
   actions:
   - type: turn_off
     device_id: f271c425508b0412a2b5683ce821391a
@@ -595,7 +589,7 @@
   conditions:
   - condition: time
     after: 07:30:00
-    before: '10:25:00'
+    before: '22:25:00'
   actions:
   - type: turn_on
     device_id: e759e526524abdccc563c154e16989d6
@@ -660,58 +654,38 @@
     domain: switch
   mode: single
 - id: '1762483694022'
-  alias: Kitchen Range Rodret
+  alias: Kitchen Counter Rodret
   description: ''
   use_blueprint:
     path: damru/ikea-rodret_E2201_ZHA-Z2M_control-anything.yaml
     input:
-      remote_name: IKEA Rodret 2
+      remote_name: Rodret 2
       on_press_action:
-      - if:
-        - condition: device
-          type: is_off
-          device_id: 9969cfac9643623285453a1649ba6839
-          entity_id: a65a9d62fabdf2069516187fe224bb9e
-          domain: light
-        then:
-        - type: turn_on
-          device_id: 9969cfac9643623285453a1649ba6839
-          entity_id: a65a9d62fabdf2069516187fe224bb9e
-          domain: light
-          brightness_pct: 100
-        else:
-        - device_id: 9969cfac9643623285453a1649ba6839
-          domain: light
-          entity_id: a65a9d62fabdf2069516187fe224bb9e
-          type: brightness_increase
+      - action: light.turn_on
+        metadata: {}
+        target:
+          entity_id: light.kitchen_lower
+        data:
+          brightness_step_pct: 20
       off_press_action:
-      - device_id: 9969cfac9643623285453a1649ba6839
-        domain: light
-        entity_id: a65a9d62fabdf2069516187fe224bb9e
-        type: brightness_decrease
+      - action: light.turn_on
+        metadata: {}
+        target:
+          entity_id: light.kitchen_lower
+        data:
+          brightness_step_pct: -20
       on_hold_action:
-      - if:
-        - condition: device
-          type: is_off
-          device_id: 9969cfac9643623285453a1649ba6839
-          entity_id: a65a9d62fabdf2069516187fe224bb9e
-          domain: light
-        then:
-        - type: turn_on
-          device_id: 9969cfac9643623285453a1649ba6839
-          entity_id: a65a9d62fabdf2069516187fe224bb9e
-          domain: light
-          brightness_pct: 100
-        else:
-        - device_id: 9969cfac9643623285453a1649ba6839
-          domain: light
-          entity_id: a65a9d62fabdf2069516187fe224bb9e
-          type: brightness_increase
+      - action: scene.turn_on
+        metadata: {}
+        target:
+          entity_id: scene.kitchen_counter_100
+        data: {}
       off_hold_action:
-      - type: turn_off
-        device_id: 9969cfac9643623285453a1649ba6839
-        entity_id: a65a9d62fabdf2069516187fe224bb9e
-        domain: light
+      - action: scene.turn_on
+        metadata: {}
+        target:
+          entity_id: scene.kitchen_counter_0
+        data: {}
 - id: '1762497183701'
   alias: Entrance turns off flood
   description: ''
@@ -779,17 +753,12 @@
     domain: binary_sensor
   actions:
   - type: turn_off
-    device_id: e759e526524abdccc563c154e16989d6
-    entity_id: 67e4a2d6d6f69251fdc090f1a56d1c07
-    domain: switch
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 60
-      milliseconds: 0
-  - type: turn_off
     device_id: 64a3c68f0fe79f0f0d50868aebb242c6
     entity_id: 5d51aaad1430295882af8179a46392b0
+    domain: switch
+  - type: turn_off
+    device_id: e759e526524abdccc563c154e16989d6
+    entity_id: 67e4a2d6d6f69251fdc090f1a56d1c07
     domain: switch
   mode: restart
 - id: '1765070595811'
@@ -808,6 +777,16 @@
     data: {}
     target:
       entity_id: switch.garage_interior_lights
+  - delay:
+      hours: 2
+      minutes: 0
+      seconds: 0
+      milliseconds: 0
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.garage_interior_lights
   mode: single
 - id: '1769144249520'
   alias: Kitchen brighter
@@ -820,9 +799,13 @@
     trigger: device
   conditions: []
   actions:
-  - device_id: 3fcf30bb8c2bbcd42401a196689329e6
+  - device_id: 39ed540628ee564af46839ee274163c9
     domain: light
-    entity_id: 95609106e1095bcf8f80cc43e16aff85
+    entity_id: 944205a7b47488790c539b103ead946d
+    type: brightness_increase
+  - device_id: 969e64f299b49931cda1c4b8f04fabc0
+    domain: light
+    entity_id: 036e71c9176a142d4ebe01f00f8d250e
     type: brightness_increase
   mode: single
 - id: '1769144329366'
@@ -836,13 +819,17 @@
     trigger: device
   conditions: []
   actions:
-  - device_id: 3fcf30bb8c2bbcd42401a196689329e6
+  - device_id: 969e64f299b49931cda1c4b8f04fabc0
     domain: light
-    entity_id: 95609106e1095bcf8f80cc43e16aff85
+    entity_id: 036e71c9176a142d4ebe01f00f8d250e
+    type: brightness_decrease
+  - device_id: 39ed540628ee564af46839ee274163c9
+    domain: light
+    entity_id: 944205a7b47488790c539b103ead946d
     type: brightness_decrease
   mode: single
 - id: '1769144580269'
-  alias: Pantry darker
+  alias: Kitchen counter dimmer
   description: ''
   triggers:
   - domain: mqtt
@@ -852,13 +839,15 @@
     trigger: device
   conditions: []
   actions:
-  - device_id: b3f289d7fab485b931ec614c62fdc055
-    domain: light
-    entity_id: 9daeed9681c17a209b6ff3d59a851fab
-    type: brightness_decrease
+  - action: light.turn_on
+    metadata: {}
+    target:
+      entity_id: light.kitchen_upper
+    data:
+      brightness_step_pct: -20
   mode: single
 - id: '1769145232489'
-  alias: Pantry brighter
+  alias: Kitchen counter brighter
   description: ''
   triggers:
   - domain: mqtt
@@ -868,13 +857,15 @@
     trigger: device
   conditions: []
   actions:
-  - device_id: b3f289d7fab485b931ec614c62fdc055
-    domain: light
-    entity_id: 9daeed9681c17a209b6ff3d59a851fab
-    type: brightness_increase
+  - action: light.turn_on
+    metadata: {}
+    target:
+      entity_id: light.kitchen_upper
+    data:
+      brightness_step_pct: 20
   mode: single
 - id: '1769216122732'
-  alias: Pantry ON 100
+  alias: Kitchen counter ON 100
   description: ''
   triggers:
   - domain: mqtt
@@ -884,14 +875,16 @@
     trigger: device
   conditions: []
   actions:
-  - type: turn_on
-    device_id: b3f289d7fab485b931ec614c62fdc055
-    entity_id: 9daeed9681c17a209b6ff3d59a851fab
-    domain: light
-    brightness_pct: 100
+  - action: light.turn_on
+    metadata: {}
+    target:
+      entity_id: light.kitchen_upper
+    data:
+      transition: 2
+      brightness_pct: 100
   mode: single
 - id: '1769216156658'
-  alias: Pantry OFF 0
+  alias: Kitchen counters OFF 0
   description: ''
   triggers:
   - domain: mqtt
@@ -901,10 +894,12 @@
     trigger: device
   conditions: []
   actions:
-  - type: turn_off
-    device_id: b3f289d7fab485b931ec614c62fdc055
-    entity_id: 9daeed9681c17a209b6ff3d59a851fab
-    domain: light
+  - action: light.turn_off
+    metadata: {}
+    target:
+      entity_id: light.kitchen_upper
+    data:
+      transition: 2
   mode: single
 - id: '1769270652486'
   alias: Kitchen ON 5
@@ -918,8 +913,13 @@
   conditions: []
   actions:
   - type: turn_on
-    device_id: 3fcf30bb8c2bbcd42401a196689329e6
-    entity_id: 95609106e1095bcf8f80cc43e16aff85
+    device_id: 969e64f299b49931cda1c4b8f04fabc0
+    entity_id: 036e71c9176a142d4ebe01f00f8d250e
+    domain: light
+    brightness_pct: 5
+  - type: turn_on
+    device_id: 39ed540628ee564af46839ee274163c9
+    entity_id: 944205a7b47488790c539b103ead946d
     domain: light
     brightness_pct: 5
   mode: single
@@ -935,26 +935,15 @@
   conditions: []
   actions:
   - type: turn_on
-    device_id: 3fcf30bb8c2bbcd42401a196689329e6
-    entity_id: 95609106e1095bcf8f80cc43e16aff85
+    device_id: 39ed540628ee564af46839ee274163c9
+    entity_id: 944205a7b47488790c539b103ead946d
     domain: light
     brightness_pct: 100
-  mode: single
-- id: '1769485073368'
-  alias: Toggle dining room light
-  description: ''
-  triggers:
-  - domain: mqtt
-    device_id: 2c2d6c37647f8cff7e2d25358aa5b994
-    type: action
-    subtype: 'on'
-    trigger: device
-  conditions: []
-  actions:
-  - type: toggle
-    device_id: 5d06c53e8eed39d5eb524937e685d95d
-    entity_id: 7c7c1d08adcd4f9141f070cf5b6d5e8d
+  - type: turn_on
+    device_id: 969e64f299b49931cda1c4b8f04fabc0
+    entity_id: 036e71c9176a142d4ebe01f00f8d250e
     domain: light
+    brightness_pct: 100
   mode: single
 - id: '1770089225852'
   alias: Lavatory turn off after 40 minutes
@@ -1019,44 +1008,6 @@
     entity_id: 2380eadf6385a697f72838298ef93310
     domain: light
   mode: restart
-- id: '1772502609190'
-  alias: Garage light turned on
-  description: ''
-  triggers:
-  - type: turned_on
-    device_id: 64a3c68f0fe79f0f0d50868aebb242c6
-    entity_id: 5d51aaad1430295882af8179a46392b0
-    domain: switch
-    trigger: device
-  conditions: []
-  actions:
-  - action: scene.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id: scene.torchierre_red
-  mode: single
-- id: '1772503131936'
-  alias: Garage light turned off
-  description: ''
-  triggers:
-  - type: turned_off
-    device_id: 64a3c68f0fe79f0f0d50868aebb242c6
-    entity_id: 5d51aaad1430295882af8179a46392b0
-    domain: switch
-    trigger: device
-  conditions: []
-  actions:
-  - action: scene.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id: scene.torchierre_green
-  - type: turn_off
-    device_id: b896e8e5867d247c8482d31f256fe663
-    entity_id: c25b6d5333d0b09eb1d24a657c0d5faf
-    domain: light
-  mode: single
 - id: '1772561466110'
   alias: Garage became unoccupied
   description: ''
@@ -1079,7 +1030,7 @@
     domain: switch
   - delay:
       hours: 0
-      minutes: 2
+      minutes: 15
       seconds: 0
       milliseconds: 0
   - type: turn_off
@@ -1099,4 +1050,57 @@
     metadata: {}
     message: Test message
     title: Test
+  mode: single
+- id: '1776629664790'
+  alias: Lavatory door closes
+  description: Sometimes the motion sensor fails
+  triggers:
+  - type: not_opened
+    device_id: 259066f1073d994ecbd64d5083179f6c
+    entity_id: ca68c81133d76536ce74acf637d41cf6
+    domain: binary_sensor
+    trigger: device
+  conditions:
+  - condition: time
+    after: 06:30:00
+    before: '23:30:00'
+  actions:
+  - type: turn_on
+    device_id: f271c425508b0412a2b5683ce821391a
+    entity_id: ea815bee1fcabdfd21bd19691d934f6a
+    domain: light
+  mode: restart
+- id: '1776659800978'
+  alias: Grow lights shut off
+  description: It's time to turn off the grow lights
+  triggers:
+  - at: '18:00:00'
+    trigger: time
+  conditions: []
+  actions:
+  - type: turn_off
+    device_id: 51a3e64d56b7c35c06fc497a18006353
+    entity_id: 4b494b3874790bc5caa87c859e5403bd
+    domain: switch
+  - type: turn_off
+    device_id: 94c2a6183ea5a31694f9ff3185fb2858
+    entity_id: 091aaa887f532f2c42215b946e7d98da
+    domain: switch
+  mode: single
+- id: '1778293592621'
+  alias: Kitchen shortcut
+  description: ''
+  triggers:
+  - domain: mqtt
+    device_id: 2c2d6c37647f8cff7e2d25358aa5b994
+    type: action
+    subtype: 'on'
+    trigger: device
+  conditions:
+  - condition: device
+    type: is_off
+    device_id: b3f289d7fab485b931ec614c62fdc055
+    entity_id: 9daeed9681c17a209b6ff3d59a851fab
+    domain: light
+  actions: []
   mode: single

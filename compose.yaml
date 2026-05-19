@@ -23,6 +23,9 @@ services:
       - "22222:22222" # ssh (debug only)
       - "5683:5683" # CoIot for Shelly 1
       - "8123:8123" # For Wyoming
+    devices:
+      - source: "/dev/serial/by-id/usb-Espressif_USB_JTAG_serial_debug_unit_D8:3B:DA:A3:F2:50-if00"
+        target: "/dev/ttyACM0"
     environment:
       TZ: "America/Los_Angeles"
     restart: unless-stopped

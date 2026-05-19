@@ -228,24 +228,52 @@
       - xy
       effect:
       color_mode: xy
-      brightness: 204
+      brightness: 158
       color_temp_kelvin:
       color_temp:
       hs_color:
-      - 44.571
-      - 27.451
+      - 28
+      - 41.176
       rgb_color:
       - 255
-      - 237
-      - 185
+      - 199
+      - 150
       xy_color:
-      - 0.381
-      - 0.382
-      friendly_name: 3A RGBW 1
-      supported_features: 44
+      - 0.44
+      - 0.373
       icon: mdi:led-strip-variant
+      friendly_name: Light
+      supported_features: 44
       state: 'on'
-    light.ikea_tradfri_10w_driver:
+    light.athom_a776e3_athom_rgbw_light:
+      supported_color_modes:
+      - rgbw
+      color_mode: rgbw
+      brightness: 209
+      hs_color:
+      - 19.286
+      - 34.286
+      rgb_color:
+      - 245
+      - 188
+      - 161
+      xy_color:
+      - 0.426
+      - 0.351
+      rgbw_color:
+      - 245
+      - 153
+      - 108
+      - 153
+      icon: mdi:led-strip
+      friendly_name: Light
+      supported_features: 40
+      state: 'on'
+    light.3a_rgbw_3:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
       effect_list:
       - blink
       - breathe
@@ -253,19 +281,76 @@
       - channel_change
       - finish_effect
       - stop_effect
+      - colorloop
+      - stop_colorloop
       supported_color_modes:
-      - brightness
+      - color_temp
+      - xy
       effect:
-      color_mode: brightness
-      brightness: 76
-      friendly_name: Ikea Tradfri 10W driver
+      color_mode: xy
+      brightness: 84
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      - 11.194
+      - 52.549
+      rgb_color:
+      - 255
+      - 146
+      - 121
+      xy_color:
+      - 0.518
+      - 0.338
+      icon: mdi:led-strip-variant
+      friendly_name: Light
       supported_features: 44
       state: 'on'
   metadata: {}
 - id: '1737096663433'
   name: Kitchen Counter Movie Night
   entities:
-    light.0x00158d00068a5228:
+    light.tradfri_10w_driver:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      effect:
+      color_mode: brightness
+      brightness: 46
+      icon: mdi:led-strip-variant
+      friendly_name: Light
+      supported_features: 44
+      state: 'on'
+    light.athom_a776e3_athom_rgbw_light:
+      supported_color_modes:
+      - rgbw
+      color_mode: rgbw
+      brightness: 209
+      hs_color:
+      - 354.586
+      - 58.59
+      rgb_color:
+      - 227
+      - 94
+      - 106
+      xy_color:
+      - 0.55
+      - 0.299
+      rgbw_color:
+      - 227
+      - 54
+      - 69
+      - 69
+      icon: mdi:led-strip
+      friendly_name: Light
+      supported_features: 40
+      state: 'on'
+    light.3a_rgbw_3:
       min_color_temp_kelvin: 2000
       max_color_temp_kelvin: 6666
       min_mireds: 150
@@ -284,96 +369,46 @@
       - xy
       effect:
       color_mode: xy
-      brightness: 82
+      brightness: 94
       color_temp_kelvin:
       color_temp:
       hs_color:
-      - 341.905
-      - 49.412
+      - 327.982
+      - 87.451
       rgb_color:
       - 255
-      - 129
-      - 167
+      - 32
+      - 151
       xy_color:
-      - 0.475
-      - 0.279
-      friendly_name: Nue RGBW 1
+      - 0.542
+      - 0.232
+      icon: mdi:led-strip-variant
+      friendly_name: Light
       supported_features: 44
       state: 'on'
-    light.0x00158d00068a53a8:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6666
-      min_mireds: 150
-      max_mireds: 500
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
-      - colorloop
-      - stop_colorloop
+    light.athom_d43314_athom_rgbw_light:
       supported_color_modes:
-      - color_temp
-      - xy
-      effect:
-      color_mode: xy
-      brightness: 92
-      color_temp_kelvin:
-      color_temp:
+      - rgbw
+      color_mode: rgbw
+      brightness: 54
       hs_color:
-      - 341.905
-      - 49.412
+      - 0
+      - 0
       rgb_color:
       - 255
-      - 129
-      - 167
-      xy_color:
-      - 0.475
-      - 0.279
-      friendly_name: Nue RGBW 2
-      supported_features: 44
-      state: 'on'
-    light.0x00158d00068a5114:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6666
-      min_mireds: 150
-      max_mireds: 500
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
-      - colorloop
-      - stop_colorloop
-      supported_color_modes:
-      - color_temp
-      - xy
-      effect:
-      color_mode: xy
-      brightness: 107
-      color_temp_kelvin:
-      color_temp:
-      hs_color:
-      - 341.905
-      - 49.412
-      rgb_color:
       - 255
-      - 129
-      - 167
+      - 255
       xy_color:
-      - 0.475
-      - 0.279
-      friendly_name: Nue RGBW 3
-      supported_features: 44
+      - 0.323
+      - 0.329
+      rgbw_color:
+      - 255
+      - 255
+      - 255
+      - 255
+      friendly_name: Light
+      supported_features: 40
       state: 'on'
-  metadata: {}
-- id: '1737096758697'
-  name: Kitchen Counter 100
-  entities:
     light.3a_rgbw_1:
       min_color_temp_kelvin: 2000
       max_color_temp_kelvin: 6666
@@ -393,24 +428,51 @@
       - xy
       effect:
       color_mode: xy
-      brightness: 255
+      brightness: 128
       color_temp_kelvin:
       color_temp:
       hs_color:
-      - 42.692
-      - 20.392
+      - 228.814
+      - 69.412
+      rgb_color:
+      - 78
+      - 111
+      - 255
+      xy_color:
+      - 0.165
+      - 0.119
+      icon: mdi:led-strip-variant
+      friendly_name: Light
+      supported_features: 44
+      state: 'on'
+  metadata: {}
+- id: '1737096758697'
+  name: Kitchen Counter 100
+  entities:
+    light.athom_d43314_athom_rgbw_light:
+      supported_color_modes:
+      - rgbw
+      color_mode: rgbw
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
       rgb_color:
       - 255
-      - 240
-      - 203
+      - 255
+      - 255
       xy_color:
-      - 0.3663
-      - 0.3674
-      friendly_name: 3A RGBW 1
-      supported_features: 44
-      icon: mdi:led-strip-variant
+      - 0.323
+      - 0.329
+      rgbw_color:
+      - 255
+      - 255
+      - 255
+      - 255
+      friendly_name: Light
+      supported_features: 40
       state: 'on'
-    light.ikea_tradfri_10w_driver:
+    light.tradfri_10w_driver:
       effect_list:
       - blink
       - breathe
@@ -423,43 +485,27 @@
       effect:
       color_mode: brightness
       brightness: 255
-      friendly_name: Ikea Tradfri 10W driver
+      icon: mdi:led-strip-variant
+      friendly_name: Light
       supported_features: 44
       state: 'on'
   metadata: {}
 - id: '1737097442408'
   name: Kitchen Counter 0
   entities:
-    light.3a_rgbw_1:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6666
-      min_mireds: 150
-      max_mireds: 500
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
-      - colorloop
-      - stop_colorloop
+    light.athom_d43314_athom_rgbw_light:
       supported_color_modes:
-      - color_temp
-      - xy
-      effect:
+      - rgbw
       color_mode:
       brightness:
-      color_temp_kelvin:
-      color_temp:
       hs_color:
       rgb_color:
       xy_color:
-      friendly_name: 3A RGBW 1
-      supported_features: 44
-      icon: mdi:led-strip-variant
+      rgbw_color:
+      friendly_name: Light
+      supported_features: 40
       state: 'off'
-    light.ikea_tradfri_10w_driver:
+    light.tradfri_10w_driver:
       effect_list:
       - blink
       - breathe
@@ -472,119 +518,10 @@
       effect:
       color_mode:
       brightness:
-      friendly_name: Ikea Tradfri 10W driver
+      icon: mdi:led-strip-variant
+      friendly_name: Light
       supported_features: 44
       state: 'off'
-  metadata: {}
-- id: '1737611208507'
-  name: Kitchen Warm
-  entities:
-    light.0x00158d00068a5228:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6666
-      min_mireds: 150
-      max_mireds: 500
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
-      - colorloop
-      - stop_colorloop
-      supported_color_modes:
-      - color_temp
-      - xy
-      effect:
-      color_mode: color_temp
-      brightness: 255
-      color_temp_kelvin: 3584
-      color_temp: 279
-      hs_color:
-      - 27.093
-      - 42.979
-      rgb_color:
-      - 255
-      - 195
-      - 145
-      xy_color:
-      - 0.448
-      - 0.373
-      friendly_name: Nue RGBW 1
-      supported_features: 44
-      state: 'on'
-    light.0x00158d00068a53a8:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6666
-      min_mireds: 150
-      max_mireds: 500
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
-      - colorloop
-      - stop_colorloop
-      supported_color_modes:
-      - color_temp
-      - xy
-      effect:
-      color_mode: color_temp
-      brightness: 255
-      color_temp_kelvin: 3584
-      color_temp: 279
-      hs_color:
-      - 27.093
-      - 42.979
-      rgb_color:
-      - 255
-      - 195
-      - 145
-      xy_color:
-      - 0.448
-      - 0.373
-      friendly_name: Nue RGBW 2
-      supported_features: 44
-      state: 'on'
-    light.0x00158d00068a5114:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6666
-      min_mireds: 150
-      max_mireds: 500
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
-      - colorloop
-      - stop_colorloop
-      supported_color_modes:
-      - color_temp
-      - xy
-      effect:
-      color_mode: color_temp
-      brightness: 255
-      color_temp_kelvin: 3584
-      color_temp: 279
-      hs_color:
-      - 27.093
-      - 42.979
-      rgb_color:
-      - 255
-      - 195
-      - 145
-      xy_color:
-      - 0.448
-      - 0.373
-      friendly_name: Nue RGBW 3
-      supported_features: 44
-      state: 'on'
-  icon: mdi:account-group
   metadata: {}
 - id: '1755735529989'
   name: Dining room warm
